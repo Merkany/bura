@@ -12,8 +12,7 @@ configuration:
     - private
     - templates
     - .obsidian
-  theme:
-      pageTitle: Bu Ülkede Deniz Yok
+  
   theme:
     typography:
       header: "Playfair Display"
