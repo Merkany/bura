@@ -213,8 +213,7 @@ plugins:
     enabled: true
     options:
       limit: 20
-      filter:
-        - "!index"
+      
   - source: "@quartz-community/spacer"
     enabled: true
     options: {}
