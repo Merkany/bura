@@ -1,3 +1,3 @@
 ---
-title: Yazılarım
+title: Bura
 ---
