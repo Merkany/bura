@@ -13,34 +13,33 @@ configuration:
     - templates
     - .obsidian
   theme:
-    fontOrigin: googleFonts
-    cdnCaching: true
+      pageTitle: Bu Ülkede Deniz Yok
+  theme:
     typography:
-      header: Schibsted Grotesk
-      body: Source Sans Pro
-      code: IBM Plex Mono
+      header: "Playfair Display"
+      body: "Lora"
+      code: "IBM Plex Mono"
     colors:
       lightMode:
-        light: "#faf8f8"
-        lightgray: "#e5e5e5"
-        gray: "#b8b8b8"
-        darkgray: "#4e4e4e"
-        dark: "#2b2b2b"
-        secondary: "#284b63"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
-        textHighlight: "#fff23688"
+        light: "#e8e1d3"
+        lightgray: "#d8cfbd"
+        gray: "#a89f8f"
+        darkgray: "#2c3347"
+        dark: "#1b2233"
+        secondary: "#1b2233"
+        tertiary: "#5c6b8a"
+        highlight: "rgba(27, 34, 51, 0.08)"
+        textHighlight: "#e0d6a888"
       darkMode:
-        light: "#161618"
-        lightgray: "#393639"
-        gray: "#646464"
-        darkgray: "#d4d4d4"
-        dark: "#ebebec"
-        secondary: "#7b97aa"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
-        textHighlight: "#b3aa0288"
-plugins:
+        light: "#1b2233"
+        lightgray: "#2c3347"
+        gray: "#6c7488"
+        darkgray: "#d8cfbd"
+        dark: "#e8e1d3"
+        secondary: "#d8cfbd"
+        tertiary: "#8896b3"
+        highlight: "rgba(216, 207, 189, 0.08)"
+        textHighlight: "#e0d6a855"plugins:
   - source: "@quartz-community/created-modified-date"
     enabled: true
     options:
