@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
 configuration:
-  pageTitle: Quartz 5
+  pageTitle: Bu Ülkede Deniz Yok
   pageTitleSuffix: ""
   enableSPA: true
   enablePopovers: true
@@ -12,7 +12,7 @@ configuration:
     - private
     - templates
     - .obsidian
-  
+
   theme:
     typography:
       header: "Playfair Display"
@@ -38,7 +38,8 @@ configuration:
         secondary: "#d8cfbd"
         tertiary: "#8896b3"
         highlight: "rgba(216, 207, 189, 0.08)"
-        textHighlight: "#e0d6a855"plugins:
+        textHighlight: "#e0d6a855"
+plugins:
   - source: "@quartz-community/created-modified-date"
     enabled: true
     options:
