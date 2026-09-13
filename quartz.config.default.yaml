@@ -131,6 +131,8 @@ plugins:
     enabled: true
   - source: "@quartz-community/explorer"
     enabled: true
+      options:
+      title: "İçindekiler"
     layout:
       position: left
       priority: 50
@@ -208,7 +210,7 @@ plugins:
       position: footer
       priority: 50
   - source: "@quartz-community/recent-notes"
-    enabled: false
+    enabled: true
   - source: "@quartz-community/spacer"
     enabled: true
     options: {}
