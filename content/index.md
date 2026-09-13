@@ -1,6 +1,6 @@
-## 
-
-
-Bura
 ---
+title: Bura
+---
+
+
 
