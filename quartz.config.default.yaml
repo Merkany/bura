@@ -131,7 +131,7 @@ plugins:
     enabled: true
   - source: "@quartz-community/explorer"
     enabled: true
-      options:
+    options:
       title: "İçindekiler"
     layout:
       position: left
