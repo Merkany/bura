@@ -201,7 +201,7 @@ plugins:
       position: afterBody
       priority: 10
   - source: "@quartz-community/footer"
-    enabled: true
+    enabled: false
     options:
       links:
         GitHub: https://github.com/jackyzha0/quartz
@@ -212,7 +212,10 @@ plugins:
   - source: "@quartz-community/recent-notes"
     enabled: true
     options:
+      title: "İçindekiler"
       limit: 20
+      hideTagPages: true
+      hideFolderPages: true
       
   - source: "@quartz-community/spacer"
     enabled: true
