@@ -166,31 +166,51 @@ body[data-slug="kayip-burosu/index"] {
   .weather-track { animation: none; padding-left: 0; white-space: normal; width: auto; }
 }
 
-/* Kayıp Bürosu: her sayfada sağ üstte sabit duran küçük bir resmi mühür. */
+/* Kayıp Bürosu: her sayfada sağ üstte sabit duran, her ziyarette değişen bir kayıt kartı. */
 .bura-corner-stamp {
   position: fixed;
-  top: 54px;
+  top: 62px;
   right: 20px;
   z-index: 500;
-  padding: 6px 12px;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px;
   background: var(--light);
   color: var(--darkgray);
   border: 1px solid var(--lightgray);
-  font: 600 12px/1.4 var(--codeFont, monospace);
-  letter-spacing: 0.04em;
   text-decoration: none;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
 }
 .bura-corner-stamp:hover {
-  color: var(--tertiary);
   border-color: var(--tertiary);
 }
-@media (max-width: 520px) {
+.bura-corner-stamp-kayit {
+  font: 700 10px/1.4 var(--codeFont, monospace);
+  letter-spacing: 0.1em;
+  color: var(--tertiary);
+}
+.bura-corner-stamp-title {
+  font: 600 14px/1.35 var(--headerFont, serif);
+  color: var(--darkgray);
+}
+.bura-corner-stamp-desc {
+  font: 400 12px/1.5 var(--bodyFont, sans-serif);
+  color: var(--gray);
+}
+.bura-corner-stamp-footer {
+  margin-top: 4px;
+  font: 600 11px/1.4 var(--codeFont, monospace);
+  letter-spacing: 0.06em;
+  color: var(--tertiary);
+}
+@media (max-width: 640px) {
   .bura-corner-stamp {
     top: auto;
     bottom: 16px;
     right: 16px;
-    font-size: 11px;
-    padding: 6px 10px;
+    left: 16px;
+    width: auto;
   }
 }
