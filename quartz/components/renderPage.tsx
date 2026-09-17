@@ -351,6 +351,7 @@ export function renderPage(
           <span class="bura-weather-label">Bura'nın hava durumu:</span>
           <span class="weather-window" tabIndex={0} aria-label="Bugün hava sınıf çatışmalı."><span class="weather-track" aria-hidden="true">Bugün hava sınıf çatışmalı.</span></span>
         </aside>
+        {slug !== "kayip-burosu/index" && slug !== "kayip-burosu" && (
         <a class="bura-corner-stamp" href={`${basePath}/kayip-burosu/`}>
           <span class="bura-corner-stamp-tab">Kayıp Bürosu</span>
           <span class="bura-corner-stamp-body">
@@ -360,6 +361,7 @@ export function renderPage(
             <span class="bura-corner-stamp-cta">devamını oku →</span>
           </span>
         </a>
+        )}
         {frame.css && <style dangerouslySetInnerHTML={{ __html: frame.css }} />}
         <div id="quartz-root" class="page" data-frame={frame.name}>
           <Body {...componentData}>
