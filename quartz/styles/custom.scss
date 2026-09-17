@@ -270,6 +270,30 @@ body[data-page-type="story"] .bura-corner-stamp-title { font-size: 11px; }
   body[data-page-type="story"] .explorer.collapsed > .explorer-content { display: none; }
 }
 
+body[data-page-type="story"] {
+  & .center > hr { margin-top: 3.5rem; }
+  & .page-footer { margin-top: 0; }
+  & .story-next {
+    display: grid;
+    gap: 0.45rem;
+    padding: 1.2rem 0 0.5rem;
+  }
+  & .story-next > span {
+    color: var(--tertiary);
+    font: 600 0.68rem/1.4 var(--codeFont);
+    letter-spacing: 0.12em;
+  }
+  & .story-next > a {
+    width: fit-content;
+    color: var(--dark);
+    background: transparent;
+    font: 500 clamp(1.2rem, 3vw, 1.55rem)/1.35 var(--headerFont);
+    text-decoration: none;
+  }
+  & .story-next > a:hover { color: var(--tertiary); }
+  & .story-next > a:focus-visible { outline: 2px solid var(--tertiary); outline-offset: 4px; }
+}
+
 /* Her sayfa girişinde gerçek bir damga vuruşu: kart havadan, hafif
    çarpık iniyor ve sertçe yerine oturuyor — adını hak eden tek, güçlü
    bir hareket. Sonra sessizce arka planda kalır; sürekli hareket eden
