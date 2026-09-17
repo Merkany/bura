@@ -52,6 +52,23 @@
     if (!form || form.dataset.ready === 'true') return;
 
     form.dataset.ready = 'true';
+    var mainLabel = form.querySelector('[data-loss-main-label]');
+    var placeLabel = form.querySelector('[data-loss-place-label]');
+
+    function updateFormLanguage() {
+      var kind = form.querySelector('input[name="bildirimTuru"]:checked');
+      var isFound = kind && kind.value === 'Buluntu';
+      if (mainLabel) mainLabel.textContent = isFound ? 'Ne buldunuz?' : 'Ne kaybettiniz?';
+      if (placeLabel) {
+        placeLabel.textContent = isFound ? 'Nerede karşınıza çıktı?' : 'En son nerede gördünüz?';
+      }
+    }
+
+    form.querySelectorAll('input[name="bildirimTuru"]').forEach(function (radio) {
+      radio.addEventListener('change', updateFormLanguage);
+    });
+    updateFormLanguage();
+
     form.addEventListener('submit', async function (event) {
       event.preventDefault();
       var status = form.querySelector('.loss-form-status');
@@ -79,8 +96,9 @@
         form.reset();
         var anonymous = form.querySelector('input[name="isimsiz"]');
         if (anonymous) anonymous.checked = true;
+        updateFormLanguage();
         if (status) {
-          status.textContent = 'Başvurunuz alındı. Bulunacağına dair bir taahhüt verilmedi.';
+          status.textContent = 'Kaydınız alındı. Yerine ulaşacağına dair bir taahhüt verilmedi.';
         }
       } catch (error) {
         if (status) status.textContent = 'Kayıt alınamadı. Bir süre sonra yeniden deneyin.';
