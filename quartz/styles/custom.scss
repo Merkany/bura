@@ -124,51 +124,35 @@ body[data-slug="kayip-burosu/index"] {
   }
 }
 
-.bura-weather { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.3rem 1.5rem; padding: 0.65rem 1rem; border-bottom: 1px solid var(--lightgray, #303044); background: var(--light, #10111f); color: var(--darkgray, #cfc6b4); font: 13px/1.5 var(--bodyFont, system-ui); text-align: center; }
-.bura-weather-label { font: 10px/1.5 var(--codeFont, monospace); letter-spacing: 0.1em; }
-
-/* Belirgin, ortalanmış hava durumu bannerı. */
-.bura-weather {
-  width: 100%;
-  min-height: 68px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.35rem 1rem;
-  flex-wrap: wrap;
-  padding: 18px 24px;
-  background: #d8cfbd;
-  color: #202235;
-  border-bottom: 2px solid #a9694f;
-  text-align: center;
-  font: 500 16px/1.6 system-ui, sans-serif;
-}
-.bura-weather-label {
-  font: 700 16px/1.6 system-ui, sans-serif;
-  letter-spacing: 0;
-}
-@media (max-width: 520px) {
-  .bura-weather { flex-direction: column; gap: 2px; padding: 13px 16px; }
-}
-
-/* Yavaş kayan hava raporu; başlık sabit kalır. */
+/* Yavaş kayan hava raporu şeridi; tema değişkenlerini kullanır, açık/koyu modda otomatik uyum sağlar. */
 .bura-weather {
   box-sizing: border-box;
+  width: 100%;
   min-height: 0;
   height: 42px;
   padding: 0 24px;
   display: flex;
+  align-items: center;
   flex-direction: row;
   flex-wrap: nowrap;
   gap: 20px;
   font-size: 14px;
   overflow: hidden;
+  text-align: center;
+  background: var(--light);
+  color: var(--darkgray);
+  border-bottom: 1px solid var(--lightgray);
 }
-.bura-weather-label { flex: 0 0 auto; font-size: 13px; }
+.bura-weather-label {
+  flex: 0 0 auto;
+  font: 700 13px/1.5 var(--codeFont, monospace);
+  letter-spacing: 0.1em;
+  color: var(--tertiary);
+}
 .weather-window { display: block; overflow: hidden; width: min(650px, 55vw); min-width: 0; text-align: left; }
 .weather-track { display: block; white-space: nowrap; width: max-content; padding-left: 650px; animation: weather-drift 14s linear infinite; }
 .bura-weather:hover .weather-track, .bura-weather:focus-within .weather-track { animation-play-state: paused; }
-.weather-window:focus-visible { outline: 2px solid #345e81; outline-offset: 2px; }
+.weather-window:focus-visible { outline: 2px solid var(--tertiary); outline-offset: 2px; }
 @keyframes weather-drift { from { transform: translateX(0); } to { transform: translateX(-100%); } }
 @media (max-width: 520px) {
   .bura-weather { height: 42px; padding: 0 12px; gap: 12px; flex-direction: row; }
@@ -180,7 +164,3 @@ body[data-slug="kayip-burosu/index"] {
   .bura-weather { height: auto; min-height: 42px; padding-top: 8px; padding-bottom: 8px; }
   .weather-track { animation: none; padding-left: 0; white-space: normal; width: auto; }
 }
-
-/* Hava şeridi renkleri. */
-.bura-weather { background: #191b32; color: #efe7d8; border-bottom: 1px solid #30334b; }
-.bura-weather-label { color: #c08f78; }
