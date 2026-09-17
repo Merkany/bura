@@ -67,7 +67,10 @@ export default (() => {
         <script defer src={joinSegments(baseDir, "static/insan-misin/overlay.js")}></script>
         <script defer src={joinSegments(baseDir, "static/bura-corner.js")}></script>
         <script defer src={joinSegments(baseDir, "static/story-ui.js")}></script>
-        <script defer src={joinSegments(baseDir, "static/loss-records.js")}></script>
+        <script
+          defer
+          src={`${joinSegments(baseDir, "static/loss-records.js")}?v=20260917-found`}
+        ></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <meta name="og:site_name" content={cfg.pageTitle}></meta>
