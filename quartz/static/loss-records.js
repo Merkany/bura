@@ -47,6 +47,54 @@
     showPage(1, false);
   }
 
-  document.addEventListener('nav', initialiseLossRecords);
+  function initialiseLossApplication() {
+    var form = document.querySelector('.loss-application-form');
+    if (!form || form.dataset.ready === 'true') return;
+
+    form.dataset.ready = 'true';
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      var status = form.querySelector('.loss-form-status');
+      var button = form.querySelector('.loss-submit');
+      var endpoint = form.dataset.formEndpoint;
+
+      if (!endpoint) {
+        if (status) status.textContent = 'Başvuru hattı henüz açılmadı.';
+        return;
+      }
+
+      if (button) button.disabled = true;
+      form.dataset.submitting = 'true';
+      if (status) status.textContent = '';
+
+      try {
+        var response = await fetch(endpoint, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' }
+        });
+
+        if (!response.ok) throw new Error('submission failed');
+
+        form.reset();
+        var anonymous = form.querySelector('input[name="isimsiz"]');
+        if (anonymous) anonymous.checked = true;
+        if (status) {
+          status.textContent = 'Başvurunuz alındı. Bulunacağına dair bir taahhüt verilmedi.';
+        }
+      } catch (error) {
+        if (status) status.textContent = 'Kayıt alınamadı. Bir süre sonra yeniden deneyin.';
+      } finally {
+        if (button) button.disabled = false;
+        delete form.dataset.submitting;
+      }
+    });
+  }
+
+  document.addEventListener('nav', function () {
+    initialiseLossRecords();
+    initialiseLossApplication();
+  });
   initialiseLossRecords();
+  initialiseLossApplication();
 })();
