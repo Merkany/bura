@@ -351,6 +351,9 @@ export function renderPage(
           <span class="bura-weather-label">Bura'nın hava durumu:</span>
           <span class="weather-window" tabIndex={0} aria-label="Bugün hava sınıf çatışmalı."><span class="weather-track" aria-hidden="true">Bugün hava sınıf çatışmalı.</span></span>
         </aside>
+        <a class="bura-corner-stamp" href={joinSegments(basePath as FullSlug, "kayip-burosu") + "/"}>
+          Kayıp Bürosu
+        </a>
         {frame.css && <style dangerouslySetInnerHTML={{ __html: frame.css }} />}
         <div id="quartz-root" class="page" data-frame={frame.name}>
           <Body {...componentData}>
