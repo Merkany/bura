@@ -5,7 +5,8 @@ configuration:
   enableSPA: true
   enablePopovers: true
   analytics:
-    provider: plausible
+    provider: goatcounter
+    websiteId: mer
   locale: tr-TR
   baseUrl: merkany.github.io/bura
   ignorePatterns:
