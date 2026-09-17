@@ -29,8 +29,16 @@ interface RenderComponents {
   frame?: string
 }
 
-const LossRecords: QuartzComponent = ({ allFiles }) => {
-  const records = allFiles
+type LossRecord = {
+  number: number
+  category: string
+  title: string
+  location: string
+  outcome: string
+}
+
+function getLossRecords(allFiles: QuartzComponentProps["allFiles"]): LossRecord[] {
+  return allFiles
     .filter((file) => file.slug?.startsWith("kayip-burosu/") && file.slug !== "kayip-burosu/index")
     .map((file) => {
       const data = file.frontmatter as Record<string, unknown> | undefined
@@ -44,6 +52,10 @@ const LossRecords: QuartzComponent = ({ allFiles }) => {
     })
     .filter((record) => record.number > 0 && record.title)
     .sort((a, b) => b.number - a.number)
+}
+
+const LossRecords: QuartzComponent = ({ allFiles }) => {
+  const records = getLossRecords(allFiles)
 
   return (
     <>
@@ -118,6 +130,28 @@ const LossRecords: QuartzComponent = ({ allFiles }) => {
         </form>
       </section>
     </>
+  )
+}
+
+const STORY_ORDER = [
+  { slug: "tatil-iptal", title: "01. Tatil İptal" },
+  { slug: "pit-pit", title: "02. Pıt Pıt" },
+  { slug: "iyim-iyiyim", title: "03. İyim, iyiyim" },
+  { slug: "kemikler-kaynadi", title: "04. Kemikler Kaynadı" },
+  { slug: "iki-beden-buyuk", title: "05. İki Beden Büyük" },
+  { slug: "bu-ulkede-deniz-yok", title: "06. Bu Ülkede Deniz Yok" },
+]
+
+const StoryNext: QuartzComponent = ({ fileData }) => {
+  const index = STORY_ORDER.findIndex((story) => story.slug === fileData.slug)
+  if (index < 0) return null
+  const next = STORY_ORDER[index + 1]
+
+  return (
+    <nav class="story-next" aria-label="Okumaya devam et">
+      <span>{next ? "SIRADAKİ" : "BAŞA DÖN"}</span>
+      <a href={next ? `./${next.slug}` : "./"}>{next ? `${next.title} →` : "[.] →"}</a>
+    </nav>
   )
 }
 
@@ -435,6 +469,13 @@ export function renderPage(
     componentData.ctx.argv.serve || !cfg.baseUrl
       ? ""
       : new URL(`https://${cfg.baseUrl}`).pathname.replace(/\/$/, "")
+  const lossRecords = getLossRecords(componentData.allFiles)
+  const resolvedAfterBody =
+    slug === "kayip-burosu/index" || slug === "kayip-burosu"
+      ? [LossRecords, ...afterBody]
+      : componentData.fileData.frontmatter?.pageType === "story"
+        ? [StoryNext, ...afterBody]
+        : afterBody
   const doc = (
     <html lang={lang} dir={direction}>
       <Head {...componentData} />
@@ -443,6 +484,16 @@ export function renderPage(
         data-basepath={basePath}
         data-page-type={componentData.fileData.frontmatter?.pageType}
       >
+        <div id="bura-loss-records-data" hidden>
+          {lossRecords.map((record) => (
+            <span
+              data-number={String(record.number).padStart(3, "0")}
+              data-category={record.category}
+              data-title={record.title}
+              data-location={record.location}
+            ></span>
+          ))}
+        </div>
         <aside class="bura-weather" aria-label="Bura — kurmaca hava raporu">
           <span class="bura-weather-label">Bura'nın hava durumu:</span>
           <span class="weather-window" tabIndex={0} aria-label="Bugün hava sınıf çatışmalı."><span class="weather-track" aria-hidden="true">Bugün hava sınıf çatışmalı.</span></span>
@@ -468,10 +519,7 @@ export function renderPage(
                 header,
                 beforeBody,
                 pageBody: Content,
-                afterBody:
-                  slug === "kayip-burosu/index" || slug === "kayip-burosu"
-                    ? [LossRecords, ...afterBody]
-                    : afterBody,
+                afterBody: resolvedAfterBody,
                 left,
                 right,
                 footer,
