@@ -63,5 +63,15 @@ document.querySelector('.verify').addEventListener('click',()=>{
   }
 });
 
+if(embedded){
+  // Embedded haldeyken "Bura'ya dön" linki sayfayı kendi içinde
+  // (iframe'in dar kutusunda) açmasın; üst pencereye kapat mesajı
+  // gönderip beklemeden hemen kapatsın.
+  document.querySelector('.success a').addEventListener('click', (e) => {
+    e.preventDefault();
+    if (window.parent) window.parent.postMessage('insan-misin-close', '*');
+  });
+}
+
 document.querySelector('#reset').addEventListener('click',()=>{grid.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed','false'));status.textContent='';success.hidden=true;challenge.hidden=false;grid.querySelector('button').focus()});
 </script></body></html>
