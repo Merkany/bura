@@ -165,3 +165,32 @@ body[data-slug="kayip-burosu/index"] {
   .bura-weather { height: auto; min-height: 42px; padding-top: 8px; padding-bottom: 8px; }
   .weather-track { animation: none; padding-left: 0; white-space: normal; width: auto; }
 }
+
+/* Kayıp Bürosu: her sayfada sağ üstte sabit duran küçük bir resmi mühür. */
+.bura-corner-stamp {
+  position: fixed;
+  top: 54px;
+  right: 20px;
+  z-index: 500;
+  padding: 6px 12px;
+  background: var(--light);
+  color: var(--darkgray);
+  border: 1px solid var(--lightgray);
+  font: 600 12px/1.4 var(--codeFont, monospace);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+.bura-corner-stamp:hover {
+  color: var(--tertiary);
+  border-color: var(--tertiary);
+}
+@media (max-width: 520px) {
+  .bura-corner-stamp {
+    top: auto;
+    bottom: 16px;
+    right: 16px;
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+}
