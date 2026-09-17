@@ -36,7 +36,7 @@ export function pageResources(
   ctx?: BuildCtx,
 ): StaticResources {
   const hashedNames = ctx?.hashedResourceNames
-  const cssFile = hashedNames?.["index.css"] ?? "index.css"
+  const cssFile = hashedNames?.["index.css"] ?? "index.css?v=20260917-weather-ticker-fast"
   const prescriptFile = hashedNames?.["prescript.js"] ?? "prescript.js"
   const postscriptFile = hashedNames?.["postscript.js"] ?? "postscript.js"
 
@@ -347,6 +347,10 @@ export function renderPage(
     <html lang={lang} dir={direction}>
       <Head {...componentData} />
       <body data-slug={slug} data-basepath={basePath}>
+        <aside class="bura-weather" aria-label="Bura — kurmaca hava raporu">
+          <span class="bura-weather-label">Bura'nın hava durumu:</span>
+          <span class="weather-window" tabIndex={0} aria-label="Bugün hava sınıf çatışmalı."><span class="weather-track" aria-hidden="true">Bugün hava sınıf çatışmalı.</span></span>
+        </aside>
         {frame.css && <style dangerouslySetInnerHTML={{ __html: frame.css }} />}
         <div id="quartz-root" class="page" data-frame={frame.name}>
           <Body {...componentData}>
