@@ -1,7 +1,7 @@
 (function () {
   var NEXT_KEY = "insan-misin-next";
-  var FIRST_MIN_DELAY = 5000;
-  var FIRST_MAX_DELAY = 10000;
+  var FIRST_MIN_DELAY = 15000;
+  var FIRST_MAX_DELAY = 20000;
   var REPEAT_DELAY = 30 * 60 * 1000; // 30 dakika
   var pendingTimer = null;
 
@@ -21,6 +21,48 @@
     try {
       sessionStorage.setItem(NEXT_KEY, String(Date.now() + delayMs));
     } catch (e) {}
+  }
+
+  // iOS Safari'de fixed-position bir overlay açıkken gövdeyi
+  // overflow:hidden ile kilitleyip sonra açmak, tarayıcının
+  // görünüm/yakınlaştırma senkronunu bozup sayfayı birkaç saniye
+  // küçük/uzaklaştırılmış gösterebiliyor. Bunun yerine gövdeyi
+  // fixed konuma alıp kaydırma konumunu saklayan daha güvenilir
+  // bir kilitleme yöntemi kullanıyoruz.
+  function lockScroll() {
+    var scrollY = window.scrollY || window.pageYOffset || 0;
+    document.body.dataset.buraScrollY = String(scrollY);
+    document.body.style.position = "fixed";
+    document.body.style.top = "-" + scrollY + "px";
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
+  }
+
+  function unlockScroll() {
+    var scrollY = parseInt(document.body.dataset.buraScrollY || "0", 10);
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.left = "";
+    document.body.style.right = "";
+    document.body.style.width = "";
+    delete document.body.dataset.buraScrollY;
+    window.scrollTo(0, scrollY);
+    refreshViewport();
+  }
+
+  // Overlay kapandıktan sonra bazı mobil tarayıcılarda görünüm alanı
+  // bir süre yanlış ölçekte kalabiliyor; viewport meta etiketini
+  // anlık olarak güncelleyip geri almak tarayıcıyı yeniden hesaplamaya
+  // zorluyor ve sayfa hemen doğru boyuta dönüyor.
+  function refreshViewport() {
+    var vp = document.querySelector('meta[name="viewport"]');
+    if (!vp) return;
+    var content = vp.getAttribute("content");
+    if (!content) return;
+    vp.setAttribute("content", content + ", maximum-scale=1");
+    void document.body.offsetHeight;
+    vp.setAttribute("content", content);
   }
 
   function showOverlay() {
@@ -44,13 +86,13 @@
 
     overlay.appendChild(frame);
     document.body.appendChild(overlay);
-    document.documentElement.style.overflow = "hidden";
+    lockScroll();
   }
 
   function removeOverlay() {
     var overlay = document.getElementById("insan-misin-overlay");
     if (overlay) overlay.remove();
-    document.documentElement.style.overflow = "";
+    unlockScroll();
   }
 
   function scheduleOverlay() {
@@ -64,13 +106,24 @@
     pendingTimer = setTimeout(showOverlay, remaining);
   }
 
+  var autoCloseTimer = null;
+
   window.addEventListener("message", function (event) {
     if (event.data === "insan-misin-verified") {
       setNext(REPEAT_DELAY);
-      setTimeout(function () {
+      autoCloseTimer = setTimeout(function () {
+        autoCloseTimer = null;
         removeOverlay();
         scheduleOverlay();
       }, 3200);
+    } else if (event.data === "insan-misin-close") {
+      // Kullanıcı "Bura'ya dön"e tıkladı: beklemeden hemen kapat.
+      if (autoCloseTimer) {
+        clearTimeout(autoCloseTimer);
+        autoCloseTimer = null;
+      }
+      removeOverlay();
+      scheduleOverlay();
     }
   });
 
