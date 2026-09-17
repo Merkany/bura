@@ -188,18 +188,23 @@ body[data-slug="kayip-burosu/index"] {
 }
 .bura-corner-stamp:hover .bura-corner-stamp-tab {
   background: var(--tertiary);
-  color: var(--light);
+  color: #f4efe4;
 }
 .bura-corner-stamp:hover .bura-corner-stamp-cta {
-  color: var(--light);
+  color: #f4efe4;
   background: var(--tertiary);
 }
 .bura-corner-stamp-tab {
-  padding: 6px 16px;
+  /* --tertiary sabit bir renk (açık/koyu modda aynı), ama --light
+     temaya göre anlam değiştiriyor (koyu modda neredeyse siyah oluyor).
+     Bu yüzden burada temayla değişmeyen sabit açık bir renk kullanıyoruz. */
+  padding: 8px 16px;
   background: var(--tertiary);
-  color: var(--light);
-  font: 700 11px/1.6 var(--codeFont, monospace);
+  color: #f4efe4;
+  font: 700 14px/1.6 var(--codeFont, monospace);
   letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
 }
 .bura-corner-stamp-body {
   display: flex;
@@ -240,5 +245,44 @@ body[data-slug="kayip-burosu/index"] {
     position: static;
     width: auto;
     margin: 16px;
+  }
+}
+
+/* Her sayfa girişinde gerçek bir damga vuruşu: kart havadan, hafif
+   çarpık iniyor ve sertçe yerine oturuyor — adını hak eden tek, güçlü
+   bir hareket. Sonra sessizce arka planda kalır; sürekli hareket eden
+   şey reklam gibi algılanır. */
+.bura-corner-stamp {
+  transform-origin: top right;
+}
+.bura-corner-stamp.bura-corner-pulse {
+  animation: bura-corner-stamp-hit 1.3s cubic-bezier(0.22, 1.4, 0.36, 1) 1;
+}
+@keyframes bura-corner-stamp-hit {
+  /* Opaklık artık ayrı animasyonlanmıyor — kart baştan sona tam görünür,
+     böylece büyük/eğik giriş hareketi ("düşüş") gerçekten görülüyor;
+     önceki sürümde opacity:0 tam da bu hareketin üstünü örtüyordu. */
+  0% {
+    transform: scale(1.6) rotate(-13deg) translateY(-22px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+  }
+  40% {
+    transform: scale(0.88) rotate(4deg) translateY(0);
+    box-shadow: 0 22px 44px rgba(0, 0, 0, 0.36);
+  }
+  65% {
+    transform: scale(1.1) rotate(-2deg);
+  }
+  85% {
+    transform: scale(0.98) rotate(0.5deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bura-corner-stamp.bura-corner-pulse {
+    animation: none;
   }
 }
