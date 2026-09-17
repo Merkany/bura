@@ -68,23 +68,34 @@ const LossRecords: QuartzComponent = ({ allFiles }) => {
 
       <section class="loss-application" aria-labelledby="loss-application-title">
         <header>
-          <span class="loss-application-code">KAYIP BİLDİRİMİ</span>
-          <h2 id="loss-application-title">Siz de bir kayıp bırakın.</h2>
+          <span class="loss-application-code">KAYIP / BULUNTU BİLDİRİMİ</span>
+          <h2 id="loss-application-title">Bir kayıp ya da buluntu bırakın.</h2>
           <p>Hatırladığınız kadarını yazın.</p>
           <p class="loss-application-note">Başvurular yayımlanmadan önce incelenir.</p>
         </header>
         <form class="loss-application-form" data-form-endpoint="https://formspree.io/f/xjykvpbb">
-          <input type="hidden" name="_subject" value="Bura — yeni kayıp başvurusu" />
+          <input type="hidden" name="_subject" value="Bura — yeni kayıp / buluntu başvurusu" />
           <label class="loss-honeypot" aria-hidden="true">
             Bu alanı boş bırakın
             <input type="text" name="_gotcha" tabIndex={-1} autocomplete="off" />
           </label>
+          <fieldset class="loss-kind loss-field-wide">
+            <legend>Buraya ne bırakıyorsunuz?</legend>
+            <label>
+              <input type="radio" name="bildirimTuru" value="Kayıp" checked />
+              <span>Kaybettiğim bir şey</span>
+            </label>
+            <label>
+              <input type="radio" name="bildirimTuru" value="Buluntu" />
+              <span>Bulduğum bir şey</span>
+            </label>
+          </fieldset>
           <label class="loss-field loss-field-wide">
-            <span>Ne kaybettiniz?</span>
-            <textarea name="kayip" rows={3} required></textarea>
+            <span data-loss-main-label>Ne kaybettiniz?</span>
+            <textarea name="bildirim" rows={3} required></textarea>
           </label>
           <label class="loss-field">
-            <span>En son nerede gördünüz?</span>
+            <span data-loss-place-label>En son nerede gördünüz?</span>
             <input type="text" name="yer" />
           </label>
           <label class="loss-field">
@@ -103,7 +114,7 @@ const LossRecords: QuartzComponent = ({ allFiles }) => {
             <span class="loss-submit-idle">Kaydı bırak</span>
             <span class="loss-submit-busy">Kaydediliyor…</span>
           </button>
-          <p class="loss-form-status" role="status" aria-live="polite"></p>
+          <p class="loss-form-status loss-field-wide" role="status" aria-live="polite"></p>
         </form>
       </section>
     </>
