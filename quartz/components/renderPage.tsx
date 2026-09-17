@@ -29,6 +29,44 @@ interface RenderComponents {
   frame?: string
 }
 
+const LossRecords: QuartzComponent = ({ allFiles }) => {
+  const records = allFiles
+    .filter((file) => file.slug?.startsWith("kayip-burosu/") && file.slug !== "kayip-burosu/index")
+    .map((file) => {
+      const data = file.frontmatter as Record<string, unknown> | undefined
+      return {
+        number: Number(data?.kayit ?? 0),
+        category: String(data?.kategori ?? ""),
+        title: String(data?.title ?? ""),
+        location: String(data?.bulunduguYer ?? ""),
+        outcome: String(data?.islem ?? ""),
+      }
+    })
+    .filter((record) => record.number > 0 && record.title)
+    .sort((a, b) => b.number - a.number)
+
+  return (
+    <div class="loss-records">
+      {records.map((record) => (
+        <section class="loss-record">
+          <header class="loss-record-head">
+            KAYIT {String(record.number).padStart(3, "0")}
+            {record.category && ` / ${record.category.toLocaleUpperCase("tr-TR")}`}
+          </header>
+          <h2 class="loss-subject">{record.title}</h2>
+          <details class="loss-details" name="kayip-kaydi">
+            <summary><span>İşlem sonucunu göster</span></summary>
+            <div class="loss-details-body">
+              <p class="loss-location"><span>Bulunduğu yer</span>{record.location}</p>
+              <footer class="loss-outcome"><span>İŞLEM</span><p>{record.outcome}</p></footer>
+            </div>
+          </details>
+        </section>
+      ))}
+    </div>
+  )
+}
+
 const headerRegex = new RegExp(/h[1-6]/)
 export function pageResources(
   baseDir: FullSlug | RelativeURL,
@@ -372,7 +410,10 @@ export function renderPage(
                 header,
                 beforeBody,
                 pageBody: Content,
-                afterBody,
+                afterBody:
+                  slug === "kayip-burosu/index" || slug === "kayip-burosu"
+                    ? [LossRecords, ...afterBody]
+                    : afterBody,
                 left,
                 right,
                 footer,
