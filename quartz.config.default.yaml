@@ -6,7 +6,7 @@ configuration:
   enablePopovers: true
   analytics:
     provider: plausible
-  locale: en-US
+  locale: tr-TR
   baseUrl: merkany.github.io/bura
   ignorePatterns:
     - private
@@ -15,29 +15,29 @@ configuration:
 
   theme:
     typography:
-      header: "Playfair Display"
-      body: "Lora"
-      code: "IBM Plex Mono"
+      header: "Fraunces"
+      body: "Inter"
+      code: "JetBrains Mono"
     colors:
       lightMode:
         light: "#e8e1d3"
         lightgray: "#d8cfbd"
         gray: "#a89f8f"
-        darkgray: "#2c3347"
-        dark: "#1b2233"
-        secondary: "#1b2233"
-        tertiary: "#5c6b8a"
-        highlight: "rgba(27, 34, 51, 0.08)"
+        darkgray: "#2c2e3f"
+        dark: "#14162a"
+        secondary: "#14162a"
+        tertiary: "#a9694f"
+        highlight: "rgba(20, 22, 42, 0.08)"
         textHighlight: "#e0d6a888"
       darkMode:
-        light: "#1b2233"
-        lightgray: "#2c3347"
-        gray: "#6c7488"
-        darkgray: "#d8cfbd"
-        dark: "#e8e1d3"
-        secondary: "#d8cfbd"
-        tertiary: "#8896b3"
-        highlight: "rgba(216, 207, 189, 0.08)"
+        light: "#10111f"
+        lightgray: "#191b32"
+        gray: "#7d8098"
+        darkgray: "#cfc6b4"
+        dark: "#efe7d8"
+        secondary: "#cfc6b4"
+        tertiary: "#a9694f"
+        highlight: "rgba(207, 198, 180, 0.08)"
         textHighlight: "#e0d6a855"
 plugins:
   - source: "@quartz-community/created-modified-date"
@@ -71,6 +71,7 @@ plugins:
     order: 50
     layout:
       position: right
+      condition: not-index
       priority: 30
   - source: "@quartz-community/crawl-links"
     enabled: true
@@ -98,7 +99,7 @@ plugins:
     enabled: false
     order: 92
   - source: "@quartz-community/quartz-fonts"
-    enabled: true
+    enabled: false
   - source: "@quartz-themes/core"
     enabled: false
     options:
@@ -135,11 +136,13 @@ plugins:
       title: "İçindekiler"
     layout:
       position: left
+      condition: not-index
       priority: 50
   - source: "@quartz-community/graph"
     enabled: true
     layout:
       position: right
+      condition: not-index
       priority: 10
   - source: "@quartz-community/search"
     enabled: true
@@ -153,6 +156,7 @@ plugins:
     enabled: true
     layout:
       position: right
+      condition: not-index
       priority: 50
   - source: "@quartz-community/article-title"
     enabled: true
@@ -163,6 +167,7 @@ plugins:
     enabled: true
     layout:
       position: beforeBody
+      condition: not-index
       priority: 20
   - source: "@quartz-community/tag-list"
     enabled: false
@@ -184,6 +189,7 @@ plugins:
     enabled: true
     layout:
       position: left
+      condition: not-index
       priority: 35
       group: toolbar
   - source: "@quartz-community/breadcrumbs"
@@ -210,7 +216,7 @@ plugins:
       position: footer
       priority: 50
   - source: "@quartz-community/recent-notes"
-    enabled: true
+    enabled: false
     options:
       title: "İçindekiler"
       limit: 20
