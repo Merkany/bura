@@ -66,9 +66,9 @@ export default {
       lastFewNotes: ({ count }) => `Son ${count} not`,
     },
     error: {
-      title: "Bulunamadı",
-      notFound: "Bu sayfa ya özel ya da mevcut değil.",
-      home: "Anasayfaya geri dön",
+      title: "404",
+      notFound: "Aradığınız şey bulunamadı.\nZaten burada değildi.",
+      home: "geri dön",
     },
     folderContent: {
       folder: "Klasör",
