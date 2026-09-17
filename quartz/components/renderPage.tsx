@@ -71,6 +71,7 @@ const LossRecords: QuartzComponent = ({ allFiles }) => {
           <span class="loss-application-code">KAYIP BİLDİRİMİ</span>
           <h2 id="loss-application-title">Siz de bir kayıp bırakın.</h2>
           <p>Hatırladığınız kadarını yazın.</p>
+          <p class="loss-application-note">Başvurular yayımlanmadan önce incelenir.</p>
         </header>
         <form class="loss-application-form" data-form-endpoint="https://formspree.io/f/xjykvpbb">
           <input type="hidden" name="_subject" value="Bura — yeni kayıp başvurusu" />
@@ -426,7 +427,11 @@ export function renderPage(
   const doc = (
     <html lang={lang} dir={direction}>
       <Head {...componentData} />
-      <body data-slug={slug} data-basepath={basePath}>
+      <body
+        data-slug={slug}
+        data-basepath={basePath}
+        data-page-type={componentData.fileData.frontmatter?.pageType}
+      >
         <aside class="bura-weather" aria-label="Bura — kurmaca hava raporu">
           <span class="bura-weather-label">Bura'nın hava durumu:</span>
           <span class="weather-window" tabIndex={0} aria-label="Bugün hava sınıf çatışmalı."><span class="weather-track" aria-hidden="true">Bugün hava sınıf çatışmalı.</span></span>
