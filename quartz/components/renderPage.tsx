@@ -46,24 +46,66 @@ const LossRecords: QuartzComponent = ({ allFiles }) => {
     .sort((a, b) => b.number - a.number)
 
   return (
-    <div class="loss-records">
-      {records.map((record) => (
-        <section class="loss-record">
-          <header class="loss-record-head">
-            KAYIT {String(record.number).padStart(3, "0")}
-            {record.category && ` / ${record.category.toLocaleUpperCase("tr-TR")}`}
-          </header>
-          <h2 class="loss-subject">{record.title}</h2>
-          <details class="loss-details" name="kayip-kaydi">
-            <summary><span>İşlem sonucunu göster</span></summary>
-            <div class="loss-details-body">
-              <p class="loss-location"><span>Bulunduğu yer</span>{record.location}</p>
-              <footer class="loss-outcome"><span>İŞLEM</span><p>{record.outcome}</p></footer>
-            </div>
-          </details>
-        </section>
-      ))}
-    </div>
+    <>
+      <div class="loss-records">
+        {records.map((record) => (
+          <section class="loss-record">
+            <header class="loss-record-head">
+              KAYIT {String(record.number).padStart(3, "0")}
+              {record.category && ` / ${record.category.toLocaleUpperCase("tr-TR")}`}
+            </header>
+            <h2 class="loss-subject">{record.title}</h2>
+            <details class="loss-details" name="kayip-kaydi">
+              <summary><span>İşlem sonucunu göster</span></summary>
+              <div class="loss-details-body">
+                <p class="loss-location"><span>Bulunduğu yer</span>{record.location}</p>
+                <footer class="loss-outcome"><span>İŞLEM</span><p>{record.outcome}</p></footer>
+              </div>
+            </details>
+          </section>
+        ))}
+      </div>
+
+      <section class="loss-application" aria-labelledby="loss-application-title">
+        <header>
+          <span class="loss-application-code">KAYIP BİLDİRİMİ</span>
+          <h2 id="loss-application-title">Siz de bir kayıp bırakın.</h2>
+          <p>Hatırladığınız kadarını yazın.</p>
+        </header>
+        <form class="loss-application-form" data-form-endpoint="https://formspree.io/f/xjykvpbb">
+          <input type="hidden" name="_subject" value="Bura — yeni kayıp başvurusu" />
+          <label class="loss-honeypot" aria-hidden="true">
+            Bu alanı boş bırakın
+            <input type="text" name="_gotcha" tabIndex={-1} autocomplete="off" />
+          </label>
+          <label class="loss-field loss-field-wide">
+            <span>Ne kaybettiniz?</span>
+            <textarea name="kayip" rows={3} required></textarea>
+          </label>
+          <label class="loss-field">
+            <span>En son nerede gördünüz?</span>
+            <input type="text" name="yer" />
+          </label>
+          <label class="loss-field">
+            <span>Yaklaşık zaman</span>
+            <input type="text" name="zaman" placeholder="Dün, 2019, öğle arası…" />
+          </label>
+          <label class="loss-field loss-field-wide">
+            <span>Adınız <small>(isteğe bağlı)</small></span>
+            <input type="text" name="isim" />
+          </label>
+          <label class="loss-anonymous">
+            <input type="checkbox" name="isimsiz" checked />
+            <span>Kaydım isimsiz yayımlansın.</span>
+          </label>
+          <button class="loss-submit" type="submit">
+            <span class="loss-submit-idle">Kaydı bırak</span>
+            <span class="loss-submit-busy">Kaydediliyor…</span>
+          </button>
+          <p class="loss-form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </>
   )
 }
 
