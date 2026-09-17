@@ -166,7 +166,9 @@ body[data-slug="kayip-burosu/index"] {
   .weather-track { animation: none; padding-left: 0; white-space: normal; width: auto; }
 }
 
-/* Kayıp Bürosu: her sayfada sağ üstte sabit duran, her ziyarette değişen bir kayıt kartı. */
+/* Kayıp Bürosu: her sayfada sağ üstte sabit duran, her ziyarette değişen bir
+   kayıt kartı. Üstteki "sekme" şeridi bunun bir bölüme açılan kapı olduğunu,
+   alttaki "devamını oku" çağrısı da tıklanabilir olduğunu netleştiriyor. */
 .bura-corner-stamp {
   position: fixed;
   top: 62px;
@@ -175,16 +177,37 @@ body[data-slug="kayip-burosu/index"] {
   width: 240px;
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  border: 1px solid var(--lightgray);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+  overflow: hidden;
+  transition: box-shadow 0.15s ease;
+}
+.bura-corner-stamp:hover {
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+}
+.bura-corner-stamp:hover .bura-corner-stamp-tab {
+  background: var(--tertiary);
+  color: var(--light);
+}
+.bura-corner-stamp:hover .bura-corner-stamp-cta {
+  color: var(--light);
+  background: var(--tertiary);
+}
+.bura-corner-stamp-tab {
+  padding: 6px 16px;
+  background: var(--tertiary);
+  color: var(--light);
+  font: 700 11px/1.6 var(--codeFont, monospace);
+  letter-spacing: 0.08em;
+}
+.bura-corner-stamp-body {
+  display: flex;
+  flex-direction: column;
   gap: 6px;
   padding: 14px 16px;
   background: var(--light);
   color: var(--darkgray);
-  border: 1px solid var(--lightgray);
-  text-decoration: none;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
-}
-.bura-corner-stamp:hover {
-  border-color: var(--tertiary);
 }
 .bura-corner-stamp-kayit {
   font: 700 10px/1.4 var(--codeFont, monospace);
@@ -199,18 +222,23 @@ body[data-slug="kayip-burosu/index"] {
   font: 400 12px/1.5 var(--bodyFont, sans-serif);
   color: var(--gray);
 }
-.bura-corner-stamp-footer {
-  margin-top: 4px;
-  font: 600 11px/1.4 var(--codeFont, monospace);
-  letter-spacing: 0.06em;
+.bura-corner-stamp-cta {
+  margin-top: 6px;
+  align-self: flex-start;
+  padding: 5px 10px;
+  background: var(--lightgray);
   color: var(--tertiary);
+  font: 700 11px/1.4 var(--codeFont, monospace);
+  letter-spacing: 0.05em;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 @media (max-width: 640px) {
+  /* Sabit köşe kartı mobilde tüm genişliği kaplayıp içeriğin üstüne
+     binebiliyor; onun yerine hava şeridinin altında, akışın bir parçası
+     olarak göster. */
   .bura-corner-stamp {
-    top: auto;
-    bottom: 16px;
-    right: 16px;
-    left: 16px;
+    position: static;
     width: auto;
+    margin: 16px;
   }
 }
