@@ -352,10 +352,13 @@ export function renderPage(
           <span class="weather-window" tabIndex={0} aria-label="Bugün hava sınıf çatışmalı."><span class="weather-track" aria-hidden="true">Bugün hava sınıf çatışmalı.</span></span>
         </aside>
         <a class="bura-corner-stamp" href={joinSegments(basePath as FullSlug, "kayip-burosu") + "/"}>
-          <span class="bura-corner-stamp-kayit" data-kayit>KAYIT</span>
-          <span class="bura-corner-stamp-title" data-title>Bulunduğu yer: —</span>
-          <span class="bura-corner-stamp-desc" data-desc></span>
-          <span class="bura-corner-stamp-footer">Kayıp Bürosu →</span>
+          <span class="bura-corner-stamp-tab">Kayıp Bürosu</span>
+          <span class="bura-corner-stamp-body">
+            <span class="bura-corner-stamp-kayit" data-kayit>KAYIT</span>
+            <span class="bura-corner-stamp-title" data-title>Bulunduğu yer: —</span>
+            <span class="bura-corner-stamp-desc" data-desc></span>
+            <span class="bura-corner-stamp-cta">devamını oku →</span>
+          </span>
         </a>
         {frame.css && <style dangerouslySetInnerHTML={{ __html: frame.css }} />}
         <div id="quartz-root" class="page" data-frame={frame.name}>
