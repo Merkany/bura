@@ -251,6 +251,25 @@ body[data-slug="kayip-burosu/index"] {
   }
 }
 
+/* Okuma sayfalarında büro kaydı metnin önüne geçmez; küçük bir dosya
+   sekmesi olarak kalır. Ana sayfadaki tam kart görünümü korunur. */
+body[data-page-type="story"] .bura-corner-stamp {
+  width: 164px;
+  right: 14px;
+}
+body[data-page-type="story"] .bura-corner-stamp-tab {
+  padding: 6px 10px;
+  font-size: 10px;
+}
+body[data-page-type="story"] .bura-corner-stamp-body { padding: 9px 10px; }
+body[data-page-type="story"] .bura-corner-stamp-desc,
+body[data-page-type="story"] .bura-corner-stamp-cta { display: none; }
+body[data-page-type="story"] .bura-corner-stamp-title { font-size: 11px; }
+
+@media (min-width: 801px) {
+  body[data-page-type="story"] .explorer.collapsed > .explorer-content { display: none; }
+}
+
 /* Her sayfa girişinde gerçek bir damga vuruşu: kart havadan, hafif
    çarpık iniyor ve sertçe yerine oturuyor — adını hak eden tek, güçlü
    bir hareket. Sonra sessizce arka planda kalır; sürekli hareket eden
@@ -413,6 +432,10 @@ body[data-slug="kayip-burosu/index"] {
     font: 500 clamp(1.55rem, 4vw, 2rem)/1.25 var(--headerFont);
   }
   & .loss-application header p { margin: 0; color: var(--gray); }
+  & .loss-application header .loss-application-note {
+    margin-top: 0.45rem;
+    font-size: 0.78rem;
+  }
 
   & .loss-application-form {
     display: grid;
