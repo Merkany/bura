@@ -1,8 +1,8 @@
 (function () {
   var NEXT_KEY = "insan-misin-next";
-  var FIRST_MIN_DELAY = 15000;
-  var FIRST_MAX_DELAY = 20000;
-  var REPEAT_DELAY = 30 * 60 * 1000; // 30 dakika
+  var SEEN_KEY = "insan-misin-seen";
+  var FIRST_MIN_DELAY = 60000;
+  var FIRST_MAX_DELAY = 120000;
   var pendingTimer = null;
 
   function getNext() {
@@ -21,6 +21,14 @@
     try {
       sessionStorage.setItem(NEXT_KEY, String(Date.now() + delayMs));
     } catch (e) {}
+  }
+
+  function hasBeenSeen() {
+    try { return sessionStorage.getItem(SEEN_KEY) === "1"; } catch (e) { return false; }
+  }
+
+  function markSeen() {
+    try { sessionStorage.setItem(SEEN_KEY, "1"); } catch (e) {}
   }
 
   // iOS Safari'de fixed-position bir overlay açıkken gövdeyi
@@ -84,7 +92,18 @@
       "width:min(92vw,440px);height:min(90vh,560px);border:0;" +
       "background:#faf9f5;box-shadow:0 20px 60px rgba(0,0,0,.5);";
 
+    var close = document.createElement("button");
+    close.type = "button";
+    close.textContent = "×";
+    close.setAttribute("aria-label", "Doğrulamayı kapat");
+    close.style.cssText =
+      "position:absolute;top:18px;right:22px;border:1px solid rgba(255,255,255,.4);" +
+      "background:rgba(16,17,31,.7);color:#efe7d8;width:40px;height:40px;" +
+      "font:26px/1 sans-serif;cursor:pointer;";
+    close.addEventListener("click", dismissOverlay);
+
     overlay.appendChild(frame);
+    overlay.appendChild(close);
     document.body.appendChild(overlay);
     lockScroll();
   }
@@ -95,8 +114,14 @@
     unlockScroll();
   }
 
+  function dismissOverlay() {
+    markSeen();
+    removeOverlay();
+  }
+
   function scheduleOverlay() {
     if (pendingTimer) clearTimeout(pendingTimer);
+    if (hasBeenSeen()) return;
     if (document.getElementById("insan-misin-overlay")) return;
     var remaining = getNext() - Date.now();
     if (remaining <= 0) {
@@ -110,11 +135,10 @@
 
   window.addEventListener("message", function (event) {
     if (event.data === "insan-misin-verified") {
-      setNext(REPEAT_DELAY);
+      markSeen();
       autoCloseTimer = setTimeout(function () {
         autoCloseTimer = null;
         removeOverlay();
-        scheduleOverlay();
       }, 3200);
     } else if (event.data === "insan-misin-close") {
       // Kullanıcı "Bura'ya dön"e tıkladı: beklemeden hemen kapat.
@@ -122,8 +146,13 @@
         clearTimeout(autoCloseTimer);
         autoCloseTimer = null;
       }
-      removeOverlay();
-      scheduleOverlay();
+      dismissOverlay();
+    }
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && document.getElementById("insan-misin-overlay")) {
+      dismissOverlay();
     }
   });
 
