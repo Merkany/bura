@@ -20,7 +20,7 @@ Tükürükçü teyzeye gidecekmiş çıkınca.
 İlk defa beddua etmiş. Ne söyledin Pura dedik: “beni mecnun ettin sen de olasın” demiş.  
 Yine güldük. Pura beddualarının tuttuğunu ilan etti hepimize.  
   
-Saçmalamayı bırak artık Pura dedim. “Tükürükçü teyze çare olamaz buna,” diye araya girdi Vera, yüzünde buruk bir tebessümle. “Nazar değil bu Pura. İnsan bir bazı şeyleri yitirdiğinde senin yaptığını yapar elbette!”  
+Saçmalamayı bırak artık Pura dedim. “Tükürükçü teyze çare olamaz buna,” diye araya girdi Vera.. “Nazar değil bu Pura." 
   
 Gözlerini serum damlalarına dikti Pura bu sözler üzerine. Damla kendi iç doygunluğuna ulaşınca düşüyor;  
   
@@ -32,7 +32,7 @@ Doktor röntgene bakıp “şurada üç kırık, burada iki kırık” var diye 
   
 Vera tabureyi biraz daha yatağın yanına çekip oturdu. Pura’nın askıdaki ayağına, sonra da çenesini saran beyaz sargılara baktı;  
   
-“Röntgende görünmeyen yerler için alçı siparişi vermiyorlarmış Pura” dedi. “İçeride serbestçe dolaşan o parçaları neyle sabitleyeceğiz?”  
+“Röntgende görünmeyen yerler için alçı siparişi vermiyorlarmış Pura” dedi.   
   
 pıt. Serum.  
 pıt. Gözyaşı.  
@@ -46,7 +46,7 @@ pıt. Gözyaşı. Pura’nın içinden bir damla daha eksildi.
   
 Vera dantelli mendilini çıkardı. Pura’nın alçı bezine doğru süzülen o ıslaklığı, sakince, incitmeden sildi.  
   
-“Ağlama Pura,” dedi usulca. “Alçı ıslanırsa kurumaz. İyileşmek için kendine biraz izin ver.” Pura işe yeni girmişti. “Artık izinli zaten” dedim ben de.  
+“Ağlama Pura,” dedi usulca. “Alçı ıslanırsa kurumaz. Kurumasına izin ver.” Pura işe yeni girmişti. “Artık izinli zaten” dedim ben de.  
   
 pıt. Serum. Pura’nın kolundaki damar doldu.  
 pıt. Gözyaşı. Pura’nın yastığı kurumadı.  
@@ -61,6 +61,6 @@ pıt. Serum. Pura’nın içinde bir şey aktı.
 pıt. Gözyaşı. Pura’nın yanağında bir çizgi kaldı.  
 Pura o çizgiye parmağını sürdü, ağzına götürdü. “Tuzlu,” dedi. Sonra hepimiz güldük.  
   
-“Yetmez mi Pura?” dedim bütün konuşmalar bitince. “Ayıp oluyor artık. Sen böyle dağılırsan seni kim sevsin? “Dağılmadım” dedi Pura. “Saçıldım. Biraz da saçmaladım.”  
+“Yetmez mi Pura?” dedim bütün konuşmalar bitince. “Ayıp oluyor artık. İnsan biraz usulünce dağılır." “Dağılmadım” dedi Pura. “Saçıldım. Biraz da saçmaladım.”  
   
 Sonra Pura gözlerini yumdu. Damlalar düşmeye devam etti biri içindeki o un ufak olmuş döküntüleri yıkadı, diğeri dökülen parçaların üzerine örtü oldu.
