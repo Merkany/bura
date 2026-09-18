@@ -10,11 +10,11 @@ Kapıyı açtığımızda bir hışırtı kopuverdi.
 
 Koltukların kenarları, halının üzeri, hatta mutfak tezgâhı… Her yer meydandan toplanmış konfetilerle doluydu. Aptal Pura tüm konfetileri alıp eve taşımış!   
   
-İlaç poşetini masanın kenarına bırakıp eşikte durup salondaki bu renk cümbüşüne baktım.
+İlaç poşetini masanın kenarına bırakıp eşikte durdum.
 
 “Pura,” dedim. “O gün direğin dibine koşup bayrağı ilk yarıya indiren sendin. Madem inanmıyordun, niye bunları eve getirmek için helak oldun?”
 
-Pura havada yakaladığı sarı bir konfeti kâğıdını parmağının ucuyla döndürmek dışında bir şey demedi.
+Pura havada yakaladığı sarı bir konfeti kâğıdını parmağının ucuyla döndürdü ama bir şey demedi.
 
 Ben de meydanda Pura’nın dişinden alıp dizimizin üzerine koyduğumuz, sonra cebime attığım o tek pembe konfeti parçasını çıkartıp dağınıklığın içinde bir daha bulunamayacak biçimde bıraktım!
 
@@ -59,7 +59,5 @@ Pura, alçısının ucuyla ekrandaki o ıslak lekeyi silmeye çalıştı, sanki 
 “Çünkü,” dedi, önemli bir açıklama yapacakmış gibi sonra durdu. Hiçbir şey demedi.
 
 Sonra sustuk. Ama bu sefer sessizlik de ritim tuttu. Buzdolabı uğuldadı. Konfetiler hışırdadı. Tavanın rutubeti genişledi. Pura’nın alçısı hafifçe tık etti.
-
-Ve bütün ev olarak Pura’nın o yalan ritmine eşlik ettik.   
   
 Bu böyle Pura iyileşip işe başlayana kadar devam etti…
