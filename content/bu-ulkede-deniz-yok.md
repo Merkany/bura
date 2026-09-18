@@ -4,7 +4,7 @@ pageType: story
 aliases:
   - "06. Bu Ülkede Deniz Yok"
 ---
-Otobüse yetişmiştik. Turnike ötmedi. Pura, etrafı yonca yapraklarla süslenmiş otomatik hazırlanmış "hoş geldin" kartı bile almıştı. Gün boyu depoda geçmişti. Zemine yapıştırılmış küçük, siyah-beyaz kodlu kareler, uzayan-kısalan bip sesleri, bol gelen eldivenler, ayaklarda beton ağırlığında botlar.
+Otobüse yetişmiştik. Turnike ötmedi. Pura, etrafı yonca yapraklarla süslenmiş otomatik hazırlanmış "hoş geldin" kartı bile almıştı. Gün boyu depoda geçmişti. Zemine yapıştırılmış küçük, siyah-beyaz kodlu kareler, sarı şeritler, uzayan-kısalan bip sesleri, bol gelen eldivenler, ayaklarda beton ağırlığında botlar.
 
 Gün bittiğinde -biten sadece iş saatleriydi- kendimizi göl kenarına attık. Vera "ördekleri beslemek yasaktır" tabelasının önündeki bankta bizim için hazırladığı sandviçlerle bekliyordu.
 
@@ -66,7 +66,7 @@ Vera bir süre sessiz kaldı. Gözlüğünü çıkardı, sildi, elinde tuttu. "�
 
 Pura başını salladı, hiçbir şey demedi.
 
-Uzaktaki su bisikletlerinden biri devrildi o sırada, içindeki iki çocuk kahkahalarla suya düştü, sığ suda debelenip tekrar tekneye tırmandılar. Pura'nın bağırışıyla çocukların kahkahası aynı anda, aynı havada asılı kaldı bir süre.
+Uzaktaki su bisikletlerinden biri devrildi o sırada, içindeki iki çocuk kahkahalarla suya düştü, sığ suda debelenip tekrar tekneye tırmandılar. Pura'nın iç çekişiyle çocukların kahkahası aynı anda, aynı havada asılı kaldı bir süre.
 
 Çocuklar gülüyor, biz de orada olmayan bir denizin kenarında betonla çimlerin birleştiği yerde oturup kaldık. 
 
