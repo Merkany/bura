@@ -10,13 +10,13 @@ Mutfak masasında oturuyorduk. Masanın kenarında hâlâ ilk haftadan kalma lah
 
 Tam o sırada Pura’nın masadaki telefonu titredi. Ekran aydınlandı: Bir e-posta.
 
-Pura ekrana baktı. Sonra telefonu, sanki içinde patlamaya hazır bir şey varmış gibi bana doğru itti. Gönderen patronuydu. Kısa, mesafeli ve şirket dilinin o pürüzsüz nezakatiyle yazılmıştı:
+Pura ekrana baktı. Sonra telefonu, sanki içinde patlamaya hazır bir şey varmış gibi bana doğru itti. Gönderen patronuydu. 
 
 > “_Çok geçmiş olsun Pura. Pazartesi günü seni yeniden aramızda görmeyi isteriz.”_
 
 Vera e-postayı okuyunca çayından bir yudum aldı. “İyi işte, insanların arasına karışma zamanın geldi de geçti bile” dedi. “Hem sağlık raporun da bitti. Yasal sınırın sonuna geldin.”
 
-“Aramızda görmeyi isteriz…” diye tekrarladı Pura. Cümleyi ağzında yabancı bir taş gibi evirip çevirirken ekran da “Kemikler için özel kalsiyum takviyesi, %20 indirim.” reklamı belirdi, Pura mırıldanarak “Belki” dedi. Pura, parmağının ucuyla masadaki o kurumuş turşu lekesini kazımaya çalışırken “peki bir insan tüm kırıkları iyileşmeden çalışabilir mi?” diye sordu aniden. “Yani her şey alt-üst olmuşken yine de her şeyi doğru rafa koyabilir mi?”
+“Aramızda görmeyi isteriz…” diye tekrarladı Pura. Cümleyi ağzında yabancı bir taş gibi evirip çevirdi. Ekranda “Kemikler için özel kalsiyum takviyesi, %20 indirim” reklamı belirdi.“Belki,” diye mırıldandı. Parmağının ucuyla masadaki o kurumuş turşu lekesini kazımaya çalışırken “Her şey alt-üst olmuşken yine de her şeyi doğru rafa koyabilir mi?” diye sordu aniden Pura.
 
 Vera sarı dosyasını düzeltip Pura’ya baktı: “İş kanununda ‘kalp kırıklığı’ bir mazeret izni sebebi sayılmıyor Pura. Üstelik patron kalbini değil kollarını, bacaklarını, birazcık da aklını aralarında görmek istiyor.”
 
