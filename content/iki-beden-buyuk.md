@@ -50,7 +50,6 @@ Sonra bana dönerek devam etti:
 
 Pura durdu. Ağzı yavaşça aralandı. Sonra bir kahkaha patlattı. Öyle bir kahkaha ki, çaydanlığın demiri tıkırdadı, konfetiler havalandı. “Doğru ya,” dedi “beni niye beklesinler, kamyon dururken.”
 
-Ama gülerken, gözlerinin kenarında bir ıslaklık parladı. Elinin tersiyle sildi.
 
 O sırada Pura’nın saatinin alarmı çaldı. Pura bileğini kaldırdı, alarmı susturdu. Hemen ardından masadaki telefonu aydınlandı: “İşe giriş saatinize 43 dakika kaldı.”
 
