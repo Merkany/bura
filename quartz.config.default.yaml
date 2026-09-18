@@ -8,7 +8,7 @@ configuration:
     provider: goatcounter
     websiteId: mer
   locale: tr-TR
-  baseUrl: merkany.github.io/bura
+  baseUrl: buradayok.org
   ignorePatterns:
     - private
     - templates
