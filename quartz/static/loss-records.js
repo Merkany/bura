@@ -12,7 +12,8 @@
     var pageCount = Math.ceil(records.length / PAGE_SIZE);
     var nav = document.createElement('nav');
     nav.className = 'loss-pagination';
-    nav.setAttribute('aria-label', 'Kayıp kayıtları sayfaları');
+    var isEnglish = document.documentElement.lang === 'en';
+    nav.setAttribute('aria-label', isEnglish ? 'Lost property record pages' : 'Kayıp kayıtları sayfaları');
 
     function showPage(page, shouldScroll) {
       records.forEach(function (record, index) {
@@ -36,7 +37,7 @@
       button.type = 'button';
       button.textContent = String(page);
       button.dataset.page = String(page);
-      button.setAttribute('aria-label', 'Kayıt sayfası ' + page);
+      button.setAttribute('aria-label', (isEnglish ? 'Record page ' : 'Kayıt sayfası ') + page);
       button.addEventListener('click', function () {
         showPage(Number(this.dataset.page), true);
       });
@@ -54,13 +55,14 @@
     form.dataset.ready = 'true';
     var mainLabel = form.querySelector('[data-loss-main-label]');
     var placeLabel = form.querySelector('[data-loss-place-label]');
+    var isEnglish = form.dataset.lang === 'en';
 
     function updateFormLanguage() {
       var kind = form.querySelector('input[name="bildirimTuru"]:checked');
-      var isFound = kind && kind.value === 'Buluntu';
-      if (mainLabel) mainLabel.textContent = isFound ? 'Ne buldunuz?' : 'Ne kaybettiniz?';
+      var isFound = kind && (kind.value === 'Buluntu' || kind.value === 'Found');
+      if (mainLabel) mainLabel.textContent = isEnglish ? (isFound ? 'What did you find?' : 'What did you lose?') : (isFound ? 'Ne buldunuz?' : 'Ne kaybettiniz?');
       if (placeLabel) {
-        placeLabel.textContent = isFound ? 'Nerede karşınıza çıktı?' : 'En son nerede gördünüz?';
+        placeLabel.textContent = isEnglish ? (isFound ? 'Where did you come across it?' : 'Where did you last see it?') : (isFound ? 'Nerede karşınıza çıktı?' : 'En son nerede gördünüz?');
       }
     }
 
@@ -76,7 +78,7 @@
       var endpoint = form.dataset.formEndpoint;
 
       if (!endpoint) {
-        if (status) status.textContent = 'Başvuru hattı henüz açılmadı.';
+        if (status) status.textContent = isEnglish ? 'The reporting line is not open yet.' : 'Başvuru hattı henüz açılmadı.';
         return;
       }
 
@@ -98,10 +100,10 @@
         if (anonymous) anonymous.checked = true;
         updateFormLanguage();
         if (status) {
-          status.textContent = 'Kaydınız alındı. Yerine ulaşacağına dair bir taahhüt verilmedi.';
+          status.textContent = isEnglish ? 'Your record has been received. No guarantee has been made that it will reach its destination.' : 'Kaydınız alındı. Yerine ulaşacağına dair bir taahhüt verilmedi.';
         }
       } catch (error) {
-        if (status) status.textContent = 'Kayıt alınamadı. Bir süre sonra yeniden deneyin.';
+        if (status) status.textContent = isEnglish ? 'The record could not be received. Please try again later.' : 'Kayıt alınamadı. Bir süre sonra yeniden deneyin.';
       } finally {
         if (button) button.disabled = false;
         delete form.dataset.submitting;
