@@ -1,6 +1,9 @@
 ---
 title: "06. Bu Ülkede Deniz Yok"
 pageType: story
+bolum: "06"
+format: arama
+anahtar_kelime: deniz
 aliases:
   - "06. Bu Ülkede Deniz Yok"
 ---
