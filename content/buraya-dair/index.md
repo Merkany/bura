@@ -4,9 +4,7 @@ title: "Bura'ya dair"
 
 [English →](/en/on-bura/)
 
-Bura, Merkan Aksoydan tarafından yapılmaktadır.
-
-2026—
+Bura, Merkan Aksoydan tarafından yapılmaktadır. — 2026
 
 Reklam yok.
 
