@@ -21,11 +21,23 @@ export const DefaultFrame: PageFrame = {
     right,
     footer,
   }: PageFrameProps) {
+    const isEnglish = componentData.fileData.frontmatter?.lang === "en"
+
     return (
       <>
         <div class="left sidebar">
-          {left.map((BodyComponent) => (
-            <BodyComponent {...componentData} />
+          {left.map((BodyComponent, index) => (
+            <>
+              <BodyComponent {...componentData} />
+              {index === 2 && (
+                <nav class="bura-meta-nav" aria-label={isEnglish ? "Site information" : "Site bilgileri"}>
+                  <a href={isEnglish ? "/en/on-bura/" : "/buraya-dair/"}>
+                    {isEnglish ? "On Bura" : "Bura'ya dair"}
+                  </a>
+                  <a href={isEnglish ? "/" : "/en/"}>{isEnglish ? "Türkçe" : "English"}</a>
+                </nav>
+              )}
+            </>
           ))}
         </div>
         <div class="center">
