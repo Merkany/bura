@@ -69,7 +69,13 @@
       })
     })
 
-    if (document.body.dataset.pageType !== "story") return
+    var slug = document.body.dataset.slug || ""
+    var shouldCollapseExplorer =
+      document.body.dataset.pageType === "story" ||
+      document.body.dataset.pageLang === "en" ||
+      slug === "buraya-dair/index"
+
+    if (!shouldCollapseExplorer) return
 
     document.querySelectorAll(".explorer").forEach(function (explorer) {
       explorer.classList.add("collapsed")
