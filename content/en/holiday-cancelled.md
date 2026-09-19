@@ -3,7 +3,6 @@ title: "01. Holiday Cancelled"
 pageType: story
 lang: en
 bolum: "01"
-format: tot-raporu
 anahtar_kelime: sapma
 ---
 
