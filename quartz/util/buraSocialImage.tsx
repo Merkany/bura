@@ -45,17 +45,17 @@ function Signature({ bolum }: { bolum: string }) {
       style={{
         display: "flex",
         position: "absolute",
-        left: "86px",
-        right: "86px",
-        bottom: "66px",
+        left: "64px",
+        right: "64px",
+        bottom: "40px",
         alignItems: "flex-end",
         justifyContent: "space-between",
-        fontSize: "20px",
+        fontSize: "24px",
         letterSpacing: "0.08em",
       }}
     >
       <span style={{ display: "flex", fontWeight: 700 }}>bura / {bolum}</span>
-      <span style={{ display: "flex", color: muted, fontSize: "14px", letterSpacing: "0.04em" }}>
+      <span style={{ display: "flex", color: ink, fontSize: "20px", letterSpacing: "0.04em" }}>
         buradayok.org
       </span>
     </div>
@@ -68,12 +68,12 @@ function Code({ value, centered = false }: { value: string; centered?: boolean }
       style={{
         display: "flex",
         position: "absolute",
-        left: "86px",
-        right: "86px",
-        bottom: "102px",
+        left: "64px",
+        right: "64px",
+        bottom: "82px",
         justifyContent: centered ? "center" : "flex-start",
-        color: "#8f877e",
-        fontSize: "12px",
+        color: muted,
+        fontSize: "17px",
         letterSpacing: "0.08em",
       }}
     >
@@ -338,16 +338,16 @@ function LostCard({
 function GenericCard({ title, code }: { title: string; code: string }) {
   return (
     <div style={base}>
-      <div style={{ display: "flex", color: muted, fontSize: "20px", letterSpacing: "0.12em" }}>
-        BURA
+      <div style={{ display: "flex", color: ink, fontSize: "26px", fontWeight: 700, letterSpacing: "0.12em" }}>
+        BURA · BURADAYOK.ORG
       </div>
       <div
         style={{
           display: "flex",
-          marginTop: "28px",
-          height: "390px",
+          marginTop: "22px",
+          height: "400px",
           width: "100%",
-          padding: "48px",
+          padding: "54px",
           alignItems: "center",
           border: `1px solid ${rule}`,
           backgroundColor: panel,
@@ -357,7 +357,7 @@ function GenericCard({ title, code }: { title: string; code: string }) {
           style={{
             display: "flex",
             maxWidth: "990px",
-            fontSize: "66px",
+            fontSize: title.length > 34 ? "60px" : "76px",
             fontWeight: 800,
             lineHeight: 1.08,
           }}
