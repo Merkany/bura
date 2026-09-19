@@ -1,6 +1,9 @@
 ---
 title: "03. İyim, iyiyim"
 pageType: story
+bolum: "03"
+format: tot-raporu
+anahtar_kelime: iyiyim
 aliases:
   - "03. İyim, iyiyim"
 ---
