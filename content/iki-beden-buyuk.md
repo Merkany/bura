@@ -1,6 +1,9 @@
 ---
 title: "05. İki Beden Büyük"
 pageType: story
+bolum: "05"
+format: tot-raporu
+anahtar_kelime: beden
 aliases:
   - "05. İki Beden Büyük"
 ---
