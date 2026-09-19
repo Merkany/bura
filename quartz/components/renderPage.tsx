@@ -244,6 +244,20 @@ const StoryNext: QuartzComponent = ({ fileData }) => {
   )
 }
 
+const HandToHand: QuartzComponent = ({ fileData }) => {
+  const isEnglish = fileData.frontmatter?.lang === "en"
+  const title = String(fileData.frontmatter?.title ?? "Bura")
+  return (
+    <div class="hand-to-hand" data-share-title={title}>
+      <button type="button" class="hand-to-hand-button">
+        <span>{isEnglish ? "Pass it on" : "Elden ele"}</span>
+        <span aria-hidden="true">↗</span>
+      </button>
+      <span class="hand-to-hand-status" aria-live="polite"></span>
+    </div>
+  )
+}
+
 const headerRegex = new RegExp(/h[1-6]/)
 export function pageResources(
   baseDir: FullSlug | RelativeURL,
@@ -562,11 +576,17 @@ export function renderPage(
   const lossPrefix = isEnglish ? "en/lost-property/" : "kayip-burosu/"
   const lossRecords = getLossRecords(componentData.allFiles, lossPrefix)
   const isLossOffice = componentData.fileData.frontmatter?.pageType === "loss-office"
+  const hasHandToHand =
+    componentData.fileData.frontmatter?.pageType === "story" ||
+    componentData.fileData.slug === "buraya-dair/index" ||
+    componentData.fileData.slug === "en/on-bura/index"
   const resolvedAfterBody = isLossOffice
     ? [LossRecords, ...afterBody]
     : componentData.fileData.frontmatter?.pageType === "story"
-      ? [StoryNext, ...afterBody]
-      : afterBody
+      ? [HandToHand, StoryNext, ...afterBody]
+      : hasHandToHand
+        ? [HandToHand, ...afterBody]
+        : afterBody
   const doc = (
     <html lang={lang} dir={direction}>
       <Head {...componentData} />
