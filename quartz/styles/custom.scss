@@ -384,10 +384,50 @@ body[data-page-type="story"] {
 }
 
 .hand-to-hand {
+  position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
   gap: 0.8rem;
   padding: 0.25rem 0 1rem;
+}
+
+.hand-to-hand-menu {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% - 0.6rem);
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(9.5rem, 1fr));
+  width: min(27rem, calc(100vw - 3rem));
+  padding: 0.45rem;
+  border: 1px solid var(--lightgray);
+  border-top: 2px solid var(--tertiary);
+  background: var(--light);
+  box-shadow: 0 14px 35px rgb(0 0 0 / 22%);
+}
+
+.hand-to-hand-menu[hidden] {
+  display: none;
+}
+
+.hand-to-hand-menu a,
+.hand-to-hand-menu button {
+  padding: 0.7rem 0.75rem;
+  border: 0;
+  border-bottom: 1px solid var(--lightgray);
+  color: var(--dark);
+  background: transparent;
+  font: 500 0.75rem/1.3 var(--codeFont);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hand-to-hand-menu a:hover,
+.hand-to-hand-menu button:hover {
+  color: var(--tertiary);
+  background: color-mix(in srgb, var(--lightgray) 20%, transparent);
 }
 
 .hand-to-hand-button {
