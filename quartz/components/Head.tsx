@@ -68,7 +68,7 @@ export default (() => {
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
         <script defer src={staticPath("insan-misin/overlay.js")}></script>
         <script defer src={`${staticPath("bura-corner.js")}?v=20260917-records`}></script>
-        <script defer src={staticPath("story-ui.js")}></script>
+        <script defer src={`${staticPath("story-ui.js")}?v=20260919-share-menu`}></script>
         <script defer src={`${staticPath("loss-records.js")}?v=20260917-found`}></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
