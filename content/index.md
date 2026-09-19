@@ -2,6 +2,8 @@
 title: "[.]"
 ---
 
+[English — selected works](./en/index.md)
+
 - [[tatil-iptal|01. Tatil İptal]]
 - [[pit-pit|02. Pıt Pıt]]
 - [[iyim-iyiyim|03. İyim, iyiyim]]
