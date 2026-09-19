@@ -1,6 +1,9 @@
 ---
 title: "02. Pıt Pıt"
 pageType: story
+bolum: "02"
+format: arama
+anahtar_kelime: ses
 aliases:
   - "02. Pıt Pıt"
 ---
