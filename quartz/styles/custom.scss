@@ -169,6 +169,29 @@ body[data-page-type="loss-office"] {
   .weather-track { animation: none; padding-left: 0; white-space: normal; width: auto; }
 }
 
+/* Siteyi açıklayan iki sakin bağlantı, başlık ve arama araçlarının hemen
+   altında; içerik listesinden ayrı bir yerde durur. */
+.bura-meta-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  margin: 0.1rem 0 0.65rem;
+  padding-left: 0.1rem;
+}
+.bura-meta-nav a {
+  color: var(--darkgray);
+  font: 500 0.82rem/1.5 var(--bodyFont);
+  text-decoration: none;
+}
+.bura-meta-nav a:hover {
+  color: var(--tertiary);
+}
+.bura-meta-nav a:focus-visible {
+  outline: 2px solid var(--tertiary);
+  outline-offset: 3px;
+}
+
 /* Kayıp Bürosu: her sayfada sağ üstte sabit duran, her ziyarette değişen bir
    kayıt kartı. Üstteki "sekme" şeridi bunun bir bölüme açılan kapı olduğunu,
    alttaki "devamını oku" çağrısı da tıklanabilir olduğunu netleştiriyor. */
