@@ -37,9 +37,12 @@ type LossRecord = {
   outcome: string
 }
 
-function getLossRecords(allFiles: QuartzComponentProps["allFiles"]): LossRecord[] {
+function getLossRecords(
+  allFiles: QuartzComponentProps["allFiles"],
+  prefix = "kayip-burosu/",
+): LossRecord[] {
   return allFiles
-    .filter((file) => file.slug?.startsWith("kayip-burosu/") && file.slug !== "kayip-burosu/index")
+    .filter((file) => file.slug?.startsWith(prefix) && file.slug !== `${prefix}index`)
     .map((file) => {
       const data = file.frontmatter as Record<string, unknown> | undefined
       return {
@@ -54,8 +57,56 @@ function getLossRecords(allFiles: QuartzComponentProps["allFiles"]): LossRecord[
     .sort((a, b) => b.number - a.number)
 }
 
-const LossRecords: QuartzComponent = ({ allFiles }) => {
-  const records = getLossRecords(allFiles)
+const LossRecords: QuartzComponent = ({ allFiles, fileData }) => {
+  const isEnglish = fileData.frontmatter?.lang === "en"
+  const records = getLossRecords(allFiles, isEnglish ? "en/lost-property/" : "kayip-burosu/")
+  const copy = isEnglish
+    ? {
+        record: "RECORD",
+        show: "Show outcome",
+        location: "Last seen",
+        outcome: "OUTCOME",
+        code: "LOST / FOUND REPORT",
+        heading: "Leave a loss or a finding.",
+        intro: "Write down as much as you remember.",
+        review: "Reports are reviewed before publication.",
+        kind: "What are you leaving here?",
+        lost: "Something I lost",
+        found: "Something I found",
+        what: "What did you lose?",
+        where: "Where did you last see it?",
+        when: "Approximate time",
+        whenPlaceholder: "Yesterday, 2019, during lunch…",
+        name: "Your name",
+        optional: "optional",
+        anonymous: "Publish my record anonymously.",
+        submit: "Leave the record",
+        submitting: "Recording…",
+        subject: "Bura — new lost / found report",
+      }
+    : {
+        record: "KAYIT",
+        show: "İşlem sonucunu göster",
+        location: "Bulunduğu yer",
+        outcome: "İŞLEM",
+        code: "KAYIP / BULUNTU BİLDİRİMİ",
+        heading: "Bir kayıp ya da buluntu bırakın.",
+        intro: "Hatırladığınız kadarını yazın.",
+        review: "Başvurular yayımlanmadan önce incelenir.",
+        kind: "Buraya ne bırakıyorsunuz?",
+        lost: "Kaybettiğim bir şey",
+        found: "Bulduğum bir şey",
+        what: "Ne kaybettiniz?",
+        where: "En son nerede gördünüz?",
+        when: "Yaklaşık zaman",
+        whenPlaceholder: "Dün, 2019, öğle arası…",
+        name: "Adınız",
+        optional: "isteğe bağlı",
+        anonymous: "Kaydım isimsiz yayımlansın.",
+        submit: "Kaydı bırak",
+        submitting: "Kaydediliyor…",
+        subject: "Bura — yeni kayıp / buluntu başvurusu",
+      }
 
   return (
     <>
@@ -63,15 +114,24 @@ const LossRecords: QuartzComponent = ({ allFiles }) => {
         {records.map((record) => (
           <section class="loss-record">
             <header class="loss-record-head">
-              KAYIT {String(record.number).padStart(3, "0")}
-              {record.category && ` / ${record.category.toLocaleUpperCase("tr-TR")}`}
+              {copy.record} {String(record.number).padStart(3, "0")}
+              {record.category &&
+                ` / ${record.category.toLocaleUpperCase(isEnglish ? "en-US" : "tr-TR")}`}
             </header>
             <h2 class="loss-subject">{record.title}</h2>
             <details class="loss-details" name="kayip-kaydi">
-              <summary><span>İşlem sonucunu göster</span></summary>
+              <summary>
+                <span>{copy.show}</span>
+              </summary>
               <div class="loss-details-body">
-                <p class="loss-location"><span>Bulunduğu yer</span>{record.location}</p>
-                <footer class="loss-outcome"><span>İŞLEM</span><p>{record.outcome}</p></footer>
+                <p class="loss-location">
+                  <span>{copy.location}</span>
+                  {record.location}
+                </p>
+                <footer class="loss-outcome">
+                  <span>{copy.outcome}</span>
+                  <p>{record.outcome}</p>
+                </footer>
               </div>
             </details>
           </section>
@@ -80,51 +140,63 @@ const LossRecords: QuartzComponent = ({ allFiles }) => {
 
       <section class="loss-application" aria-labelledby="loss-application-title">
         <header>
-          <span class="loss-application-code">KAYIP / BULUNTU BİLDİRİMİ</span>
-          <h2 id="loss-application-title">Bir kayıp ya da buluntu bırakın.</h2>
-          <p>Hatırladığınız kadarını yazın.</p>
-          <p class="loss-application-note">Başvurular yayımlanmadan önce incelenir.</p>
+          <span class="loss-application-code">{copy.code}</span>
+          <h2 id="loss-application-title">{copy.heading}</h2>
+          <p>{copy.intro}</p>
+          <p class="loss-application-note">{copy.review}</p>
         </header>
-        <form class="loss-application-form" data-form-endpoint="https://formspree.io/f/xjykvpbb">
-          <input type="hidden" name="_subject" value="Bura — yeni kayıp / buluntu başvurusu" />
+        <form
+          class="loss-application-form"
+          data-form-endpoint="https://formspree.io/f/xjykvpbb"
+          data-lang={isEnglish ? "en" : "tr"}
+        >
+          <input type="hidden" name="_subject" value={copy.subject} />
+          <input type="hidden" name="dil" value={isEnglish ? "English" : "Türkçe"} />
           <label class="loss-honeypot" aria-hidden="true">
-            Bu alanı boş bırakın
+            {isEnglish ? "Leave this field empty" : "Bu alanı boş bırakın"}
             <input type="text" name="_gotcha" tabIndex={-1} autocomplete="off" />
           </label>
           <fieldset class="loss-kind loss-field-wide">
-            <legend>Buraya ne bırakıyorsunuz?</legend>
+            <legend>{copy.kind}</legend>
             <label>
-              <input type="radio" name="bildirimTuru" value="Kayıp" checked />
-              <span>Kaybettiğim bir şey</span>
+              <input
+                type="radio"
+                name="bildirimTuru"
+                value={isEnglish ? "Lost" : "Kayıp"}
+                checked
+              />
+              <span>{copy.lost}</span>
             </label>
             <label>
-              <input type="radio" name="bildirimTuru" value="Buluntu" />
-              <span>Bulduğum bir şey</span>
+              <input type="radio" name="bildirimTuru" value={isEnglish ? "Found" : "Buluntu"} />
+              <span>{copy.found}</span>
             </label>
           </fieldset>
           <label class="loss-field loss-field-wide">
-            <span data-loss-main-label>Ne kaybettiniz?</span>
+            <span data-loss-main-label>{copy.what}</span>
             <textarea name="bildirim" rows={3} required></textarea>
           </label>
           <label class="loss-field">
-            <span data-loss-place-label>En son nerede gördünüz?</span>
+            <span data-loss-place-label>{copy.where}</span>
             <input type="text" name="yer" />
           </label>
           <label class="loss-field">
-            <span>Yaklaşık zaman</span>
-            <input type="text" name="zaman" placeholder="Dün, 2019, öğle arası…" />
+            <span>{copy.when}</span>
+            <input type="text" name="zaman" placeholder={copy.whenPlaceholder} />
           </label>
           <label class="loss-field loss-field-wide">
-            <span>Adınız <small>(isteğe bağlı)</small></span>
+            <span>
+              {copy.name} <small>({copy.optional})</small>
+            </span>
             <input type="text" name="isim" />
           </label>
           <label class="loss-anonymous">
             <input type="checkbox" name="isimsiz" checked />
-            <span>Kaydım isimsiz yayımlansın.</span>
+            <span>{copy.anonymous}</span>
           </label>
           <button class="loss-submit" type="submit">
-            <span class="loss-submit-idle">Kaydı bırak</span>
-            <span class="loss-submit-busy">Kaydediliyor…</span>
+            <span class="loss-submit-idle">{copy.submit}</span>
+            <span class="loss-submit-busy">{copy.submitting}</span>
           </button>
           <p class="loss-form-status loss-field-wide" role="status" aria-live="polite"></p>
         </form>
@@ -142,15 +214,32 @@ const STORY_ORDER = [
   { slug: "bu-ulkede-deniz-yok", title: "06. Bu Ülkede Deniz Yok" },
 ]
 
+const ENGLISH_STORY_ORDER = [
+  { slug: "en/holiday-cancelled", title: "01. Holiday Cancelled" },
+  { slug: "en/drip-drip", title: "02. Drip, Drip" },
+]
+
 const StoryNext: QuartzComponent = ({ fileData }) => {
-  const index = STORY_ORDER.findIndex((story) => story.slug === fileData.slug)
+  const isEnglish = fileData.frontmatter?.lang === "en"
+  const order = isEnglish ? ENGLISH_STORY_ORDER : STORY_ORDER
+  const index = order.findIndex((story) => story.slug === fileData.slug)
   if (index < 0) return null
-  const next = STORY_ORDER[index + 1]
+  const next = order[index + 1]
 
   return (
-    <nav class="story-next" aria-label="Okumaya devam et">
-      <span>{next ? "SIRADAKİ" : "BAŞA DÖN"}</span>
-      <a href={next ? `./${next.slug}` : "./"}>{next ? `${next.title} →` : "[.] →"}</a>
+    <nav class="story-next" aria-label={isEnglish ? "Continue reading" : "Okumaya devam et"}>
+      <span>
+        {next
+          ? isEnglish
+            ? "NEXT"
+            : "SIRADAKİ"
+          : isEnglish
+            ? "BACK TO THE BEGINNING"
+            : "BAŞA DÖN"}
+      </span>
+      <a href={next ? `/${next.slug}` : isEnglish ? "/en/" : "/"}>
+        {next ? `${next.title} →` : "[.] →"}
+      </a>
     </nav>
   )
 }
@@ -469,13 +558,15 @@ export function renderPage(
     componentData.ctx.argv.serve || !cfg.baseUrl
       ? ""
       : new URL(`https://${cfg.baseUrl}`).pathname.replace(/\/$/, "")
-  const lossRecords = getLossRecords(componentData.allFiles)
-  const resolvedAfterBody =
-    slug === "kayip-burosu/index" || slug === "kayip-burosu"
-      ? [LossRecords, ...afterBody]
-      : componentData.fileData.frontmatter?.pageType === "story"
-        ? [StoryNext, ...afterBody]
-        : afterBody
+  const isEnglish = componentData.fileData.frontmatter?.lang === "en"
+  const lossPrefix = isEnglish ? "en/lost-property/" : "kayip-burosu/"
+  const lossRecords = getLossRecords(componentData.allFiles, lossPrefix)
+  const isLossOffice = componentData.fileData.frontmatter?.pageType === "loss-office"
+  const resolvedAfterBody = isLossOffice
+    ? [LossRecords, ...afterBody]
+    : componentData.fileData.frontmatter?.pageType === "story"
+      ? [StoryNext, ...afterBody]
+      : afterBody
   const doc = (
     <html lang={lang} dir={direction}>
       <Head {...componentData} />
@@ -483,6 +574,7 @@ export function renderPage(
         data-slug={slug}
         data-basepath={basePath}
         data-page-type={componentData.fileData.frontmatter?.pageType}
+        data-page-lang={lang}
       >
         <div id="bura-loss-records-data" hidden>
           {lossRecords.map((record) => (
@@ -494,20 +586,46 @@ export function renderPage(
             ></span>
           ))}
         </div>
-        <aside class="bura-weather" aria-label="Bura — kurmaca hava raporu">
-          <span class="bura-weather-label">Bura'nın hava durumu:</span>
-          <span class="weather-window" tabIndex={0} aria-label="Bugün hava sınıf çatışmalı."><span class="weather-track" aria-hidden="true">Bugün hava sınıf çatışmalı.</span></span>
-        </aside>
-        {slug !== "kayip-burosu/index" && slug !== "kayip-burosu" && (
-        <a class="bura-corner-stamp" href={`${basePath}/kayip-burosu/`}>
-          <span class="bura-corner-stamp-tab">Kayıp Bürosu</span>
-          <span class="bura-corner-stamp-body">
-            <span class="bura-corner-stamp-kayit" data-kayit>KAYIT</span>
-            <span class="bura-corner-stamp-title" data-title>Bulunduğu yer: —</span>
-            <span class="bura-corner-stamp-desc" data-desc></span>
-            <span class="bura-corner-stamp-cta">devamını oku →</span>
+        <aside
+          class="bura-weather"
+          aria-label={isEnglish ? "Bura — fictional weather report" : "Bura — kurmaca hava raporu"}
+        >
+          <span class="bura-weather-label">
+            {isEnglish ? "Weather in Bura:" : "Bura'nın hava durumu:"}
           </span>
-        </a>
+          <span
+            class="weather-window"
+            tabIndex={0}
+            aria-label={
+              isEnglish ? "Class conflict in the air today." : "Bugün hava sınıf çatışmalı."
+            }
+          >
+            <span class="weather-track" aria-hidden="true">
+              {isEnglish ? "Class conflict in the air today." : "Bugün hava sınıf çatışmalı."}
+            </span>
+          </span>
+        </aside>
+        {!isLossOffice && (
+          <a
+            class="bura-corner-stamp"
+            href={`${basePath}/${isEnglish ? "en/lost-property" : "kayip-burosu"}/`}
+          >
+            <span class="bura-corner-stamp-tab">
+              {isEnglish ? "Lost Property" : "Kayıp Bürosu"}
+            </span>
+            <span class="bura-corner-stamp-body">
+              <span class="bura-corner-stamp-kayit" data-kayit>
+                {isEnglish ? "RECORD" : "KAYIT"}
+              </span>
+              <span class="bura-corner-stamp-title" data-title>
+                {isEnglish ? "Last seen: —" : "Bulunduğu yer: —"}
+              </span>
+              <span class="bura-corner-stamp-desc" data-desc></span>
+              <span class="bura-corner-stamp-cta">
+                {isEnglish ? "read more →" : "devamını oku →"}
+              </span>
+            </span>
+          </a>
         )}
         {frame.css && <style dangerouslySetInnerHTML={{ __html: frame.css }} />}
         <div id="quartz-root" class="page" data-frame={frame.name}>
