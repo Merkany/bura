@@ -30,6 +30,7 @@ interface RenderComponents {
 }
 
 type LossRecord = {
+  slug: string
   number: number
   category: string
   title: string
@@ -46,6 +47,7 @@ function getLossRecords(
     .map((file) => {
       const data = file.frontmatter as Record<string, unknown> | undefined
       return {
+        slug: String(file.slug ?? ""),
         number: Number(data?.kayit ?? 0),
         category: String(data?.kategori ?? ""),
         title: String(data?.title ?? ""),
@@ -139,7 +141,7 @@ const LossRecords: QuartzComponent = ({ allFiles, fileData }) => {
             </details>
             <SharePanel
               title={shareTitle}
-              url={`#${recordId}`}
+              url={`/${record.slug}/`}
               isEnglish={isEnglish}
               compact
             />
