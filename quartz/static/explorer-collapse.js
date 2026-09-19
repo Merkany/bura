@@ -7,6 +7,13 @@
   // kendi klasörünü tekrar kapatarak, yaprak sayfalardaki temiz görünüme
   // eşitliyoruz. Diğer atalar (kullanıcı nerede olduğunu görsün diye) açık
   // kalmaya devam ediyor.
+  //
+  // Explorer kendi ağacını "nav"/"render" olayında ASENKRON (fetch + await)
+  // kuruyor, bu yüzden sabit bir setTimeout güvenilir değil: DOM henüz
+  // oluşmamışken çalışıp hiçbir şey bulamayabiliyor. Bunun yerine
+  // MutationObserver ile .explorer içindeki değişiklikleri izleyip, ilgili
+  // düğüm göründüğü anda kapatıyoruz.
+
   function collapseCurrentFolder() {
     var currentSlug = document.body && document.body.dataset ? document.body.dataset.slug : "";
     if (!currentSlug) return;
@@ -20,13 +27,30 @@
     });
   }
 
-  function scheduleCollapse() {
-    // Explorer kendi ağacını "nav"/"render" olayında asenkron kuruyor;
-    // bir sonraki tick'e bırakmak, DOM'un hazır olmasını garantiliyor.
-    window.setTimeout(collapseCurrentFolder, 0);
+  var observer = null;
+
+  function observeExplorers() {
+    if (observer) observer.disconnect();
+    var explorers = document.querySelectorAll(".explorer");
+    if (!explorers.length) return;
+    observer = new MutationObserver(function () {
+      collapseCurrentFolder();
+    });
+    explorers.forEach(function (exp) {
+      observer.observe(exp, { childList: true, subtree: true, attributes: true, attributeFilter: ["class"] });
+    });
   }
 
-  document.addEventListener("nav", scheduleCollapse);
-  document.addEventListener("render", scheduleCollapse);
-  scheduleCollapse();
+  function onNav() {
+    collapseCurrentFolder();
+    observeExplorers();
+    // Fetch + render is async; a few delayed passes cover slow loads too.
+    [0, 50, 150, 400, 900].forEach(function (delay) {
+      window.setTimeout(collapseCurrentFolder, delay);
+    });
+  }
+
+  document.addEventListener("nav", onNav);
+  document.addEventListener("render", onNav);
+  onNav();
 })();
