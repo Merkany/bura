@@ -117,6 +117,7 @@ plugins:
     options:
       enableSiteMap: true
       enableRSS: true
+      rssLimit: 100
   - source: "@quartz-community/favicon"
     enabled: true
   - source: "@quartz-community/og-image"
