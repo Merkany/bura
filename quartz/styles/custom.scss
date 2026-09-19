@@ -392,28 +392,80 @@ body[data-page-type="story"] {
   padding: 0.25rem 0 1rem;
 }
 
+.hand-to-hand.is-open::before {
+  content: "";
+  position: fixed;
+  z-index: 90;
+  inset: 0;
+  background: rgb(10 10 12 / 72%);
+  backdrop-filter: blur(3px);
+}
+
 .hand-to-hand-menu {
-  position: absolute;
-  z-index: 20;
-  top: calc(100% - 0.6rem);
-  left: 0;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(9.5rem, 1fr));
-  width: min(27rem, calc(100vw - 3rem));
-  padding: 0.45rem;
-  border: 1px solid var(--lightgray);
-  border-top: 2px solid var(--tertiary);
+  position: fixed;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: min(34rem, calc(100vw - 2rem));
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--tertiary) 55%, var(--lightgray));
+  border-top: 4px solid var(--tertiary);
   background: var(--light);
-  box-shadow: 0 14px 35px rgb(0 0 0 / 22%);
+  box-shadow: 0 24px 80px rgb(0 0 0 / 45%);
+  transform: translate(-50%, -50%);
 }
 
 .hand-to-hand-menu[hidden] {
   display: none;
 }
 
-.hand-to-hand-menu a,
-.hand-to-hand-menu button {
-  padding: 0.7rem 0.75rem;
+.hand-to-hand-menu-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.35rem 1rem;
+  border-bottom: 1px solid var(--lightgray);
+}
+
+.hand-to-hand-menu-head > div {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.hand-to-hand-menu-head strong {
+  color: var(--dark);
+  font: 700 1.05rem/1.2 var(--codeFont);
+  letter-spacing: 0.06em;
+}
+
+.hand-to-hand-menu-head span {
+  color: var(--gray);
+  font: 400 0.8rem/1.4 var(--bodyFont);
+}
+
+.hand-to-hand-menu-head .hand-to-hand-close {
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  border-radius: 50%;
+  color: var(--dark);
+  background: transparent;
+  font: 400 1.4rem/1 var(--bodyFont);
+  cursor: pointer;
+}
+
+.hand-to-hand-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 0.75rem;
+}
+
+.hand-to-hand-options a,
+.hand-to-hand-options button {
+  padding: 0.9rem 1rem;
   border: 0;
   border-bottom: 1px solid var(--lightgray);
   color: var(--dark);
@@ -424,10 +476,30 @@ body[data-page-type="story"] {
   cursor: pointer;
 }
 
-.hand-to-hand-menu a:hover,
-.hand-to-hand-menu button:hover {
+.hand-to-hand-options a:hover,
+.hand-to-hand-options button:hover {
   color: var(--tertiary);
   background: color-mix(in srgb, var(--lightgray) 20%, transparent);
+}
+
+.hand-to-hand-compact {
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.hand-to-hand-compact .hand-to-hand-button {
+  min-width: 0;
+  padding: 0.5rem 0.65rem;
+  border-top-width: 1px;
+  font-size: 0.68rem;
+}
+
+@media (max-width: 520px) {
+  .hand-to-hand-options {
+    grid-template-columns: 1fr;
+    max-height: 62vh;
+    overflow-y: auto;
+  }
 }
 
 .hand-to-hand-button {
