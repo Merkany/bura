@@ -1,10 +1,11 @@
 (function () {
   function getRecords() {
+    var isEnglish = document.documentElement.lang === "en";
     return Array.from(document.querySelectorAll("#bura-loss-records-data > span")).map(function (item) {
-      var category = item.dataset.category ? " / " + item.dataset.category.toLocaleUpperCase("tr-TR") : "";
+      var category = item.dataset.category ? " / " + item.dataset.category.toLocaleUpperCase(isEnglish ? "en-US" : "tr-TR") : "";
       return {
-        kayit: "KAYIT " + item.dataset.number + category,
-        title: "Bulunduğu yer: " + item.dataset.location,
+        kayit: (isEnglish ? "RECORD " : "KAYIT ") + item.dataset.number + category,
+        title: (isEnglish ? "Last seen: " : "Bulunduğu yer: ") + item.dataset.location,
         desc: item.dataset.title,
       };
     });
