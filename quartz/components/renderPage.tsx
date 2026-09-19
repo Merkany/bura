@@ -111,8 +111,11 @@ const LossRecords: QuartzComponent = ({ allFiles, fileData }) => {
   return (
     <>
       <div class="loss-records">
-        {records.map((record) => (
-          <section class="loss-record">
+        {records.map((record) => {
+          const recordId = `kayit-${String(record.number).padStart(3, "0")}`
+          const shareTitle = `${copy.record} ${String(record.number).padStart(3, "0")} — ${record.title}`
+          return (
+          <section class="loss-record" id={recordId}>
             <header class="loss-record-head">
               {copy.record} {String(record.number).padStart(3, "0")}
               {record.category &&
@@ -134,8 +137,15 @@ const LossRecords: QuartzComponent = ({ allFiles, fileData }) => {
                 </footer>
               </div>
             </details>
+            <SharePanel
+              title={shareTitle}
+              url={`#${recordId}`}
+              isEnglish={isEnglish}
+              compact
+            />
           </section>
-        ))}
+          )
+        })}
       </div>
 
       <section class="loss-application" aria-labelledby="loss-application-title">
@@ -244,21 +254,40 @@ const StoryNext: QuartzComponent = ({ fileData }) => {
   )
 }
 
-const HandToHand: QuartzComponent = ({ fileData }) => {
-  const isEnglish = fileData.frontmatter?.lang === "en"
-  const title = String(fileData.frontmatter?.title ?? "Bura")
+function SharePanel({
+  title,
+  url,
+  isEnglish,
+  compact = false,
+}: {
+  title: string
+  url?: string
+  isEnglish: boolean
+  compact?: boolean
+}) {
   return (
-    <div class="hand-to-hand" data-share-title={title}>
+    <div
+      class={`hand-to-hand${compact ? " hand-to-hand-compact" : ""}`}
+      data-share-title={title}
+      data-share-url={url}
+    >
       <button
         type="button"
         class="hand-to-hand-button"
         aria-expanded="false"
-        aria-controls="hand-to-hand-menu"
       >
         <span>{isEnglish ? "Pass it on" : "Elden ele"}</span>
-        <span aria-hidden="true">＋</span>
+        <span aria-hidden="true">↗</span>
       </button>
-      <div class="hand-to-hand-menu" id="hand-to-hand-menu" hidden>
+      <div class="hand-to-hand-menu" role="dialog" aria-modal="true" hidden>
+        <header class="hand-to-hand-menu-head">
+          <div>
+            <strong>{isEnglish ? "Pass it on" : "Elden ele"}</strong>
+            <span>{isEnglish ? "Where would you like to share it?" : "Nerede paylaşmak istersiniz?"}</span>
+          </div>
+          <button type="button" class="hand-to-hand-close" aria-label={isEnglish ? "Close" : "Kapat"}>×</button>
+        </header>
+        <div class="hand-to-hand-options">
         <a href="#" data-share-network="facebook" target="_blank" rel="noopener noreferrer">
           Facebook
         </a>
@@ -283,10 +312,17 @@ const HandToHand: QuartzComponent = ({ fileData }) => {
         <button type="button" data-share-network="copy">
           {isEnglish ? "Copy link" : "Bağlantıyı kopyala"}
         </button>
+        </div>
       </div>
       <span class="hand-to-hand-status" aria-live="polite"></span>
     </div>
   )
+}
+
+const HandToHand: QuartzComponent = ({ fileData }) => {
+  const isEnglish = fileData.frontmatter?.lang === "en"
+  const title = String(fileData.frontmatter?.title ?? "Bura")
+  return <SharePanel title={title} isEnglish={isEnglish} />
 }
 
 const headerRegex = new RegExp(/h[1-6]/)
@@ -611,6 +647,7 @@ export function renderPage(
     componentData.fileData.frontmatter?.pageType === "story" ||
     componentData.fileData.slug === "buraya-dair/index" ||
     componentData.fileData.slug === "en/on-bura/index"
+  const resolvedBeforeBody = hasHandToHand ? [...beforeBody, HandToHand] : beforeBody
   const resolvedAfterBody = isLossOffice
     ? [LossRecords, ...afterBody]
     : componentData.fileData.frontmatter?.pageType === "story"
@@ -686,7 +723,7 @@ export function renderPage(
                 componentData,
                 head: Head,
                 header,
-                beforeBody,
+                beforeBody: resolvedBeforeBody,
                 pageBody: Content,
                 afterBody: resolvedAfterBody,
                 left,
