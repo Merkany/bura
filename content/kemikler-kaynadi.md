@@ -1,6 +1,9 @@
 ---
 title: "04. Kemikler Kaynadı"
 pageType: story
+bolum: "04"
+format: eposta
+anahtar_kelime: yanit
 aliases:
   - "04. Kemikler Kaynadı"
 ---
