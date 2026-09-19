@@ -4,6 +4,8 @@ pageType: story
 aliases:
   - "02. Pıt Pıt"
 ---
+[English →](/en/drip-drip/)
+
 Vakit kaybetmeden Pura’nın  ziyaretine gittik. Lahana turşusu götürdük seviyor diye.  -Ondan daha fazla biz seviyoruz- Kafasını gözünü kırmış, kaburgalarını çatlatmış.  
 Başının etini yedik, nasıl düştüğünü anlatsın diye.  
   
