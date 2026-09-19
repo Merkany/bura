@@ -4,6 +4,8 @@ pageType: story
 aliases:
   - "01. Tatil İptal"
 ---
+[English →](/en/holiday-cancelled/)
+
 Meer birini sevmiş. Biz de “bir insanı sevmekle başlar her şey” lafını esas almış, pankarta bunu yazıp, yollara düşmüştük. O günü kendimizce  tatil ilan ettik, meydana gazozlar taşıdık, plastik sandalyeleri dizdik, rengârenk konfetiler aldık. İlk defa göğe diklemesine fırlatacağımız havai fişekleri bile ayarlamıştık. Dünyadaki bütün kırgınlıklar bir anlığına bitti sanmıştık.
 
 Sonra Pura çıkageldi. Sessizce yürüdü meydanın ortasına. Gönderin dibine dikilip bayrağı yarıya indirmeye başladı. “Yanlış biliyorsun Pura. O böyle anlar için değil!” diye bağırdık arkasından. Herkes sevinirken onun bu eylemine öfkelendik. “Aptal” dedik ona, günü mahvediyor diye. Yas ile sevinci birbirine karıştırmasın diye az uğraşmadık ama dinlemedi.  
