@@ -12,6 +12,7 @@
         var willOpen = menu.hidden
         menu.hidden = !willOpen
         button.setAttribute("aria-expanded", willOpen ? "true" : "false")
+        wrapper.classList.toggle("is-open", willOpen)
       })
     })
 
@@ -19,7 +20,10 @@
       if (wrapper.dataset.menuReady === "true") return
       wrapper.dataset.menuReady = "true"
       var title = wrapper.dataset.shareTitle || document.title
-      var url = window.location.href.split("#")[0]
+      var requestedUrl = wrapper.dataset.shareUrl || ""
+      var url = requestedUrl
+        ? new URL(requestedUrl, window.location.href.split("#")[0]).href
+        : window.location.href.split("#")[0]
       var text = title + " — Bura"
       var encodedUrl = encodeURIComponent(url)
       var encodedText = encodeURIComponent(text)
@@ -67,6 +71,17 @@
           }
         })
       })
+
+      var close = wrapper.querySelector(".hand-to-hand-close")
+      if (close) {
+        close.addEventListener("click", function () {
+          var menu = wrapper.querySelector(".hand-to-hand-menu")
+          var trigger = wrapper.querySelector(".hand-to-hand-button")
+          if (menu) menu.hidden = true
+          if (trigger) trigger.setAttribute("aria-expanded", "false")
+          wrapper.classList.remove("is-open")
+        })
+      }
     })
 
     var slug = document.body.dataset.slug || ""
