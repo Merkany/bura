@@ -2,8 +2,10 @@
 title: "06. Bu Ülkede Deniz Yok"
 pageType: story
 bolum: "06"
-format: arama
+format: kayip-form
 anahtar_kelime: deniz
+kayip: deniz
+son_gorulen_yer: "Bu Ülkede Deniz Yok"
 aliases:
   - "06. Bu Ülkede Deniz Yok"
 ---
