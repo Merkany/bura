@@ -2,7 +2,6 @@
 title: "01. Tatil İptal"
 pageType: story
 bolum: "01"
-format: tot-raporu
 anahtar_kelime: sapma
 aliases:
   - "01. Tatil İptal"
