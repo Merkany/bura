@@ -249,10 +249,41 @@ const HandToHand: QuartzComponent = ({ fileData }) => {
   const title = String(fileData.frontmatter?.title ?? "Bura")
   return (
     <div class="hand-to-hand" data-share-title={title}>
-      <button type="button" class="hand-to-hand-button">
+      <button
+        type="button"
+        class="hand-to-hand-button"
+        aria-expanded="false"
+        aria-controls="hand-to-hand-menu"
+      >
         <span>{isEnglish ? "Pass it on" : "Elden ele"}</span>
-        <span aria-hidden="true">↗</span>
+        <span aria-hidden="true">＋</span>
       </button>
+      <div class="hand-to-hand-menu" id="hand-to-hand-menu" hidden>
+        <a href="#" data-share-network="facebook" target="_blank" rel="noopener noreferrer">
+          Facebook
+        </a>
+        <a href="#" data-share-network="x" target="_blank" rel="noopener noreferrer">
+          X
+        </a>
+        <a href="#" data-share-network="bluesky" target="_blank" rel="noopener noreferrer">
+          Bluesky
+        </a>
+        <a href="#" data-share-network="mastodon" target="_blank" rel="noopener noreferrer">
+          Mastodon
+        </a>
+        <a href="#" data-share-network="whatsapp" target="_blank" rel="noopener noreferrer">
+          WhatsApp
+        </a>
+        <button type="button" data-share-network="instagram">
+          {isEnglish ? "Instagram / Stories" : "Instagram / Hikâyeler"}
+        </button>
+        <button type="button" data-share-network="native">
+          {isEnglish ? "Other…" : "Diğer…"}
+        </button>
+        <button type="button" data-share-network="copy">
+          {isEnglish ? "Copy link" : "Bağlantıyı kopyala"}
+        </button>
+      </div>
       <span class="hand-to-hand-status" aria-live="polite"></span>
     </div>
   )
