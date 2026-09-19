@@ -36,34 +36,13 @@ Bazen de bir başkasının emeğinden.
 
 Başka bir ilişki mümkün mü?
 
-Her şey satılmak için üretilmek zorunda değil.
-
-Her şeyin değişim değeri olmak zorunda değil.
-
-Her şey metalaşmayabilir.
-
-Bura'nın metinleri de.
-
-Duygular da.  
-İnsanlar da.
-
-Neyin daha çok tıklanacağını tahmin edip ona göre yazılmıyor hiçbir şey.
+Bura'da neyin daha çok tıklanacağını tahmin edip ona göre yazılmıyor hiçbir şey.
 
 Üstelik bir şey çok okundu diye daha iyi yazılmış olmuyor.
 
-Kimsenin okumadığı bir şey de bu yüzden yok olmuyor.
+Kimsenin okumadığı bir şey de bu yüzden Bura'da yok olmuyor.
 
 Bura sayıların tarafsız olduğuna pek inanmıyor.
-
-Çok görünenin önemli, çok tıklananın değerli, çok takip edilenin sözünün daha önemli olması Bura'lık değil.
-
-Birileri sıralıyor.
-
-Birileri ölçüyor.
-
-Birileri karar veriyor.
-
-Çoğu zaman da birileri bundan para kazanıyor.
 
 Bir metni biriyle paylaşabilirsiniz.
 
@@ -71,7 +50,9 @@ Bir cümleyi yanınızda götürebilirsiniz.
 
 Geri getirmeniz de gerekmez.
 
-Bura, okurun yalnızca okumasının yeterli olup olmadığından emin değil.
+Çok görünenin önemli, çok tıklananın değerli, çok takip edilenin sözünün daha önemli olması Bura'lık değil.
+
+Bura, okurun yalnızca okumasının yeterli olup olmadığından da emin değil.
 
 Okur isterse bir şey bırakabilir.
 
@@ -89,7 +70,7 @@ Bazen bıraktığınız şeyin ne olacağını ben de bilmiyorum.
 
 İyi.
 
-Bura üreten ile tüketen arasındaki çizginin biraz silinmesinden yana.
+Bura üreten ile tüketen arasındaki çizginin silinmesinden yana.
 
 Çünkü bu ayrım yalnızca burada karşımıza çıkmıyor.
 
@@ -103,7 +84,7 @@ Ama değil.
 
 İnsanların yalnızca ürettikleriyle, satın aldıklarıyla ya da ne kadar işe yaradıklarıyla ölçülmesi de öyle.
 
-Bura'da metin yalnızca metin değildir.
+Bura'da yayımlanan yalnızca metin değildir.
 
 Sayfa da yayının parçasıdır.
 
@@ -115,17 +96,17 @@ Hata da.
 
 Beklemek de.
 
-Bazen bir bağlantı hiçbir yere çıkabilir.
+Bazen bir bağlantı hiçbir yere çıkamayabilir.
 
 Bu her zaman hata değildir.
 
-Her gün bir şey yayımlamak gerekmiyor.
+Üstelik her gün bir şey yayımlamak gerekmiyor.
 
 Yayımlayacak bir şey yoksa yoktur.
 
 Sessizlik de burada kalabilir.
 
-Bura sürekli üretmek zorunda olduğumuz fikrinden hoşlanmıyor.
+Bura, sürekli üretmek zorunda olduğumuz fikrinden hoşlanmıyor.
 
 Her gün daha fazlasını yapmak,
 
@@ -169,7 +150,7 @@ Bazıları bizde kalabilir.
 
 Bura internetten kaçmak için yapılmadı.
 
-İnterneti seviyorum aslında.
+İnterneti seviyor aslında.
 
 Bura, bir insanın yaptığı küçücük bir şeyi dünyanın öbür ucundaki başka bir insanın bulabilmesini seviyor.
 
