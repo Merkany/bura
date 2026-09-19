@@ -6,7 +6,6 @@ const ink = "#f5efe5"
 const paper = "#101011"
 const panel = "#1a1a1b"
 const red = "#ef514b"
-const yellow = "#d3ad67"
 const muted = "#b8ada0"
 const rule = "#aaa49a"
 
@@ -34,6 +33,10 @@ function binary(value: string): string {
     .split("")
     .map((character) => character.charCodeAt(0).toString(2).padStart(8, "0"))
     .join(" ")
+}
+
+function sectionNumber(value: string): string | number {
+  return /^\d+$/.test(value) ? Number(value) : value
 }
 
 function Signature({ bolum }: { bolum: string }) {
@@ -132,35 +135,46 @@ function ReportCard({ title, bolum, code }: { title: string; bolum: string; code
 function EmailCard({ title, bolum, code }: { title: string; bolum: string; code: string }) {
   return (
     <div style={base}>
-      <div style={{ display: "flex", fontSize: "23px", color: muted }}>Kimden: —</div>
-      <div style={{ display: "flex", marginTop: "18px", fontSize: "23px" }}>Konu: {title}</div>
-      <div
-        style={{
-          display: "flex",
-          height: "2px",
-          marginTop: "28px",
-          backgroundColor: ink,
-          opacity: 0.18,
-        }}
-      />
-      <div style={{ display: "flex", marginTop: "55px", fontSize: "53px", fontWeight: 800 }}>
-        okundu bilgisi&nbsp;
-        <span style={{ display: "flex", transform: "translateY(6px)", color: red }}>istenmedi</span>
+      <div style={{ display: "flex", color: muted, fontSize: "20px" }}>
+        Bölüm {sectionNumber(bolum)} — işe dönüş e-postası formatı
       </div>
       <div
         style={{
           display: "flex",
-          marginTop: "40px",
-          maxWidth: "940px",
-          color: muted,
-          fontSize: "20px",
-          lineHeight: 1.5,
+          flexDirection: "column",
+          marginTop: "20px",
+          padding: "34px 38px",
+          height: "410px",
+          border: `1px solid ${rule}`,
+          backgroundColor: panel,
         }}
       >
-        mesai saatleri dışında gönderilmiştir · yanıt beklenmemektedir ama beklenmektedir
-      </div>
-      <div style={{ display: "flex", marginTop: "46px", color: yellow, fontSize: "20px" }}>
-        1 ek ........
+        <div style={{ display: "flex", fontSize: "21px", color: muted }}>Kimden: —</div>
+        <div style={{ display: "flex", marginTop: "14px", fontSize: "23px" }}>
+          <span style={{ display: "flex", color: muted }}>Konu:&nbsp;</span>
+          <span style={{ display: "flex", fontWeight: 700 }}>{title.replace(/^\d+\.\s*/, "")}</span>
+        </div>
+        <div style={{ display: "flex", height: "1px", marginTop: "24px", backgroundColor: rule }} />
+        <div style={{ display: "flex", marginTop: "30px", fontSize: "29px", fontWeight: 700 }}>
+          okundu bilgisi&nbsp;
+          <span style={{ display: "flex", transform: "translateY(3px)", color: red }}>
+            istenmedi
+          </span>
+        </div>
+        <div style={{ display: "flex", marginTop: "23px", color: muted, fontSize: "17px" }}>
+          mesai saatleri dışında gönderilmiştir · yanıt beklenmemektedir ama beklenmektedir
+        </div>
+        <div
+          style={{
+            display: "flex",
+            marginTop: "auto",
+            justifyContent: "flex-end",
+            color: muted,
+            fontSize: "18px",
+          }}
+        >
+          1 ek ........
+        </div>
       </div>
       <Code value={code} />
       <Signature bolum={bolum} />
@@ -171,64 +185,73 @@ function EmailCard({ title, bolum, code }: { title: string; bolum: string; code:
 function CallCard({ title, bolum, code }: { title: string; bolum: string; code: string }) {
   return (
     <div style={{ ...base, alignItems: "center", textAlign: "center" }}>
-      <div
-        style={{
-          display: "flex",
-          marginTop: "6px",
-          color: muted,
-          fontSize: "23px",
-          letterSpacing: "0.18em",
-        }}
-      >
-        GELEN ARAMA
+      <div style={{ display: "flex", alignSelf: "flex-start", color: muted, fontSize: "20px" }}>
+        Bölüm {sectionNumber(bolum)} — telefon görüşmesi formatı
       </div>
       <div
         style={{
           display: "flex",
-          position: "relative",
-          marginTop: "64px",
-          justifyContent: "center",
+          flexDirection: "column",
+          alignItems: "center",
+          marginTop: "20px",
+          width: "100%",
+          height: "410px",
+          padding: "40px",
+          border: `1px solid ${rule}`,
+          backgroundColor: panel,
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            position: "absolute",
-            color: red,
-            fontSize: "66px",
-            fontWeight: 800,
-            transform: "translate(3px, 2px)",
-            opacity: 0.9,
-          }}
-        >
-          {title}
-        </div>
+        <div style={{ display: "flex", color: muted, fontSize: "19px" }}>Gelen Arama</div>
         <div
           style={{
             display: "flex",
             position: "relative",
-            color: ink,
-            fontSize: "66px",
-            fontWeight: 800,
+            marginTop: "35px",
+            justifyContent: "center",
           }}
         >
-          {title}
+          <div
+            style={{
+              display: "flex",
+              position: "absolute",
+              color: red,
+              fontSize: "66px",
+              fontWeight: 800,
+              transform: "translate(3px, 2px)",
+              opacity: 0.9,
+            }}
+          >
+            {title.replace(/^\d+\.\s*/, "")}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              position: "relative",
+              color: ink,
+              fontSize: "66px",
+              fontWeight: 800,
+            }}
+          >
+            {title.replace(/^\d+\.\s*/, "")}
+          </div>
         </div>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          marginTop: "45px",
-          color: yellow,
-          fontSize: "32px",
-          letterSpacing: "0.6em",
-        }}
-      >
-        • • •
-      </div>
-      <div style={{ display: "flex", marginTop: "30px", fontSize: "27px" }}>süre: 00:0_</div>
-      <div style={{ display: "flex", marginTop: "18px", color: muted, fontSize: "18px" }}>
-        bekleme müziği: telifsiz
+        <div
+          style={{
+            display: "flex",
+            marginTop: "35px",
+            color: red,
+            fontSize: "32px",
+            letterSpacing: "0.45em",
+          }}
+        >
+          • • •
+        </div>
+        <div style={{ display: "flex", marginTop: "25px", color: muted, fontSize: "24px" }}>
+          süre: 00:0_
+        </div>
+        <div style={{ display: "flex", marginTop: "17px", color: muted, fontSize: "17px" }}>
+          bekleme müziği: telifsiz
+        </div>
       </div>
       <Code value={code} centered />
       <Signature bolum={bolum} />
@@ -251,24 +274,24 @@ function LostCard({
     <div
       style={{
         display: "flex",
-        padding: "22px 0",
-        borderBottom: `2px solid ${ink}22`,
+        padding: "15px 0",
+        borderBottom: `1px solid ${rule}`,
         alignItems: "baseline",
       }}
     >
       <span
         style={{
           display: "flex",
-          width: "390px",
+          width: "360px",
           color: muted,
-          fontSize: "18px",
+          fontSize: "16px",
           letterSpacing: "0.12em",
         }}
       >
         {label}
       </span>
       <span
-        style={{ display: "flex", flex: 1, color: valueColor, fontSize: "38px", fontWeight: 700 }}
+        style={{ display: "flex", flex: 1, color: valueColor, fontSize: "25px", fontWeight: 700 }}
       >
         {value}
       </span>
@@ -276,12 +299,35 @@ function LostCard({
   )
   return (
     <div style={base}>
-      {row("KAYIP", lost)}
-      {row("SON GÖRÜLDÜĞÜ YER", place)}
-      {row("BULUNMA İHTİMALİ", "düşük", red)}
-      {row("PİYASA DEĞERİ", "hesaplanamadı")}
-      <div style={{ display: "flex", marginTop: "22px", color: red, fontSize: "18px" }}>
-        satılık değildir
+      <div style={{ display: "flex", color: muted, fontSize: "20px" }}>
+        Bölüm {sectionNumber(bolum)} — kayıp eşya bildirimi formatı
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          marginTop: "20px",
+          padding: "16px 38px",
+          height: "430px",
+          border: `1px solid ${rule}`,
+          backgroundColor: panel,
+        }}
+      >
+        {row("KAYIP", lost)}
+        {row("SON GÖRÜLDÜĞÜ YER", place)}
+        {row("BULUNMA İHTİMALİ", "düşük", red)}
+        {row("PİYASA DEĞERİ", "hesaplanamadı")}
+        <div
+          style={{
+            display: "flex",
+            marginTop: "auto",
+            justifyContent: "flex-end",
+            color: muted,
+            fontSize: "17px",
+          }}
+        >
+          satılık değildir
+        </div>
       </div>
       <Code value={code} />
       <Signature bolum={bolum} />
@@ -292,20 +338,32 @@ function LostCard({
 function GenericCard({ title, code }: { title: string; code: string }) {
   return (
     <div style={base}>
-      <div style={{ display: "flex", color: red, fontSize: "22px", letterSpacing: "0.18em" }}>
+      <div style={{ display: "flex", color: muted, fontSize: "20px", letterSpacing: "0.12em" }}>
         BURA
       </div>
       <div
         style={{
           display: "flex",
-          marginTop: "118px",
-          maxWidth: "1040px",
-          fontSize: "68px",
-          fontWeight: 800,
-          lineHeight: 1.06,
+          marginTop: "28px",
+          height: "390px",
+          width: "100%",
+          padding: "48px",
+          alignItems: "center",
+          border: `1px solid ${rule}`,
+          backgroundColor: panel,
         }}
       >
-        {title}
+        <div
+          style={{
+            display: "flex",
+            maxWidth: "990px",
+            fontSize: "66px",
+            fontWeight: 800,
+            lineHeight: 1.08,
+          }}
+        >
+          {title}
+        </div>
       </div>
       <Code value={code} />
       <Signature bolum="—" />
