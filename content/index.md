@@ -2,6 +2,8 @@
 title: "[.]"
 ---
 
+[Bura'ya dair](./buraya-dair.md)
+
 [English — selected works](./en/index.md)
 
 - [[tatil-iptal|01. Tatil İptal]]
