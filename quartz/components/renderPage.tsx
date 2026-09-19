@@ -141,7 +141,7 @@ const LossRecords: QuartzComponent = ({ allFiles, fileData }) => {
             </details>
             <SharePanel
               title={shareTitle}
-              url={`/${record.slug}/`}
+              url={`/${record.slug}`}
               isEnglish={isEnglish}
               compact
             />
