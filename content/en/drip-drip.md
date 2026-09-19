@@ -3,7 +3,6 @@ title: "02. Drip, Drip"
 pageType: story
 lang: en
 bolum: "02"
-format: arama
 anahtar_kelime: ses
 ---
 
