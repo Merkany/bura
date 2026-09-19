@@ -66,7 +66,7 @@ body[data-slug="index"] {
 }
 
 // Büro kayıtları: sakin bir okuma alanı, seyrek idari ayrıntılar.
-body[data-slug="kayip-burosu/index"] {
+body[data-page-type="loss-office"] {
   & .page > #quartz-body {
     @media all and ($desktop) {
       grid-template-columns: 280px minmax(0, 760px);
@@ -120,7 +120,7 @@ body[data-slug="kayip-burosu/index"] {
   }
 }
 
-body[data-slug="kayip-burosu/index"] {
+body[data-page-type="loss-office"] {
   & .page-listing,
   & .breadcrumbs {
     display: none;
@@ -333,7 +333,7 @@ body[data-page-type="story"] {
   }
 }
 
-body[data-slug="kayip-burosu/index"] .loss-record {
+body[data-page-type="loss-office"] .loss-record {
   margin: 0;
   padding: 1.35rem 1.4rem 1.2rem;
   border: 1px solid var(--lightgray);
@@ -353,7 +353,7 @@ body[data-slug="kayip-burosu/index"] .loss-record {
   @media (max-width:520px) { padding:1.3rem; .loss-record-head {gap:0.65rem;} }
 }
 
-body[data-slug="kayip-burosu/index"] {
+body[data-page-type="loss-office"] {
   & .page { max-width: 1500px; }
 
   & .page > #quartz-body {
