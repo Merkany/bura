@@ -70,7 +70,6 @@ export default (() => {
         <script defer src={`${staticPath("bura-corner.js")}?v=20260917-records`}></script>
         <script defer src={`${staticPath("story-ui.js")}?v=20260919-share-menu-3`}></script>
         <script defer src={`${staticPath("loss-records.js")}?v=20260917-found`}></script>
-        <script defer src={`${staticPath("explorer-collapse.js")}?v=20260919-folders`}></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <meta name="og:site_name" content={cfg.pageTitle}></meta>
