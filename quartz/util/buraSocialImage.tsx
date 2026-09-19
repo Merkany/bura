@@ -2,11 +2,13 @@ import type { SocialImageOptions } from "@quartz-community/og-image"
 
 type CardFormat = "tot-raporu" | "eposta" | "arama" | "kayip-form"
 
-const ink = "#17151b"
-const paper = "#f4efe3"
-const red = "#b84f3d"
-const yellow = "#d7a83e"
-const muted = "#77716a"
+const ink = "#f5efe5"
+const paper = "#101011"
+const panel = "#1a1a1b"
+const red = "#ef514b"
+const yellow = "#d3ad67"
+const muted = "#b8ada0"
+const rule = "#aaa49a"
 
 const base: Record<string, string | number> = {
   width: "100%",
@@ -15,7 +17,7 @@ const base: Record<string, string | number> = {
   flexDirection: "column",
   position: "relative",
   overflow: "hidden",
-  padding: "58px 66px 52px",
+  padding: "48px 58px 42px",
   backgroundColor: paper,
   color: ink,
 }
@@ -40,9 +42,9 @@ function Signature({ bolum }: { bolum: string }) {
       style={{
         display: "flex",
         position: "absolute",
-        left: "66px",
-        right: "66px",
-        bottom: "43px",
+        left: "86px",
+        right: "86px",
+        bottom: "66px",
         alignItems: "flex-end",
         justifyContent: "space-between",
         fontSize: "20px",
@@ -63,12 +65,12 @@ function Code({ value, centered = false }: { value: string; centered?: boolean }
       style={{
         display: "flex",
         position: "absolute",
-        left: "66px",
-        right: "66px",
-        bottom: "82px",
+        left: "86px",
+        right: "86px",
+        bottom: "102px",
         justifyContent: centered ? "center" : "flex-start",
-        color: muted,
-        fontSize: "13px",
+        color: "#8f877e",
+        fontSize: "12px",
         letterSpacing: "0.08em",
       }}
     >
