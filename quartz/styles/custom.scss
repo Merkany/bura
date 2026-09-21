@@ -573,7 +573,8 @@ body[data-page-type="story"] {
   }
 }
 
-body[data-page-type="loss-office"] .loss-record {
+body[data-page-type="loss-office"] .loss-record,
+body[data-page-type="loss-record"] .loss-record {
   margin: 0;
   padding: 1.35rem 1.4rem 1.2rem;
   border: 1px solid var(--lightgray);
@@ -637,6 +638,17 @@ body[data-page-type="loss-office"] .loss-record {
     .loss-record-head {
       gap: 0.65rem;
     }
+  }
+}
+
+body[data-page-type="loss-record"] .single-loss-record {
+  display: flex;
+  flex-direction: column;
+  max-width: 760px;
+  margin: 1.5rem 0 2rem;
+
+  .loss-location {
+    padding: 1rem 0;
   }
 }
 
