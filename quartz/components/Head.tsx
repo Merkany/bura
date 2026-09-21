@@ -102,6 +102,12 @@ export default (() => {
         )}
 
         <link rel="icon" href={iconPath} />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Bura — yeni metinler ve Kayıp Bürosu"
+          href={`${siteBasePath}/bura-akis.xml`}
+        />
         <meta name="description" content={description} />
         <meta name="generator" content="Quartz" />
 
