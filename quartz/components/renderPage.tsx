@@ -327,6 +327,44 @@ const HandToHand: QuartzComponent = ({ fileData }) => {
   return <SharePanel title={title} isEnglish={isEnglish} />
 }
 
+const SingleLossRecord: QuartzComponent = ({ fileData }) => {
+  const data = fileData.frontmatter as Record<string, unknown> | undefined
+  const number = Number(data?.kayit ?? 0)
+  if (number <= 0) return null
+
+  const isEnglish = data?.lang === "en"
+  const recordLabel = isEnglish ? "RECORD" : "KAYIT"
+  const locationLabel = isEnglish ? "Last seen" : "Bulunduğu yer"
+  const outcomeLabel = isEnglish ? "OUTCOME" : "İŞLEM"
+  const category = String(data?.kategori ?? "")
+  const title = String(data?.title ?? "Bura")
+  const location = String(data?.bulunduguYer ?? "")
+  const outcome = String(data?.islem ?? "")
+
+  return (
+    <section class="loss-record single-loss-record">
+      <header class="loss-record-head">
+        {recordLabel} {String(number).padStart(3, "0")}
+        {category && ` / ${category.toLocaleUpperCase(isEnglish ? "en-US" : "tr-TR")}`}
+      </header>
+      <p class="loss-location">
+        <span>{locationLabel}</span>
+        {location}
+      </p>
+      <footer class="loss-outcome">
+        <span>{outcomeLabel}</span>
+        <p>{outcome}</p>
+      </footer>
+      <SharePanel
+        title={`${recordLabel} ${String(number).padStart(3, "0")} — ${title}`}
+        url={`/${fileData.slug}`}
+        isEnglish={isEnglish}
+        compact
+      />
+    </section>
+  )
+}
+
 const headerRegex = new RegExp(/h[1-6]/)
 export function pageResources(
   baseDir: FullSlug | RelativeURL,
@@ -645,6 +683,9 @@ export function renderPage(
   const lossPrefix = isEnglish ? "en/lost-property/" : "kayip-burosu/"
   const lossRecords = getLossRecords(componentData.allFiles, lossPrefix)
   const isLossOffice = componentData.fileData.frontmatter?.pageType === "loss-office"
+  const isLossRecordPage = Number(componentData.fileData.frontmatter?.kayit ?? 0) > 0
+  const pageType =
+    componentData.fileData.frontmatter?.pageType ?? (isLossRecordPage ? "loss-record" : undefined)
   const hasHandToHand =
     componentData.fileData.frontmatter?.pageType === "story" ||
     componentData.fileData.slug === "buraya-dair/index" ||
@@ -652,7 +693,9 @@ export function renderPage(
   const resolvedBeforeBody = hasHandToHand ? [...beforeBody, HandToHand] : beforeBody
   const resolvedAfterBody = isLossOffice
     ? [LossRecords, ...afterBody]
-    : componentData.fileData.frontmatter?.pageType === "story"
+    : isLossRecordPage
+      ? [SingleLossRecord, ...afterBody]
+      : componentData.fileData.frontmatter?.pageType === "story"
       ? [HandToHand, StoryNext, ...afterBody]
       : hasHandToHand
         ? [HandToHand, ...afterBody]
@@ -663,7 +706,7 @@ export function renderPage(
       <body
         data-slug={slug}
         data-basepath={basePath}
-        data-page-type={componentData.fileData.frontmatter?.pageType}
+        data-page-type={pageType}
         data-page-lang={lang}
       >
         <div id="bura-loss-records-data" hidden>
