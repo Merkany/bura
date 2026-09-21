@@ -7,6 +7,7 @@ const projectDir = fileURLToPath(new URL("..", import.meta.url))
 const contentDir = join(projectDir, "content")
 const outputFeed = join(projectDir, "public", "bura-akis.xml")
 const siteUrl = "https://buradayok.org"
+const feedUrl = `${siteUrl}/bura-akis.xml`
 
 async function markdownFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true })
@@ -68,7 +69,9 @@ for (const file of await markdownFiles(contentDir)) {
   const description = isLossRecord
     ? [field(source, "kategori"), field(source, "bulunduguYer")].filter(Boolean).join(" · ")
     : field(source, "description") || `${originalTitle}, Bura'da yeni bir metin.`
-  const url = `${siteUrl}/${slug}/`
+  // GitHub Pages emits these pages as extensionless files. A trailing slash
+  // therefore points at a non-existent directory and returns 404.
+  const url = `${siteUrl}/${slug}`
   entries.push({ title, description, url, date: publicationDate(file) })
 }
 
@@ -87,12 +90,14 @@ const items = entries
   .join("\n")
 
 const feed = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Bura — yeni metinler ve Kayıp Bürosu</title>
     <link>${siteUrl}/</link>
+    <atom:link href="${feedUrl}" rel="self" type="application/rss+xml" />
     <description>Bura'da yayımlanan yeni metinler ve Kayıp Bürosu kayıtları</description>
     <language>tr</language>
+    <generator>Bura</generator>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
 ${items}
   </channel>
