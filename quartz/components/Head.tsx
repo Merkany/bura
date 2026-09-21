@@ -15,7 +15,18 @@ export default (() => {
     const titleSuffix = cfg.pageTitleSuffix ?? ""
     const title =
       (fileData.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title) + titleSuffix
+    const lossRecordDescription = fileData.frontmatter?.kayit
+      ? [
+          `Kayıp Bürosu / ${String(fileData.frontmatter.kayit).padStart(3, "0")}`,
+          fileData.frontmatter.kategori,
+          fileData.frontmatter.bulunduguYer,
+          fileData.frontmatter.islem,
+        ]
+          .filter(Boolean)
+          .join(" · ")
+      : undefined
     const description =
+      lossRecordDescription ??
       fileData.frontmatter?.socialDescription ??
       fileData.frontmatter?.description ??
       unescapeHTML(fileData.description?.trim() ?? i18n(cfg.locale).propertyDefaults.description)
