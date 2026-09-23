@@ -1,11 +1,12 @@
 ---
-title: 07. 86 Dakika
+title: 07. Seksenaltı Dakika
 pageType: story
 bolum: "07"
 format: tot-raporu
 anahtar_kelime: zaman
 aliases:
   - 07. 86 Dakika
+image: "[[social-image-preview-dark.png]]"
 ---
 Eve geldiğimizde . Vera mutfağın ışığını yaktı. Pura bilgisayarı alıp geldi. Maili açıtı.
 
