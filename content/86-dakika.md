@@ -1,3 +1,12 @@
+---
+title: "07. 86 Dakika"
+pageType: story
+bolum: "07"
+format: tot-raporu
+anahtar_kelime: zaman
+aliases:
+  - "07. 86 Dakika"
+---
 Eve geldiğimizde . Vera mutfağın ışığını yaktı. Pura bilgisayarı alıp geldi. Maili açıtı.
 
 **Konu:** [Sistem Uyarısı] 25.08.2026 / Görev Dışı Zaman Sapma Raporu  
