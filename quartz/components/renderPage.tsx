@@ -224,6 +224,7 @@ const STORY_ORDER = [
   { slug: "kemikler-kaynadi", title: "04. Kemikler Kaynadı" },
   { slug: "iki-beden-buyuk", title: "05. İki Beden Büyük" },
   { slug: "bu-ulkede-deniz-yok", title: "06. Bu Ülkede Deniz Yok" },
+  { slug: "86-dakika", title: "07. 86 Dakika" },
 ]
 
 const ENGLISH_STORY_ORDER = [
