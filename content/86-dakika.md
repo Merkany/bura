@@ -21,7 +21,7 @@ Eve geldiğimizde . Vera mutfağın ışığını yaktı. Pura bilgisayarı alı
 | 15:26–15:39 | **Çalışan nerede olduğunu hatırlamıyor** | 13 dk | **Görev dışı**    |
 | 17:18–17:46 | **Konuşma**                              | 28 dk | **Görev dışı**    |
 |             |                                          |       |                   |
-**Toplam TOT: 86 dakika**
+**Toplam: 86 dakika**
 
 Vera buzdolabını açtı. İçine baktı. Kapattı. Birkaç saniye sonra tekrar açtı.
 
