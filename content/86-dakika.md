@@ -8,7 +8,7 @@ aliases:
   - 07. 86 Dakika
 socialImage: 86-dakika.png
 ---
-Eve geldiğimizde . Vera mutfağın ışığını yaktı. Pura bilgisayarı alıp geldi. Maili açıtı.
+Eve geldiğimizde. Vera mutfağın ışığını yaktı. Pura bilgisayarı alıp geldi. Mailini açtı.
 
 **Konu:** [Sistem Uyarısı] 25.08.2026 / Görev Dışı Zaman Sapma Raporu  
 **Alıcı:** Pura [Personel No: 0226]  
