@@ -1,11 +1,11 @@
 ---
-title: "07. 86 Dakika"
+title: 07. 86 Dakika
 pageType: story
 bolum: "07"
 format: tot-raporu
 anahtar_kelime: zaman
 aliases:
-  - "07. 86 Dakika"
+  - 07. 86 Dakika
 ---
 Eve geldiğimizde . Vera mutfağın ışığını yaktı. Pura bilgisayarı alıp geldi. Maili açıtı.
 
@@ -15,7 +15,7 @@ Eve geldiğimizde . Vera mutfağın ışığını yaktı. Pura bilgisayarı alı
 | Saat        | Sistem Tespiti                           | Süre  | Değerlendirme     |
 | ----------- | ---------------------------------------- | ----- | ----------------- |
 | 09:15–09:29 | **Konuşma**                              | 14 dk | **Görev dışı**    |
-| 10:42–10:51 | İstasyon Dışı Zaman                      | 9 dk  | Görev dışı        |
+| 10:42–10:51 | **İstasyon Dışı Zaman**                  | 9 dk  | Görev dışı        |
 | 11:37–11:49 | **Tarama yapılmadı**                     | 12 dk | **Görev dışı**    |
 | 13:54–14:04 | **Tuvalet**                              | 10 dk | Üç haktan fazlası |
 | 15:26–15:39 | **Çalışan nerede olduğunu hatırlamıyor** | 13 dk | **Görev dışı**    |
@@ -113,7 +113,7 @@ O dokuz dakikada Pura yan istasyondaydı.
 
 Arkadaşının yanında.
 
-**Çalışma istasyonlarının etrafındaki sarı çizgileri daha önce görmüştüm.** İlk gördüğümde sarı ıstırap çemberlerimizi düşünmüştüm.
+Çalışma istasyonlarının etrafındaki sarı çizgileri daha önce görmüştüm. İlk gördüğümde sarı ıstırap çemberlerimizi düşünmüştüm.
 
 Yalnız burada çember yoktu.
 
@@ -123,4 +123,4 @@ Kareler, dikdörtgenler vardı. İçlerine girmek yasaktı.
 
 Pura dışarıdaydı.
 
-**Istırap da.**
+*Istırap da.*
