@@ -217,24 +217,53 @@ const LossRecords: QuartzComponent = ({ allFiles, fileData }) => {
   )
 }
 
-const STORY_ORDER = [
-  { slug: "tatil-iptal", title: "01. Tatil İptal" },
-  { slug: "pit-pit", title: "02. Pıt Pıt" },
-  { slug: "iyim-iyiyim", title: "03. İyim, iyiyim" },
-  { slug: "kemikler-kaynadi", title: "04. Kemikler Kaynadı" },
-  { slug: "iki-beden-buyuk", title: "05. İki Beden Büyük" },
-  { slug: "bu-ulkede-deniz-yok", title: "06. Bu Ülkede Deniz Yok" },
-  { slug: "86-dakika", title: "07. 86 Dakika" },
-]
+type StoryLink = {
+  slug: string
+  title: string
+  section: number
+}
 
-const ENGLISH_STORY_ORDER = [
-  { slug: "en/holiday-cancelled", title: "01. Holiday Cancelled" },
-  { slug: "en/drip-drip", title: "02. Drip, Drip" },
-]
+function getStories(
+  allFiles: QuartzComponentProps["allFiles"],
+  isEnglish: boolean,
+): StoryLink[] {
+  return allFiles
+    .filter((file) => {
+      const isStory = file.frontmatter?.pageType === "story"
+      const fileIsEnglish = file.frontmatter?.lang === "en"
+      return isStory && fileIsEnglish === isEnglish
+    })
+    .map((file) => {
+      const title = String(file.frontmatter?.title ?? file.slug ?? "Bura")
+      const sectionFromTitle = title.match(/^\s*(\d+)/)?.[1]
+      return {
+        slug: String(file.slug ?? ""),
+        title,
+        section: Number(file.frontmatter?.bolum ?? sectionFromTitle ?? Number.MAX_SAFE_INTEGER),
+      }
+    })
+    .filter((story) => story.slug)
+    .sort((a, b) => a.section - b.section || a.title.localeCompare(b.title))
+}
 
-const StoryNext: QuartzComponent = ({ fileData }) => {
+const HomepageStories: QuartzComponent = ({ allFiles }) => {
+  const stories = getStories(allFiles, false)
+  return (
+    <nav class="homepage-stories" aria-label="Metinler">
+      <ul>
+        {stories.map((story) => (
+          <li>
+            <a href={`/${story.slug}`}>{story.title}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+const StoryNext: QuartzComponent = ({ fileData, allFiles }) => {
   const isEnglish = fileData.frontmatter?.lang === "en"
-  const order = isEnglish ? ENGLISH_STORY_ORDER : STORY_ORDER
+  const order = getStories(allFiles, isEnglish)
   const index = order.findIndex((story) => story.slug === fileData.slug)
   if (index < 0) return null
   const next = order[index + 1]
@@ -691,7 +720,12 @@ export function renderPage(
     componentData.fileData.frontmatter?.pageType === "story" ||
     componentData.fileData.slug === "buraya-dair/index" ||
     componentData.fileData.slug === "en/on-bura/index"
-  const resolvedBeforeBody = hasHandToHand ? [...beforeBody, HandToHand] : beforeBody
+  const isHomepage = componentData.fileData.slug === "index"
+  const resolvedBeforeBody = isHomepage
+    ? [...beforeBody, HomepageStories]
+    : hasHandToHand
+      ? [...beforeBody, HandToHand]
+      : beforeBody
   const resolvedAfterBody = isLossOffice
     ? [LossRecords, ...afterBody]
     : isLossRecordPage
