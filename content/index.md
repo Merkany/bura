@@ -8,6 +8,7 @@ title: "[.]"
 - [[kemikler-kaynadi|04. Kemikler Kaynadı]]
 - [[iki-beden-buyuk|05. İki Beden Büyük]]
 - [[bu-ulkede-deniz-yok|06. Bu Ülkede Deniz Yok]]
+- [[86-dakika|07. 86 Dakika]]
 
 ---
 
