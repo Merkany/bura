@@ -6,7 +6,7 @@ format: tot-raporu
 anahtar_kelime: zaman
 aliases:
   - 07. 86 Dakika
-socialImage: paylasim/86-dakika.png
+socialImage: 86-dakika.png
 ---
 Eve geldiğimizde . Vera mutfağın ışığını yaktı. Pura bilgisayarı alıp geldi. Maili açıtı.
 
