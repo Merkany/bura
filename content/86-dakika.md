@@ -1,5 +1,5 @@
 ---
-title: 07. Seksenaltı Dakika
+title: 07. 86 Dakika
 pageType: story
 bolum: "07"
 format: tot-raporu
