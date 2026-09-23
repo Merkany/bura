@@ -380,7 +380,11 @@ export const buraSocialImage: SocialImageOptions["imageStructure"] = ({
   const isLossRecord = String(fileData.slug ?? "").startsWith("kayip-burosu/")
   const rawFormat = isLossRecord ? "kayip-form" : frontmatter.format
   const format = typeof rawFormat === "string" ? (rawFormat as CardFormat) : undefined
-  const bolum = String(frontmatter.bolum ?? frontmatter.kayit ?? "—").padStart(2, "0")
+  const sectionFromTitle = title.match(/^\s*(\d+)/)?.[1]
+  const bolum = String(frontmatter.bolum ?? frontmatter.kayit ?? sectionFromTitle ?? "—").padStart(
+    2,
+    "0",
+  )
   const keyword = text(
     frontmatter.anahtar_kelime ?? frontmatter.kategori,
     title.split(/\s+/)[0] ?? "bura",
