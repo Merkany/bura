@@ -402,7 +402,7 @@ export function pageResources(
   ctx?: BuildCtx,
 ): StaticResources {
   const hashedNames = ctx?.hashedResourceNames
-  const cssFile = hashedNames?.["index.css"] ?? "index.css?v=20260917-weather-ticker-fast"
+  const cssFile = hashedNames?.["index.css"] ?? "index.css?v=20260924-cloud-machine"
   const prescriptFile = hashedNames?.["prescript.js"] ?? "prescript.js"
   const postscriptFile = hashedNames?.["postscript.js"] ?? "postscript.js"
 
@@ -772,6 +772,26 @@ export function renderPage(
               {isEnglish ? "Class conflict in the air today." : "Bugün hava sınıf çatışmalı."}
             </span>
           </span>
+          <span class="cloud-machine-layer" data-cloud-layer aria-hidden="true"></span>
+          <span class="cloud-machine" data-cloud-machine>
+            <span class="cloud-machine-body" aria-hidden="true">
+              <span class="cloud-machine-outlet"></span>
+              <span class="cloud-machine-dial"></span>
+              <span class="cloud-machine-seam"></span>
+            </span>
+            <button
+              class="cloud-machine-button"
+              type="button"
+              data-cloud-button
+              aria-label={isEnglish ? "Make a cloud" : "Bulut üret"}
+            ></button>
+          </span>
+          <span
+            class="cloud-machine-status"
+            data-cloud-status
+            role="status"
+            aria-live="polite"
+          ></span>
         </aside>
         {!isLossOffice && (
           <a
