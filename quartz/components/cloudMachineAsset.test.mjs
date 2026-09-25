@@ -51,3 +51,11 @@ test("queued clicks do not enable a separate burst motion mode", async () => {
   assert.doesNotMatch(script, /burst|lastManualPress/)
   assert.doesNotMatch(logic, /burst/)
 })
+
+test("the homepage loss-office card sits centered below the cloud area", async () => {
+  const styles = await readFile("quartz/styles/custom.scss", "utf8")
+  assert.match(
+    styles,
+    /body\[data-slug="index"\] \.bura-corner-stamp\s*\{[\s\S]*?top:\s*180px;[\s\S]*?left:\s*50%;[\s\S]*?translate:\s*-50% 0;/,
+  )
+})
