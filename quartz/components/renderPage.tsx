@@ -754,6 +754,12 @@ export function renderPage(
             ></span>
           ))}
         </div>
+        <span
+          class="free-cloud-layer"
+          data-free-cloud-layer
+          data-cloud-asset-base={`${basePath}/static/bulutlar`}
+          aria-hidden="true"
+        ></span>
         <aside
           class="bura-weather"
           aria-label={isEnglish ? "Bura — fictional weather report" : "Bura — kurmaca hava raporu"}
