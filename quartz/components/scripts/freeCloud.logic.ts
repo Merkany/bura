@@ -34,7 +34,9 @@ export function makeFreeCloudSpec(random: () => number): FreeCloudSpec {
     asset: CLOUD_SHAPES[assetIndex],
     direction,
     scale: Number(between(0.7, 1.15, random).toFixed(2)),
-    topVh: Math.round(between(8, 60, random)),
+    // Üst köşe (makine, hava yazısı, kayıp bürosu kutusu) zaten kalabalık —
+    // bulut oradan uzak durup sayfanın gövdesinde dolaşsın.
+    topVh: Math.round(between(30, 85, random)),
     driftVh: Math.round(between(-16, 16, random)),
     // Yolun ortasında iki farklı sapma noktası — bulut düz bir çizgide değil,
     // hafif dalgalanarak geçsin diye.
