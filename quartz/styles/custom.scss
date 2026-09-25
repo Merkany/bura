@@ -474,10 +474,9 @@ body[data-page-type="loss-office"] {
   transition: box-shadow 0.15s ease;
 }
 body[data-slug="index"] .bura-corner-stamp {
-  top: 180px;
-  right: auto;
-  left: 50%;
-  translate: -50% 0;
+  /* Bulut yapma makinesinin hemen altında, iki parmak kadar boşluk
+     bırakarak dursun — ortalanınca liste metninin üstüne biniyordu. */
+  top: 190px;
 }
 .bura-corner-stamp:hover {
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
