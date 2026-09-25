@@ -417,6 +417,11 @@ body[data-page-type="loss-office"] {
     right: calc(var(--cloud-machine-width) - 12px);
     width: 76px;
   }
+  /* Durum mesajı geniş kalınca Kayıp Bürosu kartının yazılarının üstüne
+     uzanıyordu — makinenin genişliğine yakın bir sınır koy, sola taşmasın. */
+  .cloud-machine-status {
+    width: min(150px, calc(100vw - 24px));
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .bura-weather {
@@ -554,18 +559,13 @@ body[data-slug="index"] .bura-corner-stamp {
   .bura-corner-stamp {
     position: static;
     width: auto;
-    margin: 16px;
+    /* Sağda makineye yetecek kadar boşluk bırak — kutu tamamen onun
+       solunda kalsın, üstüne binmesin. */
+    margin: 16px 150px 16px 16px;
   }
   body[data-slug="index"] .bura-corner-stamp {
     left: auto;
     translate: none;
-  }
-  /* Makinenin durduğu köşeyle çakışmasın diye üst sağ köşeden bir
-     çentik kesiyoruz; başlık da bu kesik şekle göre ortalanıyor
-     (tam kutu genişliğine göre değil). */
-  .bura-corner-stamp-tab {
-    clip-path: polygon(0 0, 78% 0, 100% 62%, 100% 100%, 0 100%);
-    padding: 8px 44px 8px 16px;
   }
 }
 
