@@ -772,20 +772,32 @@ export function renderPage(
               {isEnglish ? "Class conflict in the air today." : "Bugün hava sınıf çatışmalı."}
             </span>
           </span>
-          <span class="cloud-machine-layer" data-cloud-layer aria-hidden="true"></span>
-          <span class="cloud-machine" data-cloud-machine>
-            <span class="cloud-machine-body" aria-hidden="true">
-              <span class="cloud-machine-outlet"></span>
-              <span class="cloud-machine-dial"></span>
-              <span class="cloud-machine-seam"></span>
+          <span
+            class="cloud-machine-layer"
+            data-cloud-layer
+            data-cloud-asset-base={`${basePath}/static/bulutlar`}
+            aria-hidden="true"
+          ></span>
+          <button
+            class="cloud-machine"
+            type="button"
+            data-cloud-machine
+            data-cloud-button
+            aria-label={isEnglish ? "Make a cloud" : "Bulut üret"}
+          >
+            <img
+              class="cloud-machine-image"
+              src={`${basePath}/static/bulut-yapma-makinesi.png`}
+              alt=""
+              aria-hidden="true"
+            />
+            <span class="cloud-machine-indicator" aria-hidden="true"></span>
+            <span class="cloud-machine-red-button" aria-hidden="true"></span>
+            <span class="cloud-machine-instruction" aria-hidden="true">
+              <span>BULUT</span>
+              <span>YAP</span>
             </span>
-            <button
-              class="cloud-machine-button"
-              type="button"
-              data-cloud-button
-              aria-label={isEnglish ? "Make a cloud" : "Bulut üret"}
-            ></button>
-          </span>
+          </button>
           <span
             class="cloud-machine-status"
             data-cloud-status
