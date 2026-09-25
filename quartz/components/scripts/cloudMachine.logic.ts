@@ -51,7 +51,7 @@ const between = (minimum: number, maximum: number, random: () => number) =>
   minimum + (maximum - minimum) * boundedRandom(random)
 
 export function nextAutomaticDelay(random: () => number): number {
-  return Math.round(between(1_500, 2_200, random))
+  return Math.round(between(10_000, 20_000, random))
 }
 
 export function nextManualDelay(random: () => number): number {
