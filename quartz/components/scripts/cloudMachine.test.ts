@@ -9,6 +9,7 @@ const {
   makeCloudSpec,
   manualAttemptFails,
   nextAutomaticDelay,
+  nextManualDelay,
   pickManualStatus,
 } = cloudMachineModule
 
@@ -17,32 +18,36 @@ function sequence(...values: number[]) {
   return () => values[index++] ?? values.at(-1) ?? 0
 }
 
-test("automatic production waits between 18 and 35 seconds", () => {
-  assert.equal(
-    nextAutomaticDelay(() => 0),
-    18_000,
-  )
-  assert.equal(
-    nextAutomaticDelay(() => 1),
-    35_000,
-  )
+test("automatic production waits between 1.5 and 2.2 seconds during the introduction period", () => {
+  assert.equal(nextAutomaticDelay(() => 0), 1_500)
+  assert.equal(nextAutomaticDelay(() => 1), 2_200)
 })
 
-test("manual clouds use fifteen shapes while automatic clouds use a smaller subset", () => {
+test("manual production waits between 0.5 and 0.8 seconds", () => {
+  assert.equal(nextManualDelay(() => 0), 500)
+  assert.equal(nextManualDelay(() => 1), 800)
+})
+
+test("manual clouds use all fifteen supplied assets while automatic clouds use four normal ones", () => {
   assert.equal(CLOUD_SHAPES.length, 15)
-  assert.ok(AUTO_CLOUD_SHAPES.length >= 3)
-  assert.ok(AUTO_CLOUD_SHAPES.length < CLOUD_SHAPES.length)
-  assert.ok(AUTO_CLOUD_SHAPES.every((shape) => CLOUD_SHAPES.includes(shape)))
+  assert.equal(AUTO_CLOUD_SHAPES.length, 4)
+  assert.ok(AUTO_CLOUD_SHAPES.every((asset) => CLOUD_SHAPES.includes(asset)))
+  assert.deepEqual(AUTO_CLOUD_SHAPES, [
+    "bulut-01.png",
+    "bulut-03.png",
+    "bulut-04.png",
+    "bulut-05.png",
+  ])
 
   const automatic = makeCloudSpec("automatic", sequence(0.999, 0.5, 0.5, 0.5, 0.5, 0.5))
   const manual = makeCloudSpec("manual", sequence(0.999, 0.5, 0.5, 0.5, 0.5, 0.5))
-  assert.equal(automatic.shape, AUTO_CLOUD_SHAPES.at(-1))
-  assert.equal(manual.shape, CLOUD_SHAPES.at(-1))
+  assert.equal(automatic.asset, AUTO_CLOUD_SHAPES.at(-1))
+  assert.equal(manual.asset, CLOUD_SHAPES.at(-1))
 })
 
 test("cloud motion varies within deliberately small bounds", () => {
-  const low = makeCloudSpec("manual", sequence(0, 0, 0, 0, 0, 0))
-  const high = makeCloudSpec("manual", sequence(0.999, 1, 1, 1, 1, 1))
+  const low = makeCloudSpec("manual", sequence(0, 0, 0, 0, 0, 0, 0, 0, 0))
+  const high = makeCloudSpec("manual", sequence(0.999, 1, 1, 1, 1, 1, 1, 1, 1))
 
   assert.deepEqual(
     {
@@ -52,7 +57,10 @@ test("cloud motion varies within deliberately small bounds", () => {
       rotation: low.rotation,
       midRotation: low.midRotation,
       durationMs: low.durationMs,
+      startX: low.startX,
       startY: low.startY,
+      midY: low.midY,
+      endY: low.endY,
     },
     {
       scale: 0.78,
@@ -61,7 +69,10 @@ test("cloud motion varies within deliberately small bounds", () => {
       rotation: -6,
       midRotation: 2.4,
       durationMs: 10_000,
+      startX: -5,
       startY: -6,
+      midY: -30,
+      endY: -12,
     },
   )
   assert.deepEqual(
@@ -69,30 +80,49 @@ test("cloud motion varies within deliberately small bounds", () => {
       scale: high.scale,
       rotation: high.rotation,
       durationMs: high.durationMs,
+      startX: high.startX,
       startY: high.startY,
+      midY: high.midY,
+      endY: high.endY,
     },
-    { scale: 1.18, rotation: 6, durationMs: 16_000, startY: 6 },
+    {
+      scale: 1.18,
+      rotation: 6,
+      durationMs: 16_000,
+      startX: 5,
+      startY: 6,
+      midY: -12,
+      endY: 38,
+    },
   )
 })
 
-test("manual status is absent on most presses and contains fifteen possible messages", () => {
-  assert.equal(MANUAL_STATUS_MESSAGES.length, 15)
-  assert.equal(pickManualStatus(sequence(0.9)), null)
-  assert.notEqual(pickManualStatus(sequence(0.1, 0.5)), null)
+test("compressed manual production uses the same motion range as a single press", () => {
+  const values = [0.4, 0.65, 0.25, 0.55, 0.7, 0.45, 0.6, 0.35, 0.8]
+  const first = makeCloudSpec("manual", sequence(...values))
+  const queued = makeCloudSpec("manual", sequence(...values))
+  assert.deepEqual(queued, first)
+})
+
+test("every manual press gets one of the twenty status messages", () => {
+  assert.equal(MANUAL_STATUS_MESSAGES.length, 20)
+  assert.equal(pickManualStatus(sequence(0)), "Şekil üzerinde uzlaşılamadı.")
+  assert.notEqual(pickManualStatus(sequence(0.9)), null)
 })
 
 test("Deniz bekleniyor is much rarer than ordinary status messages", () => {
-  assert.equal(pickManualStatus(sequence(0.1, 0.005)), "Deniz bekleniyor…")
-  assert.notEqual(pickManualStatus(sequence(0.1, 0.5)), "Deniz bekleniyor…")
+  assert.equal(pickManualStatus(sequence(0.995)), "Deniz bekleniyor.")
+  assert.notEqual(pickManualStatus(sequence(0.5)), "Deniz bekleniyor.")
+})
+
+test("status selection does not affect the independently selected cloud asset", () => {
+  const cloud = makeCloudSpec("manual", sequence(0.5, 0.5, 0.5, 0.5, 0.5, 0.5))
+  const status = pickManualStatus(sequence(0.995))
+  assert.equal(status, "Deniz bekleniyor.")
+  assert.equal(cloud.asset, CLOUD_SHAPES[7])
 })
 
 test("a manual attempt very rarely fails to produce a cloud", () => {
-  assert.equal(
-    manualAttemptFails(() => 0.005),
-    true,
-  )
-  assert.equal(
-    manualAttemptFails(() => 0.5),
-    false,
-  )
+  assert.equal(manualAttemptFails(() => 0.005), true)
+  assert.equal(manualAttemptFails(() => 0.5), false)
 })
