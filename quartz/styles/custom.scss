@@ -473,6 +473,12 @@ body[data-page-type="loss-office"] {
   overflow: hidden;
   transition: box-shadow 0.15s ease;
 }
+body[data-slug="index"] .bura-corner-stamp {
+  top: 180px;
+  right: auto;
+  left: 50%;
+  translate: -50% 0;
+}
 .bura-corner-stamp:hover {
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
 }
@@ -537,6 +543,10 @@ body[data-page-type="loss-office"] {
     position: static;
     width: auto;
     margin: 16px;
+  }
+  body[data-slug="index"] .bura-corner-stamp {
+    left: auto;
+    translate: none;
   }
 }
 
