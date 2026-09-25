@@ -1,5 +1,14 @@
 @use "./variables.scss" as *;
 
+/* iOS Safari'de position:fixed + overflow:hidden katmanları, içindeki
+   transform ile hareket eden öğeleri (serbest bulut gibi) her zaman
+   kırpmayabiliyor; bu da sayfayı yatayda taşırıp içeriği ekranın
+   kenarından kesiyor. Kökten önlem: sayfa hiçbir zaman yatay kaymasın. */
+html,
+body {
+  overflow-x: hidden;
+}
+
 :root {
   --headerFont: "Fraunces", serif;
   --bodyFont: "Inter", sans-serif;
@@ -1186,6 +1195,7 @@ body[data-page-type="loss-office"] {
   position: fixed;
   z-index: 1;
   inset: 0;
+  width: 100vw;
   overflow: hidden;
   pointer-events: none;
 }
