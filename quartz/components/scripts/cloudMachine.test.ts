@@ -18,9 +18,9 @@ function sequence(...values: number[]) {
   return () => values[index++] ?? values.at(-1) ?? 0
 }
 
-test("automatic production waits between 1.5 and 2.2 seconds during the introduction period", () => {
-  assert.equal(nextAutomaticDelay(() => 0), 1_500)
-  assert.equal(nextAutomaticDelay(() => 1), 2_200)
+test("automatic production waits between 10 and 20 seconds", () => {
+  assert.equal(nextAutomaticDelay(() => 0), 10_000)
+  assert.equal(nextAutomaticDelay(() => 1), 20_000)
 })
 
 test("manual production waits between 0.5 and 0.8 seconds", () => {
