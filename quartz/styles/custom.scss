@@ -560,6 +560,13 @@ body[data-slug="index"] .bura-corner-stamp {
     left: auto;
     translate: none;
   }
+  /* Makinenin durduğu köşeyle çakışmasın diye üst sağ köşeden bir
+     çentik kesiyoruz; başlık da bu kesik şekle göre ortalanıyor
+     (tam kutu genişliğine göre değil). */
+  .bura-corner-stamp-tab {
+    clip-path: polygon(0 0, 78% 0, 100% 62%, 100% 100%, 0 100%);
+    padding: 8px 44px 8px 16px;
+  }
 }
 
 /* Okuma sayfalarında büro kaydı metnin önüne geçmez; küçük bir dosya
