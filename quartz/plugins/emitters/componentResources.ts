@@ -8,6 +8,8 @@ import spaRouterScript from "../../components/scripts/spa.inline"
 import popoverScript from "../../components/scripts/popover.inline"
 // @ts-ignore
 import cloudMachineScript from "../../components/scripts/cloudMachine.inline"
+// @ts-ignore
+import freeCloudScript from "../../components/scripts/freeCloud.inline"
 import baseStyles from "../../styles/base.scss"
 import customStyles from "../../styles/custom.scss"
 import popoverStyle from "../../components/styles/popover.scss"
@@ -87,6 +89,7 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
   const cfg = ctx.cfg.configuration
 
   componentResources.afterDOMLoaded.push(cloudMachineScript)
+  componentResources.afterDOMLoaded.push(freeCloudScript)
 
   // popovers
   if (cfg.enablePopovers) {
