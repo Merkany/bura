@@ -298,14 +298,11 @@ body[data-page-type="loss-office"] {
   top: calc(var(--cloud-machine-height) + 14px);
   right: 8px;
   width: min(310px, calc(100vw - 24px));
-  padding: 4px 9px;
-  border-radius: 2px;
   color: var(--darkgray);
-  background: color-mix(in srgb, var(--light) 92%, transparent);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   font: 500 11px/1.35 var(--codeFont, monospace);
   letter-spacing: 0.02em;
   text-align: right;
+  text-shadow: 0 1px 2px color-mix(in srgb, var(--light) 70%, transparent);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0s;
@@ -378,8 +375,11 @@ body[data-page-type="loss-office"] {
   padding-left: 650px;
   animation: weather-drift 14s linear infinite;
 }
-.bura-weather:hover .weather-track,
-.bura-weather:focus-within .weather-track {
+.weather-window:hover .weather-track,
+.weather-window:focus-within .weather-track {
+  /* Sadece kayan yazının kendisine odaklanınca/üstüne gelince dursun —
+     bulut makinesi düğmesine basmak da aynı aside içinde olduğu için
+     eskiden (focus-within .bura-weather) akışı gereksiz yere durduruyordu. */
   animation-play-state: paused;
 }
 .weather-window:focus-visible {
