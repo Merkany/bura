@@ -1,0 +1,14 @@
+# Bura
+
+> Bura, Merkan Aksoydan tarafından yapılmaktadır.
+
+Bura'da bazı yazılar, kaybettiklerimiz ve boşluklar vardır. Reklam, ücretli üyelik ve ücretli içerik yoktur.
+
+## Temel sayfalar
+
+- Bura'ya dair: https://buradayok.org/buraya-dair/
+- Metinler: https://buradayok.org/
+- Kayıp Bürosu: https://buradayok.org/kayip-burosu/
+- English: https://buradayok.org/en/
+- RSS: https://buradayok.org/bura-akis.xml
+- Sitemap: https://buradayok.org/sitemap.xml
