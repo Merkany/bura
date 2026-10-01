@@ -1,5 +1,7 @@
 ---
 title: "[.]"
+seoTitle: "Bura — Merkan Aksoydan"
+socialDescription: "Bura, Merkan Aksoydan tarafından yapılmaktadır. Bazı yazılar, kaybettiklerimiz ve boşluklar."
 ---
 
 ---
