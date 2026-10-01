@@ -70,3 +70,11 @@ test("the eighth story has a clean permalink, legacy redirect, and generated soc
   assert.match(legacy, /<meta[^>]+http-equiv=["']refresh["'][^>]+zamaninda-gelme-olasiligi/i)
   assert.ok(image.size > 10_000)
 })
+
+test("share controls prefer the canonical public URL over the browser address", async () => {
+  const story = await text("zamaninda-gelme-olasiligi.html")
+  const shareScript = await text("static/story-ui.js")
+  assert.match(story, /story-ui\.js\?v=20261001-canonical-share-1/)
+  assert.match(shareScript, /link\[rel=["']canonical["']\]/)
+  assert.match(shareScript, /canonical[^\n]+href/)
+})
