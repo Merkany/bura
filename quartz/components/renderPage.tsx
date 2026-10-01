@@ -123,7 +123,11 @@ const LossRecords: QuartzComponent = ({ allFiles, fileData }) => {
               {record.category &&
                 ` / ${record.category.toLocaleUpperCase(isEnglish ? "en-US" : "tr-TR")}`}
             </header>
-            <h2 class="loss-subject">{record.title}</h2>
+            <h2 class="loss-subject">
+              <a class="loss-record-permalink" href={`/${record.slug}`}>
+                {record.title}
+              </a>
+            </h2>
             <details class="loss-details" name="kayip-kaydi">
               <summary>
                 <span>{copy.show}</span>
