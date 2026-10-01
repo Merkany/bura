@@ -10,7 +10,7 @@ aliases:
 ---
 Turnike Pura'nın kartını okudu, yeşil yandı, bir kere öttü. Depo çıkışında herkes aynı sesi çıkarıyordu. 
 
-Dışarıda yerler ıslaktı ama yağmur durmuştu. Yağmur bittiğinde kimse bunu haber saymaz. 
+Dışarıda yerler ıslaktı ama yağmur durmuştu. Yağmur durduğunda kimse bunu haber saymaz. 
 
 Durakta bir kadınla depodan biri vardı. Üstünde bizimle aynı yelek vardı. Pura'ya başıyla selam verdi.. 
 
