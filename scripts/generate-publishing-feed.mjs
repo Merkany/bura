@@ -60,19 +60,24 @@ for (const file of await markdownFiles(contentDir)) {
   const source = await readFile(file, "utf8")
   const slug = slugFor(file)
   const isStory = !slug.startsWith("en/") && field(source, "pageType") === "story"
-  const isLossRecord = slug.startsWith("kayip-burosu/") && slug !== "kayip-burosu/"
+  const isTurkishLossRecord = slug.startsWith("kayip-burosu/") && slug !== "kayip-burosu/"
+  const isEnglishLossRecord =
+    slug.startsWith("en/lost-property/") && slug !== "en/lost-property/"
+  const isLossRecord = isTurkishLossRecord || isEnglishLossRecord
   if (!isStory && !isLossRecord) continue
 
   const recordNumber = field(source, "kayit").padStart(3, "0")
   const originalTitle = field(source, "title") || "Bura"
-  const title = isLossRecord ? `Kayıp Bürosu / ${recordNumber} — ${originalTitle}` : originalTitle
+  const title = isLossRecord
+    ? `${isEnglishLossRecord ? "Lost Property" : "Kayıp Bürosu"} / ${recordNumber} — ${originalTitle}`
+    : originalTitle
   const description = isLossRecord
     ? [field(source, "kategori"), field(source, "bulunduguYer")].filter(Boolean).join(" · ")
     : field(source, "description") || `${originalTitle}, Bura'da yeni bir metin.`
   // GitHub Pages emits these pages as extensionless files. A trailing slash
   // therefore points at a non-existent directory and returns 404.
   const url = `${siteUrl}/${slug}`
-  entries.push({ title, description, url, date: publicationDate(file) })
+  entries.push({ title, description, url, date: publicationDate(file), isLossRecord })
 }
 
 entries.sort((a, b) => b.date.getTime() - a.date.getTime())
@@ -105,4 +110,36 @@ ${items}
 `
 
 await writeFile(outputFeed, feed)
+
+const sitemapPath = join(projectDir, "public", "sitemap.xml")
+let sitemap = await readFile(sitemapPath, "utf8")
+sitemap = sitemap.replace(
+  /<url>\s*<loc>https:\/\/buradayok\.org\/tags\/?<\/loc>[\s\S]*?<\/url>/g,
+  "",
+)
+
+const lossRecordUrls = entries.filter((entry) => entry.isLossRecord)
+const missingLossRecords = lossRecordUrls.filter(
+  ({ url }) => !sitemap.includes(`<loc>${xml(url)}</loc>`),
+)
+const lossRecordEntries = missingLossRecords
+  .map(
+    ({ url, date }) => `<url>
+    <loc>${xml(url)}</loc>
+    <lastmod>${date.toISOString()}</lastmod>
+  </url>`,
+  )
+  .join("")
+sitemap = sitemap.replace("</urlset>", `${lossRecordEntries}</urlset>`)
+await writeFile(sitemapPath, sitemap)
+
+const defaultFeedPath = join(projectDir, "public", "index.xml")
+let defaultFeed = await readFile(defaultFeedPath, "utf8")
+defaultFeed = defaultFeed.replace(
+  /<item>\s*<title>[^<]*<\/title>\s*<link>https:\/\/buradayok\.org\/tags\/?<\/link>[\s\S]*?<\/item>/g,
+  "",
+)
+await writeFile(defaultFeedPath, defaultFeed)
+
 console.log(`Bura yayın akışı hazır: ${entries.length} içerik (public/bura-akis.xml)`)
+console.log(`Sitemap'e ${missingLossRecords.length} Kayıp Bürosu kaydı eklendi; /tags/ çıkarıldı.`)
