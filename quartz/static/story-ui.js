@@ -21,9 +21,12 @@
       wrapper.dataset.menuReady = "true"
       var title = wrapper.dataset.shareTitle || document.title
       var requestedUrl = wrapper.dataset.shareUrl || ""
+      var canonical = document.querySelector('link[rel="canonical"]')
+      var canonicalUrl =
+        canonical && canonical.href ? canonical.href : window.location.href.split("#")[0]
       var url = requestedUrl
-        ? new URL(requestedUrl, window.location.href.split("#")[0]).href
-        : window.location.href.split("#")[0]
+        ? new URL(requestedUrl, canonicalUrl).href
+        : canonicalUrl
       var text = title + " — Bura"
       var encodedUrl = encodeURIComponent(url)
       var encodedText = encodeURIComponent(text)
