@@ -1,5 +1,5 @@
 ---
-title: 8. Zamanında Gelme Olasılığı
+title: 08. Zamanında Gelme Olasılığı
 pageType: story
 bolum: "08"
 format: ""
