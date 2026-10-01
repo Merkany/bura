@@ -13,8 +13,8 @@ export default (() => {
     ctx,
   }: QuartzComponentProps) => {
     const titleSuffix = cfg.pageTitleSuffix ?? ""
-    const title =
-      (fileData.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title) + titleSuffix
+    const visibleTitle = fileData.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title
+    const title = String(fileData.frontmatter?.seoTitle ?? visibleTitle) + titleSuffix
     const lossRecordDescription = fileData.frontmatter?.kayit
       ? [
           `Kayıp Bürosu / ${String(fileData.frontmatter.kayit).padStart(3, "0")}`,
@@ -43,6 +43,46 @@ export default (() => {
     // Url of current page
     const publicSlug = fileData.slug === "404" ? "404" : simplifySlug(fileData.slug!)
     const socialUrl = new URL(publicSlug, `${url.toString().replace(/\/$/, "")}/`).toString()
+    const siteUrl = new URL("/", url).toString()
+    const personId = `${siteUrl}#merkan-aksoydan`
+    const websiteId = `${siteUrl}#bura`
+    const person = {
+      "@type": "Person",
+      "@id": personId,
+      name: "Merkan Aksoydan",
+      url: new URL("buraya-dair/", siteUrl).toString(),
+    }
+    const website = {
+      "@type": "WebSite",
+      "@id": websiteId,
+      name: "Bura",
+      url: siteUrl,
+      creator: { "@id": personId },
+      inLanguage: ["tr", "en"],
+    }
+    const identitySlug = publicSlug.replace(/\/$/, "")
+    const pageType =
+      identitySlug === ""
+        ? "WebPage"
+        : identitySlug === "buraya-dair"
+          ? "AboutPage"
+          : fileData.frontmatter?.pageType === "story" || fileData.frontmatter?.kayit
+            ? "CreativeWork"
+            : "WebPage"
+    const pageData = {
+      "@type": pageType,
+      "@id": `${socialUrl}#page`,
+      url: socialUrl,
+      name: String(visibleTitle),
+      description,
+      isPartOf: { "@id": websiteId },
+      ...(pageType === "CreativeWork" ? { author: { "@id": personId } } : {}),
+      ...(pageType === "AboutPage" ? { about: { "@id": websiteId } } : {}),
+    }
+    const structuredData = JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [person, website, pageData],
+    }).replace(/</g, "\\u003c")
 
     const usesCustomOgImage = ctx.cfg.plugins.emitters.some((e) => e.name === "CustomOgImages")
     const ogImageDefaultPath = `https://${cfg.baseUrl}/static/og-image.png`
@@ -122,6 +162,7 @@ export default (() => {
         />
         <meta name="description" content={description} />
         <meta name="generator" content="Quartz" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
 
         {css.map((resource) => CSSResourceToStyleElement(resource, true))}
         {js
