@@ -78,3 +78,36 @@ test("share controls prefer the canonical public URL over the browser address", 
   assert.match(shareScript, /link\[rel=["']canonical["']\]/)
   assert.match(shareScript, /canonical[^\n]+href/)
 })
+
+test("the homepage exposes Bura's identity without changing its visible mark", async () => {
+  const home = await text("index.html")
+  assert.match(home, /<title>Bura — Merkan Aksoydan<\/title>/)
+  assert.match(home, /<h1[^>]*class=["'][^"']*article-title[^"']*["'][^>]*>\[\.\]<\/h1>/)
+  assert.match(
+    home,
+    /<meta[^>]+name=["']description["'][^>]+content=["']Bura, Merkan Aksoydan tarafından yapılmaktadır\./,
+  )
+})
+
+test("public pages provide machine-readable publication and authorship data", async () => {
+  const home = await text("index.html")
+  const about = await text("buraya-dair/index.html")
+  const story = await text("zamaninda-gelme-olasiligi.html")
+
+  assert.match(home, /<script[^>]+type=["']application\/ld\+json["'][^>]*>/)
+  assert.match(home, /"@type":"WebSite"/)
+  assert.match(home, /"name":"Bura"/)
+  assert.match(home, /"creator":\{"@id":"https:\/\/buradayok\.org\/#merkan-aksoydan"\}/)
+  assert.match(about, /"@type":"AboutPage"/)
+  assert.match(about, /"name":"Bura'ya dair"/)
+  assert.match(story, /"@type":"CreativeWork"/)
+  assert.match(story, /"author":\{"@id":"https:\/\/buradayok\.org\/#merkan-aksoydan"\}/)
+})
+
+test("llms.txt identifies Bura from its own published statement", async () => {
+  const llms = await text("llms.txt")
+  assert.match(llms, /^# Bura/m)
+  assert.match(llms, /Bura, Merkan Aksoydan tarafından yapılmaktadır\./)
+  assert.match(llms, /https:\/\/buradayok\.org\/buraya-dair\//)
+  assert.doesNotMatch(llms, /resmi kuruluş|şirket|organizasyon/i)
+})
