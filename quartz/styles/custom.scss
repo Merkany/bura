@@ -642,7 +642,7 @@ body[data-page-type^="tasma-"] .center > hr {
 .tasma-intro h1 {
   margin: 0 0 0.35rem;
   color: var(--tasma-ink);
-  font: 500 clamp(2rem, 4.2vw, 3.5rem)/1 var(--headerFont);
+  font: 500 clamp(1.75rem, 3.6vw, 3rem)/1 var(--headerFont);
 }
 .tasma-intro p {
   max-width: 650px;
@@ -652,12 +652,6 @@ body[data-page-type^="tasma-"] .center > hr {
   font-size: clamp(0.86rem, 1.35vw, 1rem);
   font-style: italic;
   line-height: 1.55;
-}
-.tasma-intro .tasma-intro-instruction {
-  margin-top: 0.85rem;
-  color: color-mix(in srgb, var(--tasma-ink) 74%, var(--tasma-muted));
-  font-family: var(--codeFont);
-  font-size: 0.76rem;
 }
 .tasma-constellation {
   width: min(1200px, 100%);
