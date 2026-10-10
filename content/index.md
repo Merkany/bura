@@ -8,7 +8,7 @@ socialDescription: "Bura, Merkan Aksoydan tarafından yapılmaktadır. Bazı yaz
 
 ## [Taşma](./tasma/index.md)
 
-Pura, Vera ve Meer'in dışında kalan, biçimsiz yazılar.
+Parlak bir yıldıza dokun.
 
 ---
 
