@@ -5,6 +5,11 @@
   var FIRST_MAX_DELAY = 120000;
   var pendingTimer = null;
 
+  function isExcludedPage() {
+    var pageType = document.body.getAttribute("data-page-type") || "";
+    return pageType.indexOf("tasma-") === 0;
+  }
+
   function getNext() {
     try {
       var stored = sessionStorage.getItem(NEXT_KEY);
@@ -74,6 +79,7 @@
   }
 
   function showOverlay() {
+    if (isExcludedPage()) return;
     if (document.getElementById("insan-misin-overlay")) return;
 
     var basePath = (document.body.dataset.basepath || "").replace(/\/$/, "");
@@ -110,8 +116,10 @@
 
   function removeOverlay() {
     var overlay = document.getElementById("insan-misin-overlay");
-    if (overlay) overlay.remove();
-    unlockScroll();
+    if (overlay) {
+      overlay.remove();
+      unlockScroll();
+    }
   }
 
   function dismissOverlay() {
@@ -120,7 +128,14 @@
   }
 
   function scheduleOverlay() {
-    if (pendingTimer) clearTimeout(pendingTimer);
+    if (pendingTimer) {
+      clearTimeout(pendingTimer);
+      pendingTimer = null;
+    }
+    if (isExcludedPage()) {
+      removeOverlay();
+      return;
+    }
     if (hasBeenSeen()) return;
     if (document.getElementById("insan-misin-overlay")) return;
     var remaining = getNext() - Date.now();
