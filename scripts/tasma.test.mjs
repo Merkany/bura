@@ -40,7 +40,8 @@ test("Taşma renderer uses an SVG sky and a real Polaris anchor", async () => {
   assert.match(renderer, /const TasmaText/)
   assert.doesNotMatch(renderer, /class="tasma-photo"[^>]*tabIndex/)
   const styles = await read("quartz/styles/custom.scss")
-  assert.match(styles, /\.tasma-top \{[\s\S]*position: relative;/)
+  assert.match(styles, /\.tasma-top \{[\s\S]*position: sticky;[\s\S]*top: 0;/)
+  assert.match(styles, /html:has\(body\[data-page-type="tasma-text"\]\)[\s\S]*overflow-x: clip;/)
 })
 
 test("Polaris interaction is registered and has no public reset shortcut", async () => {
@@ -54,6 +55,7 @@ test("Polaris interaction is registered and has no public reset shortcut", async
   assert.match(script, /prefers-reduced-motion/)
   assert.doesNotMatch(script, /var\(--rw\)/)
   assert.doesNotMatch(script, /shiftKey|#sifirla|location\.hash/)
+  assert.doesNotMatch(script, /ph\.addEventListener\('wheel'/)
 })
 
 test("the sky background uses fixed decorative stars", async () => {
@@ -75,6 +77,9 @@ test("the titleless page never exposes its file slug as a public title", async (
   assert.match(head, /isTasmaText[\s\S]*publicName[\s\S]*Taşma — Bura/)
   assert.match(socialImage, /pageType === "tasma-text"[\s\S]*seoTitle/)
 })
+
+
+
 
 
 
