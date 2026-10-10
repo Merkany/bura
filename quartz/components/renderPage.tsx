@@ -274,7 +274,6 @@ const TasmaSky: QuartzComponent = () => {
         <h1 id="tasma-title">Taşma</h1>
         <p>Bazı yazılar nereye ait olduklarını bilmiyor.</p>
         <p>Onlar için bir gökyüzü açtık. Yazılmış ve henüz yazılmamış metinlerden oluşan bir gökyüzü.</p>
-        <p class="tasma-intro-instruction">Parlak bir yıldıza dokun.</p>
       </header>
       <figure class="tasma-constellation">
         <svg class="tasma-sky" viewBox="0 0 1200 1020" aria-labelledby="tasma-sky-title tasma-sky-desc">
