@@ -616,8 +616,15 @@ body[data-page-type^="tasma-"] .center > hr {
   z-index: 2;
   top: clamp(18px, 3vw, 38px);
   right: clamp(20px, 4vw, 54px);
-  font: 500 1rem/1 var(--codeFont);
+  padding: 0.55rem 0.75rem;
+  border: 1px solid rgba(238, 231, 218, 0.2);
+  font: 500 0.78rem/1 var(--codeFont);
   color: var(--tasma-muted);
+}
+.tasma-home-link:hover,
+.tasma-home-link:focus-visible {
+  color: var(--tasma-ink);
+  border-color: rgba(238, 231, 218, 0.5);
 }
 .tasma-landing {
   position: relative;
@@ -635,14 +642,22 @@ body[data-page-type^="tasma-"] .center > hr {
 .tasma-intro h1 {
   margin: 0 0 0.35rem;
   color: var(--tasma-ink);
-  font: 500 clamp(2.7rem, 6vw, 5rem)/1 var(--headerFont);
+  font: 500 clamp(2rem, 4.2vw, 3.5rem)/1 var(--headerFont);
 }
 .tasma-intro p {
   max-width: 650px;
   margin: 0.25rem 0;
   color: var(--tasma-muted);
-  font-size: clamp(0.95rem, 1.7vw, 1.15rem);
+  font-family: var(--headerFont);
+  font-size: clamp(0.86rem, 1.35vw, 1rem);
+  font-style: italic;
   line-height: 1.55;
+}
+.tasma-intro .tasma-intro-instruction {
+  margin-top: 0.85rem;
+  color: color-mix(in srgb, var(--tasma-ink) 74%, var(--tasma-muted));
+  font-family: var(--codeFont);
+  font-size: 0.76rem;
 }
 .tasma-constellation {
   width: min(1200px, 100%);
