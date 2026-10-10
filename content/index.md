@@ -6,9 +6,9 @@ socialDescription: "Bura, Merkan Aksoydan tarafından yapılmaktadır. Bazı yaz
 
 ---
 
-## [Bunları Düşünmesem Yeriydi](./bunlari-dusunmesem-yeriydi/index.md)
+## [Taşma](./tasma/index.md)
 
-Birbirinden bağımsız kısa düşünceler.
+Pura, Vera ve Meer'in dışında kalan, biçimsiz yazılar.
 
 ---
 
