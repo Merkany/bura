@@ -269,11 +269,12 @@ const HomepageStories: QuartzComponent = ({ allFiles }) => {
 const TasmaSky: QuartzComponent = () => {
   return (
     <main class="tasma-landing" aria-labelledby="tasma-title">
-      <a class="tasma-home-link" href="/" aria-label="Bura ana sayfasına dön">[.]</a>
+      <a class="tasma-home-link" href="/" aria-label="Bura ana sayfasına dön">← Ana sayfa</a>
       <header class="tasma-intro">
         <h1 id="tasma-title">Taşma</h1>
         <p>Bazı yazılar nereye ait olduklarını bilmiyor.</p>
         <p>Onlar için bir gökyüzü açtık. Yazılmış ve henüz yazılmamış metinlerden oluşan bir gökyüzü.</p>
+        <p class="tasma-intro-instruction">Parlak bir yıldıza dokun.</p>
       </header>
       <figure class="tasma-constellation">
         <svg class="tasma-sky" viewBox="0 0 1200 1020" aria-labelledby="tasma-sky-title tasma-sky-desc">
@@ -315,7 +316,6 @@ const TasmaSky: QuartzComponent = () => {
           })}
         </svg>
       </figure>
-      <p class="tasma-instruction">Parlak bir yıldıza dokun.</p>
     </main>
   )
 }
