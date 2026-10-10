@@ -78,6 +78,13 @@ test("the titleless page never exposes its file slug as a public title", async (
   assert.match(socialImage, /pageType === "tasma-text"[\s\S]*seoTitle/)
 })
 
+test("the human check stays disabled throughout Taşma", async () => {
+  const overlay = await read("quartz/static/insan-misin/overlay.js")
+  assert.match(overlay, /data-page-type/)
+  assert.match(overlay, /tasma-/)
+  assert.match(overlay, /if \(isExcludedPage\(\)\) return/)
+})
+
 
 
 
