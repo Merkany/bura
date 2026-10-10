@@ -16,6 +16,7 @@ import { styleText } from "util"
 import { resolveFrame } from "./frames"
 import type { TreeTransform } from "../plugins/types"
 import type { BuildCtx } from "../util/ctx"
+import { TASMA_BACKGROUND_STARS, TASMA_CONSTELLATIONS } from "./tasmaData"
 
 interface RenderComponents {
   head: QuartzComponent
@@ -262,6 +263,90 @@ const HomepageStories: QuartzComponent = ({ allFiles }) => {
         ))}
       </ul>
     </nav>
+  )
+}
+
+const TasmaSky: QuartzComponent = () => {
+  return (
+    <main class="tasma-landing" aria-labelledby="tasma-title">
+      <a class="tasma-home-link" href="/" aria-label="Bura ana sayfasına dön">[.]</a>
+      <header class="tasma-intro">
+        <h1 id="tasma-title">Taşma</h1>
+        <p>Bazı yazılar nereye ait olduklarını bilmiyor.</p>
+        <p>Onlar için bir gökyüzü açtık. Yazılmış ve henüz yazılmamış metinlerden oluşan bir gökyüzü.</p>
+      </header>
+      <figure class="tasma-constellation">
+        <svg class="tasma-sky" viewBox="0 0 1200 1020" aria-labelledby="tasma-sky-title tasma-sky-desc">
+          <title id="tasma-sky-title">Taşma gökyüzü</title>
+          <desc id="tasma-sky-desc">Takımyıldızları arasındaki parlak Polaris yıldızı yayımlanmış bir metne bağlıdır.</desc>
+          <g class="tasma-background-stars" aria-hidden="true">
+            {TASMA_BACKGROUND_STARS.map((star) => (
+              <circle cx={star.x} cy={star.y} r={star.radius} opacity={star.opacity} />
+            ))}
+          </g>
+          {TASMA_CONSTELLATIONS.map((constellation) => {
+            const stars = new Map(constellation.stars.map((star) => [star.id, star]))
+            return (
+              <g class={`tasma-constellation-group tasma-${constellation.id}`}>
+                <g class="tasma-lines" aria-hidden="true">
+                  {constellation.lines.map(([from, to]) => {
+                    const a = stars.get(from)!
+                    const b = stars.get(to)!
+                    return <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} />
+                  })}
+                </g>
+                <g class="tasma-stars">
+                  {constellation.stars.map((star) => {
+                    const radius = star.radius ?? 4
+                    const point = <circle cx={star.x} cy={star.y} r={radius} />
+                    return star.href ? (
+                      <a class="tasma-star tasma-star-published" href={star.href} aria-label={`${star.name}: metni oku`}>
+                        <circle class="tasma-star-halo" cx={star.x} cy={star.y} r={radius + 15} />
+                        {point}
+                      </a>
+                    ) : (
+                      <g class="tasma-star tasma-star-dim" aria-label="Henüz yazılmadı">{point}</g>
+                    )
+                  })}
+                </g>
+                <text class="tasma-constellation-label" x={constellation.labelX} y={constellation.labelY}>{constellation.label}</text>
+              </g>
+            )
+          })}
+        </svg>
+      </figure>
+      <p class="tasma-instruction">Parlak bir yıldıza dokun.</p>
+    </main>
+  )
+}
+const TasmaText: QuartzComponent = ({ ctx }) => {
+  const siteBasePath = ctx.argv.serve || !ctx.cfg.configuration.baseUrl
+    ? ""
+    : new URL(`https://${ctx.cfg.configuration.baseUrl}`).pathname.replace(/\/$/, "")
+  return (
+    <main class="tasma-experience" data-tasma-experience>
+      <a href="#tasma-flow" class="tasma-skip" id="tasma-skip" role="button">
+        Düz metin için Enter'a basın
+      </a>
+      <a class="tasma-back" href="/tasma/" aria-label="Taşma gökyüzüne dön">Taşma'ya dön</a>
+      <div class="tasma-top">
+        <div class="tasma-photo" id="tasma-photo" role="img" aria-label="Akşam ışığında, dağlarla çevrili bir göl">
+          <img class="tasma-image" id="tasma-image" src={`${siteBasePath}/static/tasma/polaris-gol.jpg`} alt="" aria-hidden="true" />
+        </div>
+        <div class="tasma-groove" id="tasma-groove">
+          <div class="tasma-ring" id="tasma-ring" tabIndex={0} role="slider" aria-label="Fotoğrafı ve metni aç" aria-valuemin={0} aria-valuemax={100} aria-valuenow={0}>
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <defs><filter id="tasma-chalk" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="4" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="2.6"/></filter></defs>
+              <g fill="none" stroke="#e6b422" stroke-linecap="round" filter="url(#tasma-chalk)"><path d="M25 5C36 4 45 13 44 24C43 36 34 45 23 44C12 43 3 35 4 23C5 12 14 6 27 5C33 5 38 8 40 12" stroke-width="3.6"/><path d="M22 7C12 9 6 17 6 25C6 35 14 42 24 42" stroke-width="1.8" opacity=".55"/></g>
+            </svg>
+          </div>
+          <div class="tasma-countdown" id="tasma-countdown" aria-hidden="true"></div>
+        </div>
+      </div>
+      <div class="tasma-dock"></div>
+      <article class="tasma-flow" id="tasma-flow" tabIndex={-1} aria-label="Başlıksız metin"></article>
+      <footer class="tasma-text-footer"><a href="/">[.] Bura</a></footer>
+    </main>
   )
 }
 
@@ -725,6 +810,10 @@ export function renderPage(
     componentData.fileData.slug === "buraya-dair/index" ||
     componentData.fileData.slug === "en/on-bura/index"
   const isHomepage = componentData.fileData.slug === "index"
+  const isTasmaSky = pageType === "tasma-sky"
+  const isTasmaText = pageType === "tasma-text"
+  const isTasma = isTasmaSky || isTasmaText
+  const PageContent = isTasmaSky ? TasmaSky : isTasmaText ? TasmaText : Content
   const resolvedBeforeBody = isHomepage
     ? [...beforeBody, HomepageStories]
     : hasHandToHand
@@ -758,13 +847,13 @@ export function renderPage(
             ></span>
           ))}
         </div>
-        <span
+        {!isTasma && <span
           class="free-cloud-layer"
           data-free-cloud-layer
           data-cloud-asset-base={`${basePath}/static/bulutlar`}
           aria-hidden="true"
-        ></span>
-        <aside
+        ></span>}
+        {!isTasma && <aside
           class="bura-weather"
           aria-label={isEnglish ? "Bura — fictional weather report" : "Bura — kurmaca hava raporu"}
         >
@@ -814,8 +903,8 @@ export function renderPage(
             role="status"
             aria-live="polite"
           ></span>
-        </aside>
-        {!isLossOffice && (
+        </aside>}
+        {!isTasma && !isLossOffice && (
           <a
             class="bura-corner-stamp"
             href={`${basePath}/${isEnglish ? "en/lost-property" : "kayip-burosu"}/`}
@@ -844,13 +933,13 @@ export function renderPage(
               frame.render({
                 componentData,
                 head: Head,
-                header,
-                beforeBody: resolvedBeforeBody,
-                pageBody: Content,
-                afterBody: resolvedAfterBody,
-                left,
-                right,
-                footer,
+                header: isTasma ? [] : header,
+                beforeBody: isTasma ? [] : resolvedBeforeBody,
+                pageBody: PageContent,
+                afterBody: isTasma ? [] : resolvedAfterBody,
+                left: isTasma ? [] : left,
+                right: isTasma ? [] : right,
+                footer: isTasma ? [] : footer,
               }),
             ]}
           </Body>
@@ -864,3 +953,4 @@ export function renderPage(
 
   return "<!DOCTYPE html>\n" + render(doc)
 }
+
