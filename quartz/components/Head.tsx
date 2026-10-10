@@ -15,6 +15,10 @@ export default (() => {
     const titleSuffix = cfg.pageTitleSuffix ?? ""
     const visibleTitle = fileData.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title
     const title = String(fileData.frontmatter?.seoTitle ?? visibleTitle) + titleSuffix
+    const isTasmaText = fileData.frontmatter?.pageType === "tasma-text"
+    const publicName = isTasmaText
+      ? String(fileData.frontmatter?.seoTitle ?? "Taşma — Bura")
+      : String(visibleTitle)
     const lossRecordDescription = fileData.frontmatter?.kayit
       ? [
           `Kayıp Bürosu / ${String(fileData.frontmatter.kayit).padStart(3, "0")}`,
@@ -73,7 +77,7 @@ export default (() => {
       "@type": pageType,
       "@id": `${socialUrl}#page`,
       url: socialUrl,
-      name: String(visibleTitle),
+      name: publicName,
       description,
       isPartOf: { "@id": websiteId },
       ...(pageType === "CreativeWork" ? { author: { "@id": personId } } : {}),
