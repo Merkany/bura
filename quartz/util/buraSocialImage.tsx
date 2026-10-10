@@ -377,17 +377,21 @@ export const buraSocialImage: SocialImageOptions["imageStructure"] = ({
   fileData,
 }) => {
   const frontmatter = fileData.frontmatter ?? {}
+  const publicTitle =
+    frontmatter.pageType === "tasma-text"
+      ? text(frontmatter.seoTitle, "Taşma — Bura")
+      : title
   const isLossRecord = String(fileData.slug ?? "").startsWith("kayip-burosu/")
   const rawFormat = isLossRecord ? "kayip-form" : frontmatter.format
   const format = typeof rawFormat === "string" ? (rawFormat as CardFormat) : undefined
-  const sectionFromTitle = title.match(/^\s*(\d+)/)?.[1]
+  const sectionFromTitle = publicTitle.match(/^\s*(\d+)/)?.[1]
   const bolum = String(frontmatter.bolum ?? frontmatter.kayit ?? sectionFromTitle ?? "—").padStart(
     2,
     "0",
   )
   const keyword = text(
     frontmatter.anahtar_kelime ?? frontmatter.kategori,
-    title.split(/\s+/)[0] ?? "bura",
+    publicTitle.split(/\s+/)[0] ?? "bura",
   )
   const code = binary(keyword)
   const sharedStyle: Record<string, string | number> = {
@@ -400,13 +404,13 @@ export const buraSocialImage: SocialImageOptions["imageStructure"] = ({
   if (format === "eposta")
     return (
       <div style={sharedStyle}>
-        <EmailCard title={title} bolum={bolum} code={code} />
+        <EmailCard title={publicTitle} bolum={bolum} code={code} />
       </div>
     )
   if (format === "arama")
     return (
       <div style={sharedStyle}>
-        <CallCard title={title} bolum={bolum} code={code} />
+        <CallCard title={publicTitle} bolum={bolum} code={code} />
       </div>
     )
   if (format === "kayip-form") {
@@ -415,7 +419,7 @@ export const buraSocialImage: SocialImageOptions["imageStructure"] = ({
         <LostCard
           bolum={bolum}
           code={code}
-          lost={text(frontmatter.kayip, title)}
+          lost={text(frontmatter.kayip, publicTitle)}
           place={text(frontmatter.son_gorulen_yer ?? frontmatter.bulunduguYer, "—")}
         />
       </div>
@@ -424,13 +428,13 @@ export const buraSocialImage: SocialImageOptions["imageStructure"] = ({
   if (format === "tot-raporu") {
     return (
       <div style={sharedStyle}>
-        <ReportCard title={title} bolum={bolum} code={code} />
+        <ReportCard title={publicTitle} bolum={bolum} code={code} />
       </div>
     )
   }
   return (
     <div style={sharedStyle}>
-      <GenericCard title={title} code={code} />
+      <GenericCard title={publicTitle} code={code} />
     </div>
   )
 }
