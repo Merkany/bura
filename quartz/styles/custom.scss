@@ -569,6 +569,315 @@ body[data-slug="index"] .bura-corner-stamp {
   }
 }
 
+/* Taşma: sabit gerçek yıldız geometrisi ve Polaris metni */
+body[data-page-type="tasma-sky"],
+body[data-page-type="tasma-text"] {
+  --tasma-bg: #060711;
+  --tasma-ink: #eee7da;
+  --tasma-muted: #85889a;
+  --tasma-line: rgba(214, 176, 88, 0.34);
+  margin: 0;
+  background: var(--tasma-bg);
+  color: var(--tasma-ink);
+}
+body[data-page-type^="tasma-"] #quartz-root,
+body[data-page-type^="tasma-"] #quartz-body,
+body[data-page-type^="tasma-"] .page,
+body[data-page-type^="tasma-"] .center {
+  width: 100%;
+  max-width: none;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+body[data-page-type^="tasma-"] .page > #quartz-body {
+  display: block;
+  width: 100%;
+  max-width: none;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+body[data-page-type^="tasma-"] .page-header,
+body[data-page-type^="tasma-"] .page-footer,
+body[data-page-type^="tasma-"] .left,
+body[data-page-type^="tasma-"] .right,
+body[data-page-type^="tasma-"] .center > hr {
+  display: none;
+}
+.tasma-home-link,
+.tasma-back,
+.tasma-text-footer a {
+  color: inherit;
+  text-decoration: none;
+}
+.tasma-home-link {
+  position: absolute;
+  z-index: 2;
+  top: clamp(18px, 3vw, 38px);
+  right: clamp(20px, 4vw, 54px);
+  font: 500 1rem/1 var(--codeFont);
+  color: var(--tasma-muted);
+}
+.tasma-landing {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: clamp(28px, 6vw, 72px) clamp(20px, 8vw, 120px) 40px;
+  background: var(--tasma-bg);
+}
+.tasma-intro {
+  position: relative;
+  z-index: 1;
+  width: min(790px, 100%);
+  margin: 0 auto;
+}
+.tasma-intro h1 {
+  margin: 0 0 0.35rem;
+  color: var(--tasma-ink);
+  font: 500 clamp(2.7rem, 6vw, 5rem)/1 var(--headerFont);
+}
+.tasma-intro p {
+  max-width: 650px;
+  margin: 0.25rem 0;
+  color: var(--tasma-muted);
+  font-size: clamp(0.95rem, 1.7vw, 1.15rem);
+  line-height: 1.55;
+}
+.tasma-constellation {
+  width: min(1200px, 100%);
+  margin: clamp(18px, 3vh, 42px) auto 0;
+}
+.tasma-sky {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  overflow: visible;
+}
+.tasma-background-stars circle {
+  fill: #6f7896;
+}
+.tasma-lines line {
+  stroke: var(--tasma-line);
+  stroke-width: 1.25;
+}
+.tasma-constellation-label {
+  fill: var(--tasma-muted);
+  font: italic 16px/1 var(--headerFont);
+  text-anchor: middle;
+}
+.tasma-star circle {
+  fill: #666a7d;
+  stroke: rgba(238, 231, 218, 0.25);
+  stroke-width: 1;
+}
+.tasma-star-published {
+  cursor: pointer;
+}
+.tasma-star-published circle:not(.tasma-star-halo) {
+  fill: #fff2d1;
+  stroke: #fff8e9;
+  filter: drop-shadow(0 0 8px rgba(255, 226, 154, 0.92));
+}
+.tasma-star-halo {
+  fill: transparent !important;
+  stroke: transparent !important;
+}
+.tasma-star-published:hover circle:not(.tasma-star-halo),
+.tasma-star-published:focus-visible circle:not(.tasma-star-halo) {
+  filter: drop-shadow(0 0 14px #fff0bf);
+}
+.tasma-star-published:focus-visible {
+  outline: none;
+}
+.tasma-star-published:focus-visible .tasma-star-halo {
+  stroke: #fff2d1 !important;
+  stroke-width: 2;
+}
+.tasma-constellation figcaption {
+  margin-top: -1.5rem;
+  color: var(--tasma-muted);
+  font: italic 1rem/1.4 var(--headerFont);
+  text-align: center;
+}
+.tasma-instruction {
+  margin: 1rem auto 0;
+  color: var(--tasma-muted);
+  font: 400 0.78rem/1.4 var(--codeFont);
+  text-align: center;
+}
+
+body[data-page-type="tasma-text"] {
+  --tasma-text-bg: var(--light);
+  --tasma-text-fg: var(--darkgray);
+  --tasma-text-muted: var(--gray);
+  --tasma-text-line: color-mix(in srgb, var(--darkgray) 18%, transparent);
+  background: var(--tasma-text-bg);
+  color: var(--tasma-text-fg);
+}
+.tasma-experience {
+  --tasma-ring-width: 32px;
+  min-height: 100vh;
+  background: var(--tasma-text-bg);
+  color: var(--tasma-text-fg);
+  font-family: var(--bodyFont);
+  -webkit-tap-highlight-color: transparent;
+}
+.tasma-back {
+  position: fixed;
+  z-index: 12;
+  top: max(12px, env(safe-area-inset-top));
+  left: 16px;
+  padding: 0.35rem 0.5rem;
+  color: var(--tasma-text-muted);
+  font: 500 0.72rem/1 var(--codeFont);
+  letter-spacing: 0.02em;
+}
+.tasma-top {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: max(10px, env(safe-area-inset-top)) 16px 10px;
+  border-bottom: 1px solid var(--tasma-text-line);
+  background: var(--tasma-text-bg);
+}
+.tasma-photo {
+  position: relative;
+  width: min(92vw, 620px, calc(34vh * 1.3333));
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  outline: 0;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.tasma-image {
+  position: absolute;
+  inset: -8%;
+  width: 116%;
+  height: 116%;
+  max-width: none;
+  object-fit: cover;
+  will-change: filter, opacity;
+}
+.tasma-groove {
+  position: relative;
+  z-index: 2;
+  width: min(92vw, 620px, calc(34vh * 1.3333));
+  height: 12px;
+  margin: 12px 0 10px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--tasma-text-fg) 9%, var(--tasma-text-bg));
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.12);
+  touch-action: none;
+  user-select: none;
+}
+.tasma-groove::after {
+  content: "";
+  position: absolute;
+  inset: -16px 0;
+}
+.tasma-ring {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: var(--tasma-ring-width);
+  height: var(--tasma-ring-width);
+  margin-top: calc(var(--tasma-ring-width) / -2);
+  outline: 0;
+  cursor: grab;
+  touch-action: none;
+}
+.tasma-ring svg { width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.tasma-ring.shake { animation: tasma-ring-shake 0.7s ease-in-out; }
+@keyframes tasma-ring-shake {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  25% { transform: translateX(-3px) rotate(-5deg); }
+  55% { transform: translateX(3px) rotate(4deg); }
+  80% { transform: translateX(-2px) rotate(-2deg); }
+}
+.tasma-countdown {
+  position: absolute;
+  inset: 50% 0 auto;
+  translate: 0 -50%;
+  color: var(--tasma-text-muted);
+  font: 400 1.4rem/1 var(--codeFont);
+  letter-spacing: 0.06em;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+}
+.tasma-groove.done { background: transparent; box-shadow: none; pointer-events: none; }
+.tasma-groove.done .tasma-ring { opacity: 0; pointer-events: none; }
+.tasma-groove.done .tasma-countdown { opacity: 1; }
+.tasma-flow {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 18px 16px max(70px, env(safe-area-inset-bottom));
+  color: var(--tasma-text-fg);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  outline: 0;
+}
+.tasma-flow .blk { transition: filter 0.5s, opacity 0.5s; }
+.tasma-flow .l { min-height: 0.4em; margin: 0 0 0.35em; }
+.tasma-flow .w { transition: opacity 0.4s, filter 0.5s; }
+.tasma-skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+}
+.tasma-skip:focus {
+  left: 16px;
+  top: 8px;
+  z-index: 20;
+  padding: 8px 12px;
+  border: 1px solid var(--tasma-text-line);
+  background: var(--tasma-text-bg);
+  color: var(--tasma-text-fg);
+}
+.tasma-text-footer {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 0 16px 42px;
+  color: var(--tasma-text-muted);
+  font: 400 0.78rem/1.4 var(--codeFont);
+}
+.tasma-dock { display: none; }
+@media (pointer: coarse), (max-width: 700px) {
+  .tasma-experience { --tasma-ring-width: 44px; }
+  .tasma-groove {
+    position: fixed;
+    z-index: 7;
+    left: 50%;
+    bottom: max(26px, calc(env(safe-area-inset-bottom) + 14px));
+    width: min(84vw, 520px);
+    margin: 0;
+    transform: translateX(-50%);
+  }
+  .tasma-groove::after { inset: -26px -18px -30px; }
+  .tasma-dock {
+    position: fixed;
+    z-index: 4;
+    inset: auto 0 0;
+    display: block;
+    height: 130px;
+    background: linear-gradient(to bottom, transparent, var(--tasma-text-bg) 62%);
+    pointer-events: none;
+  }
+  .tasma-flow { padding-bottom: max(170px, env(safe-area-inset-bottom)); }
+  .tasma-back { position: absolute; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tasma-flow .w,
+  .tasma-flow .blk { transition: none; }
+  .tasma-ring.shake { animation: none; }
+}
+
 /* Okuma sayfalarında büro kaydı metnin önüne geçmez; küçük bir dosya
    sekmesi olarak kalır. Ana sayfadaki tam kart görünümü korunur. */
 body[data-page-type="story"] .bura-corner-stamp {
@@ -743,7 +1052,7 @@ body[data-page-type="story"] {
 @media (max-width: 520px) {
   .hand-to-hand-options {
     grid-template-columns: 1fr;
-    max-height: 62vh;
+    max-height: none;
     overflow-y: auto;
   }
 }
@@ -896,11 +1205,6 @@ body[data-page-type="loss-record"] .single-loss-record {
   .loss-location {
     padding: 1rem 0;
   }
-}
-
-.loss-record-permalink {
-  color: inherit;
-  text-decoration: none;
 }
 
 body[data-page-type="loss-office"] {
@@ -1282,3 +1586,8 @@ body[data-page-type="loss-office"] {
     width: clamp(70px, 24vw, 130px);
   }
 }
+
+
+
+
+
