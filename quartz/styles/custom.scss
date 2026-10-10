@@ -708,6 +708,12 @@ body[data-page-type^="tasma-"] .center > hr {
   text-align: center;
 }
 
+html:has(body[data-page-type="tasma-text"]),
+body[data-page-type="tasma-text"] {
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
 body[data-page-type="tasma-text"] {
   --tasma-text-bg: var(--light);
   --tasma-text-fg: var(--darkgray);
@@ -735,8 +741,9 @@ body[data-page-type="tasma-text"] {
   letter-spacing: 0.02em;
 }
 .tasma-top {
-  position: relative;
+  position: sticky;
   z-index: 5;
+  top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1586,6 +1593,8 @@ body[data-page-type="loss-office"] {
     width: clamp(70px, 24vw, 130px);
   }
 }
+
+
 
 
 
