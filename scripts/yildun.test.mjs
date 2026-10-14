@@ -7,8 +7,16 @@ const read = (path) => readFile(path, "utf8")
 test("Yildun is the second published star and opens the packaged experience", async () => {
   const data = await read("quartz/components/tasmaData.ts")
   assert.match(data, /id: "polaris"[\s\S]*href: "\/tasma\/polaris"/)
-  assert.match(data, /id: "umi-2", name: "Yildun"[\s\S]*href: "\/static\/tasma\/yildun\/"/)
+  assert.match(data, /id: "umi-2", name: "Yildun"[\s\S]*href: "\/tasma\/yildun\/"/)
   assert.equal((data.match(/href: "/g) ?? []).length, 2)
+})
+
+test("Yildun is published at a clean URL and its former URL redirects", async () => {
+  const emitter = await read("quartz/plugins/emitters/static.ts")
+  const page = await read("quartz/static/tasma/yildun/index.html")
+  assert.match(emitter, /const cleanYildunPath = "tasma\/yildun"/)
+  assert.match(emitter, /redirectToCleanYildun/)
+  assert.match(page, /<link rel="canonical" href="https:\/\/buradayok\.org\/tasma\/yildun\/">/)
 })
 
 test("the packaged Yildun page includes its local scene and media", async () => {
