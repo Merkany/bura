@@ -10,15 +10,16 @@ test("homepage replaces the retired section with Taşma", async () => {
   assert.doesNotMatch(homepage, /Bunları Düşünmesem Yeriydi/)
 })
 
-test("the full sky stays visible and only Polaris is published", async () => {
+test("the full sky stays visible and Polaris plus Yildun are published", async () => {
   const source = await read("quartz/components/tasmaData.ts")
   assert.match(source, /label: "Küçük Ayı"/)
   for (const label of ["Büyük Ayı", "Cepheus", "Kassiopeia", "Pegasus", "Andromeda", "Perseus", "Kuğu, batıyor", "Oryon, yükseliyor", "Kartal, batıyor", "Balık \/ Kova"]) {
     assert.match(source, new RegExp(label.replace("/", "\\/")))
   }
   assert.match(source, /id: "polaris"[\s\S]*href: "\/tasma\/polaris"/)
+  assert.match(source, /id: "umi-2"[\s\S]*href: "\/static\/yildun\/"/)
   assert.doesNotMatch(source, /href: "\/tasma\/polaris\/"/)
-  assert.equal((source.match(/href: \"/g) ?? []).length, 1)
+  assert.equal((source.match(/href: \"/g) ?? []).length, 2)
   assert.match(source, /TASMA_BACKGROUND_STARS/)
 })
 
@@ -84,6 +85,9 @@ test("the human check stays disabled throughout Taşma", async () => {
   assert.match(overlay, /tasma-/)
   assert.match(overlay, /if \(isExcludedPage\(\)\) return/)
 })
+
+
+
 
 
 
