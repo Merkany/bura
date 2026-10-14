@@ -17,7 +17,7 @@ test("the full sky stays visible and Polaris plus Yildun are published", async (
     assert.match(source, new RegExp(label.replace("/", "\\/")))
   }
   assert.match(source, /id: "polaris"[\s\S]*href: "\/tasma\/polaris"/)
-  assert.match(source, /id: "umi-2"[\s\S]*href: "\/static\/yildun\/"/)
+  assert.match(source, /id: "umi-2"[\s\S]*href: "\/static\/tasma\/yildun\/"/)
   assert.doesNotMatch(source, /href: "\/tasma\/polaris\/"/)
   assert.equal((source.match(/href: \"/g) ?? []).length, 2)
   assert.match(source, /TASMA_BACKGROUND_STARS/)
