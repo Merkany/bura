@@ -17,7 +17,7 @@ html:has(.reader:not([hidden])),body:has(.reader:not([hidden])){background:#343B
 const C = {
  READING_MAX_LEVEL:.14, FINAL_PARAGRAPH_LEVEL:.22, READING_SPEED_PER_SECOND:.03,
  BAND_THICKNESS:.045, EDGE_AMPLITUDE:.0075, NOISE_SPEED:.012, EDGE_OCTAVES:4,
- END_WAIT_SECONDS:6, END_TAIL_EM:3.4, FILL_SECONDS:8, WATER_HOLD_SECONDS:2, ARCHIVE_REVEAL_SECONDS:8,
+ END_WAIT_SECONDS:6, END_TAIL_EM:5.5, FILL_SECONDS:8, WATER_HOLD_SECONDS:2, ARCHIVE_REVEAL_SECONDS:8,
  PARAGRAPH_GAP_EM:1.2, OPENING_SPACE_PX:100, TITLE_GAP_PX:60, TEXT_MAX_WIDTH_PX:900, TEXT_SIDE_PADDING_PX:24,
  FONT_MIN_PX:20, FONT_FLUID_VW:0, FONT_MAX_PX:20, LINE_HEIGHT:1.7, MOBILE_BREAKPOINT_PX:700,
  READING_ZONE_TOP:.20, READING_ZONE_BOTTOM:.65, TEXT_EDGE_BLUR_PX:0,
@@ -64,7 +64,7 @@ document.documentElement.style.setProperty('--large-photo-opacity',C.LARGE_PHOTO
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const pieces=TEXT_PARTS.map(t=>{const p=document.createElement('p');p.textContent=t;reader.append(p);return p;});const finalParagraph=pieces[pieces.length-1],endSentence='Onu da sakladım.',endIndex=finalParagraph.textContent.lastIndexOf(endSentence);let lastPiece=finalParagraph;if(endIndex>=0){const text=finalParagraph.textContent;finalParagraph.replaceChildren(document.createTextNode(text.slice(0,endIndex)));lastPiece=document.createElement('span');lastPiece.className='final-sentence';lastPiece.textContent=text.slice(endIndex);finalParagraph.append(lastPiece);}
 for(const [name,value] of Object.entries({'--column':`calc(100% - ${C.TEXT_SIDE_PADDING_PX*2}px)`, '--text-max-width':C.TEXT_MAX_WIDTH_PX+'px','--font-min':C.FONT_MIN_PX+'px','--font-fluid':C.FONT_FLUID_VW+'vw','--font-max':C.FONT_MAX_PX+'px','--line':C.LINE_HEIGHT,'--lead':C.OPENING_SPACE_PX+'px','--tail':C.END_TAIL_EM+'em','--gap':C.PARAGRAPH_GAP_EM+'em','--title-gap':C.TITLE_GAP_PX+'px','--archive-gap':C.ARCHIVE_GAP_PX+'px'}))document.documentElement.style.setProperty(name,value);
-let phase='reading',level=0,target=0,progressMax=0,clock=0,last=performance.now(),phaseAt=0,fillFrom=0,fullyVisibleSince=null,lockedY=0,fullArchive=true,currentPhoto=0,modalToken=0,stoppedVideo=reduced;
+let phase='reading',level=0,target=0,progressMax=0,clock=0,last=performance.now(),phaseAt=0,fillFrom=0,endReachedSince=null,lockedY=0,fullArchive=true,currentPhoto=0,modalToken=0,stoppedVideo=reduced;
 const poster=new Image();poster.src=video.poster;let textureReady=false;
 const gl=canvas.getContext('webgl',{alpha:true,premultipliedAlpha:false,antialias:false});let renderer;
 const fade=t=>t*t*(3-2*t);
@@ -94,8 +94,8 @@ if(gl){
 renderer.resize();
 function lock(){lockedY=scrollY;document.body.style.position='fixed';document.body.style.top=-lockedY+'px';document.body.style.width='100%';}
 function unlock(){document.body.style.position='';document.body.style.top='';document.body.style.width='';scrollTo(0,lockedY);}
-function finalTrigger(){if(phase!=='reading')return;window.dispatchEvent(new Event('textfinished'));phase=reduced?'archive':'fill';phaseAt=clock;fillFrom=level;fullyVisibleSince=null;lock();if(reduced){stoppedVideo=true;video.pause();level=1;showArchive();setArchiveOpacity(1);finishArchive();}}
-function readProgress(){if(phase!=='reading')return;const lastR=lastPiece.getBoundingClientRect(),zone=innerHeight*C.READING_ZONE_BOTTOM;const start=reader.offsetTop,lastDocumentTop=lastR.top+scrollY;const progress=Math.max(0,Math.min(1,(scrollY+zone-start)/Math.max(1,lastDocumentTop-start)));progressMax=Math.max(progressMax,progress);target=Math.max(target,C.READING_MAX_LEVEL*progressMax);const atLast=lastR.top<zone&&lastR.bottom>0;if(atLast)target=Math.max(target,C.FINAL_PARAGRAPH_LEVEL);const full=lastR.top>=0&&lastR.bottom<=innerHeight*C.READING_ZONE_BOTTOM;const passed=lastR.bottom<innerHeight*C.READING_ZONE_TOP||scrollY+innerHeight>=document.documentElement.scrollHeight-C.END_SCROLL_EPSILON_PX;if(full){if(fullyVisibleSince===null)fullyVisibleSince=clock;}else fullyVisibleSince=null;if(passed||(!reduced&&fullyVisibleSince!==null&&clock-fullyVisibleSince>=C.END_WAIT_SECONDS))finalTrigger();}
+function finalTrigger(){if(phase!=='reading')return;window.dispatchEvent(new Event('textfinished'));phase=reduced?'archive':'fill';phaseAt=clock;fillFrom=level;endReachedSince=null;lock();if(reduced){stoppedVideo=true;video.pause();level=1;showArchive();setArchiveOpacity(1);finishArchive();}}
+function readProgress(){if(phase!=='reading')return;const lastR=lastPiece.getBoundingClientRect(),zone=innerHeight*C.READING_ZONE_BOTTOM;const start=reader.offsetTop,lastDocumentTop=lastR.top+scrollY;const progress=Math.max(0,Math.min(1,(scrollY+zone-start)/Math.max(1,lastDocumentTop-start)));progressMax=Math.max(progressMax,progress);target=Math.max(target,C.READING_MAX_LEVEL*progressMax);const atLast=lastR.top<zone&&lastR.bottom>0;if(atLast)target=Math.max(target,C.FINAL_PARAGRAPH_LEVEL);const full=lastR.top>=0&&lastR.bottom<=innerHeight*C.READING_ZONE_BOTTOM;const passed=lastR.bottom<innerHeight*C.READING_ZONE_TOP||scrollY+innerHeight>=document.documentElement.scrollHeight-C.END_SCROLL_EPSILON_PX;const endReached=full||passed;if(endReached&&endReachedSince===null)endReachedSince=clock;if(reduced&&passed)finalTrigger();else if(!reduced&&endReachedSince!==null&&clock-endReachedSince>=C.END_WAIT_SECONDS)finalTrigger();}
 function thumbnail(index){const item=PHOTOS[index],button=document.createElement('button');button.className='photo-link';button.dataset.index=index;button.setAttribute('aria-label','Deniz fotoğrafını büyüt');const img=new Image();img.width=Math.round(item.ratio>=1?480:480*item.ratio);img.height=Math.round(item.ratio>=1?480/item.ratio:480);img.style.aspectRatio=String(item.ratio);img.src=item.thumb;img.alt='';img.loading='lazy';img.decoding='async';button.append(img);button.onclick=()=>open(index);return button;}
 const galleryOrder=PHOTOS.map((_,i)=>i);for(let i=galleryOrder.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[galleryOrder[i],galleryOrder[j]]=[galleryOrder[j],galleryOrder[i]];}
 let nodes=[];
@@ -116,4 +116,5 @@ addEventListener('resize',()=>{renderer.resize();layout();});requestAnimationFra
 window.sceneState=()=>({phase,level,target,progressMax,photoCount:PHOTOS.length,fullArchive,stoppedVideo,reduced,clock});
 })();
 </script><script src="audio-controller.js"></script></body></html>
+
 
