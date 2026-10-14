@@ -17,7 +17,7 @@ html:has(.reader:not([hidden])),body:has(.reader:not([hidden])){background:#343B
 const C = {
  READING_MAX_LEVEL:.14, FINAL_PARAGRAPH_LEVEL:.22, READING_SPEED_PER_SECOND:.03,
  BAND_THICKNESS:.045, EDGE_AMPLITUDE:.0075, NOISE_SPEED:.012, EDGE_OCTAVES:4,
- END_WAIT_SECONDS:6, END_TAIL_EM:10, FILL_SECONDS:8, WATER_HOLD_SECONDS:2, ARCHIVE_REVEAL_SECONDS:8,
+ END_WAIT_SECONDS:3, END_TAIL_EM:10, FILL_SECONDS:6, WATER_HOLD_SECONDS:2, ARCHIVE_REVEAL_SECONDS:8,
  PARAGRAPH_GAP_EM:1.2, OPENING_SPACE_PX:100, TITLE_GAP_PX:60, TEXT_MAX_WIDTH_PX:900, TEXT_SIDE_PADDING_PX:24,
  FONT_MIN_PX:20, FONT_FLUID_VW:0, FONT_MAX_PX:20, LINE_HEIGHT:1.7, MOBILE_BREAKPOINT_PX:700,
  READING_ZONE_TOP:.20, READING_ZONE_BOTTOM:.65, TEXT_EDGE_BLUR_PX:0,
@@ -116,6 +116,7 @@ addEventListener('resize',()=>{renderer.resize();layout();});requestAnimationFra
 window.sceneState=()=>({phase,level,target,progressMax,photoCount:PHOTOS.length,fullArchive,stoppedVideo,reduced,clock});
 })();
 </script><script src="audio-controller.js"></script></body></html>
+
 
 
 
