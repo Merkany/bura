@@ -28,6 +28,16 @@ test("the packaged Yildun page includes its local scene and media", async () => 
   }
 })
 
+test("the photo credit follows the archive grid in the document flow", async () => {
+  const page = await read("quartz/static/tasma/yildun/index.html")
+  assert.match(
+    page,
+    /<div class="grid"><\/div><p class="photo-credit">Fotoğraflar: Deniz işçisi Kaptan Efecan Özcan<\/p>/,
+  )
+  assert.match(page, /\.photo-credit\{[^}]*font-size:/)
+  assert.doesNotMatch(page, /\.photo-credit\{[^}]*(?:position:absolute|position:fixed)/)
+})
+
 test("water waits three seconds and rises over six seconds at the ending", async () => {
   const page = await read("quartz/static/tasma/yildun/index.html")
   assert.match(page, /END_WAIT_SECONDS:3/)
