@@ -255,6 +255,7 @@ const HomepageStories: QuartzComponent = ({ allFiles }) => {
   const stories = getStories(allFiles, false)
   return (
     <nav class="homepage-stories" aria-label="Metinler">
+      <p class="reading-place" data-reading-place hidden></p>
       <ul>
         {stories.map((story) => (
           <li>
@@ -263,6 +264,20 @@ const HomepageStories: QuartzComponent = ({ allFiles }) => {
         ))}
       </ul>
     </nav>
+  )
+}
+
+const ReadingPlaceResume: QuartzComponent = ({ fileData }) => {
+  const isEnglish = fileData.frontmatter?.lang === "en"
+  return (
+    <p class="reading-place-resume" data-reading-place-resume hidden>
+      <button type="button" data-reading-place-continue>
+        {isEnglish ? "Continue where you left off" : "Kaldığın yerden devam et"}
+      </button>
+      <button type="button" data-reading-place-dismiss>
+        {isEnglish ? "Start from the beginning" : "Baştan oku"}
+      </button>
+    </p>
   )
 }
 
@@ -815,18 +830,20 @@ export function renderPage(
   const PageContent = isTasmaSky ? TasmaSky : isTasmaText ? TasmaText : Content
   const resolvedBeforeBody = isHomepage
     ? [...beforeBody, HomepageStories]
-    : hasHandToHand
-      ? [...beforeBody, HandToHand]
-      : beforeBody
+    : componentData.fileData.frontmatter?.pageType === "story"
+      ? [...beforeBody, ReadingPlaceResume, HandToHand]
+      : hasHandToHand
+        ? [...beforeBody, HandToHand]
+        : beforeBody
   const resolvedAfterBody = isLossOffice
     ? [LossRecords, ...afterBody]
     : isLossRecordPage
       ? [SingleLossRecord, ...afterBody]
       : componentData.fileData.frontmatter?.pageType === "story"
-      ? [HandToHand, StoryNext, ...afterBody]
-      : hasHandToHand
-        ? [HandToHand, ...afterBody]
-        : afterBody
+        ? [HandToHand, StoryNext, ...afterBody]
+        : hasHandToHand
+          ? [HandToHand, ...afterBody]
+          : afterBody
   const doc = (
     <html lang={lang} dir={direction}>
       <Head {...componentData} />

@@ -12,6 +12,8 @@ import cloudMachineScript from "../../components/scripts/cloudMachine.inline"
 import freeCloudScript from "../../components/scripts/freeCloud.inline"
 // @ts-ignore
 import tasmaScript from "../../components/scripts/tasma.inline"
+// @ts-ignore
+import readingPlaceScript from "../../components/scripts/readingPlace.inline"
 import baseStyles from "../../styles/base.scss"
 import customStyles from "../../styles/custom.scss"
 import popoverStyle from "../../components/styles/popover.scss"
@@ -93,6 +95,7 @@ function addGlobalPageResources(ctx: BuildCtx, componentResources: ComponentReso
   componentResources.afterDOMLoaded.push(cloudMachineScript)
   componentResources.afterDOMLoaded.push(freeCloudScript)
   componentResources.afterDOMLoaded.push(tasmaScript)
+  componentResources.afterDOMLoaded.push(readingPlaceScript)
 
   // popovers
   if (cfg.enablePopovers) {
