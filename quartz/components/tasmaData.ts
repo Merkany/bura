@@ -40,7 +40,7 @@ export const TASMA_CONSTELLATIONS: TasmaConstellation[] = [
     labelY: 245,
     stars: [
       { id: "polaris", name: "Polaris", x: 592, y: 218, radius: 6.5, href: "/tasma/polaris" },
-      { id: "umi-2", name: "Yildun", x: 571, y: 195, radius: 5.5, href: "/static/tasma/yildun/" },
+      { id: "umi-2", name: "Yildun", x: 571, y: 195, radius: 5.5, href: "/tasma/yildun/" },
       { id: "umi-3", x: 563, y: 154 },
       { id: "umi-4", x: 600, y: 144 },
       { id: "umi-5", x: 621, y: 181 },
