@@ -28,9 +28,10 @@ test("the packaged Yildun page includes its local scene and media", async () => 
   }
 })
 
-test("water waits six seconds at the ending and leaves breathing room after the text", async () => {
+test("water waits three seconds and rises over six seconds at the ending", async () => {
   const page = await read("quartz/static/tasma/yildun/index.html")
-  assert.match(page, /END_WAIT_SECONDS:6/)
+  assert.match(page, /END_WAIT_SECONDS:3/)
+  assert.match(page, /FILL_SECONDS:6/)
   assert.match(page, /END_TAIL_EM:10/)
   assert.doesNotMatch(page, /if\(passed\|\|/)
   assert.doesNotMatch(page, /const endReached=full\|\|passed/)
